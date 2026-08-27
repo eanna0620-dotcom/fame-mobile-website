@@ -187,7 +187,7 @@ a{color:inherit;text-decoration:none}
 /* блок меню: pinned horizontal scroll (вертикальный скролл двигает карточки по X) */
 .menu-hwrap{position:relative;height:calc(var(--vh-region,732px) - 56px)}   /* обычная высота карточки (без пина) */
 .menu-hpin{position:relative;height:100%;overflow:hidden;background:var(--bg);z-index:2;--cimg:min(500px, calc(var(--vh-region,732px) - 230px))}
-.menu-hscroll{position:absolute;left:0;top:0;width:402px;height:100%;overflow-x:auto;overflow-y:hidden;
+.menu-hscroll{position:absolute;left:0;top:0;width:402px;height:100%;overflow-x:auto;overflow-y:hidden;touch-action:pan-x;
   scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x}
 .menu-hscroll::-webkit-scrollbar{display:none}
 .menu-htrack{display:flex;height:100%;will-change:scroll-position}
@@ -594,8 +594,8 @@ a{color:inherit;text-decoration:none}
   <!-- HERO -->
   <section class="hero">
     <div class="hero__media">
-      <video class="hero__vid" id="hero-main" src="stage.1543fb27.mp4" muted playsinline loop preload="auto"></video>
-      <video class="hero__vid" id="hero-loader" src="loader.1f79659f.mp4" muted playsinline preload="auto"></video>
+      <video class="hero__vid" id="hero-main" src="stage.1543fb27.mp4" muted playsinline webkit-playsinline autoplay loop preload="auto"></video>
+      <video class="hero__vid" id="hero-loader" src="loader.1f79659f.mp4" muted playsinline webkit-playsinline autoplay preload="auto"></video>
     </div>
     <div class="hero__scrim"></div>
     <div class="hero__veil"></div>
@@ -1530,7 +1530,7 @@ a{color:inherit;text-decoration:none}
         dots=[].slice.call(document.querySelectorAll(cfg.dots+' i')),
         title=document.querySelector(cfg.title), desc=document.querySelector(cfg.desc),
         wrap=document.querySelector(cfg.wrap), cards=cfg.cards,
-        idx=0, timer=null, idleT=null, realN=0, armed=false, cur=-1, drag=false, mX=0, mL=0, W=402;
+        idx=0, timer=null, idleT=null, realN=0, armed=false, cur=-1, drag=false, mX=0, mL=0, W=402, lastTouch=0;
     function realOf(pos){ return ((pos%realN)+realN)%realN; }
     function dotsText(real){ dots.forEach(function(d,j){ d.classList.toggle('on', j===real); });
       if(real!==cur){ cur=real; var c=cards[real]||cards[0]; revealLines(title,c.t); revealLines(desc,c.d); } }
@@ -1554,12 +1554,12 @@ a{color:inherit;text-decoration:none}
     function uEnd(){ if(idleT) clearTimeout(idleT); idleT=setTimeout(function(){ idleT=null; startAuto(); },2000); }
     if(scroll){
       scroll.addEventListener('pointerdown',uStart);
-      scroll.addEventListener('touchstart',uStart,{passive:true});
+      scroll.addEventListener('touchstart',function(){ lastTouch=Date.now(); uStart(); },{passive:true});
       scroll.addEventListener('wheel',function(e){ uStart(); var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY; scroll.scrollLeft+=d; uEnd(); },{passive:true});
       window.addEventListener('pointerup',uEnd);
       scroll.addEventListener('touchend',uEnd);
       scroll.style.cursor='grab';
-      scroll.addEventListener('mousedown',function(e){ drag=true; mX=e.clientX; mL=scroll.scrollLeft;
+      scroll.addEventListener('mousedown',function(e){ if(Date.now()-lastTouch<800) return; drag=true; mX=e.clientX; mL=scroll.scrollLeft;
         scroll.style.scrollSnapType='none'; scroll.style.cursor='grabbing'; uStart(); e.preventDefault(); });
       window.addEventListener('mousemove',function(e){ if(!drag) return; scroll.scrollLeft=mL-(e.clientX-mX); });
       window.addEventListener('mouseup',function(){ if(!drag) return; drag=false;
@@ -1709,9 +1709,12 @@ a{color:inherit;text-decoration:none}
       heroLoader.addEventListener('loadedmetadata',function(){ if(heroLoader.duration) heroLoader.playbackRate=heroLoader.duration/4; });
       robustPlay(heroLoader); }
     if(heroMain){ robustPlay(heroMain); }
-    /* запасной старт по первому тачу/клику (строгие мобильные политики автоплея) */
-    document.addEventListener('touchstart',function once(){ robustPlay(heroLoader); robustPlay(heroMain); },{once:true,passive:true});
-    document.addEventListener('click',function once(){ robustPlay(heroLoader); robustPlay(heroMain); },{once:true});
+    /* iOS: автоплей часто заблокирован → стартуем видео по любому касанию/клику (повторно, пока не заиграет) */
+    function tryStartVids(){
+      if(heroLoader && heroLoader.paused){ try{ heroLoader.muted=true; }catch(e){} heroLoader.play().catch(function(){}); }
+      if(heroMain && heroMain.paused){ try{ heroMain.muted=true; }catch(e){} heroMain.play().catch(function(){}); }
+    }
+    ['touchstart','touchend','pointerdown','click'].forEach(function(ev){ document.addEventListener(ev, tryStartVids, {passive:true}); });
     if(heroSecEl){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ heroSecEl.classList.add('media-in'); }); }); }  /* 0с: видео из opacity (≤0.6с) */
     setTimeout(function(){ pl.classList.add('logo-on'); }, 2150);     /* 2.15с: овал проявляется из opacity (1.3с) */
     setTimeout(function(){ flyLogo(); }, 3550);                        /* отлёт сразу после появления (плавно, 1.1с) */
