@@ -181,24 +181,24 @@ a{color:inherit;text-decoration:none}
 .sc__dark{position:relative;background:var(--bg);display:flex;flex-direction:column;padding-bottom:80px}
 .sc__media{position:relative;width:402px;height:472px;overflow:hidden}
 .sc__media-img{position:absolute;left:0;top:0;width:402px;background-size:cover;background-position:center}
-.sc--menu .sc__media-img{height:500px}
-.sc--menu .sc__media,.sc--interior .sc__media{height:500px}
-.sc--interior .sc__media-img{height:500px}
+.sc--menu .sc__media-img{height:var(--cimg,500px)}
+.sc--menu .sc__media,.sc--interior .sc__media{height:var(--cimg,500px)}
+.sc--interior .sc__media-img{height:var(--cimg,500px)}
 /* блок меню: pinned horizontal scroll (вертикальный скролл двигает карточки по X) */
 .menu-hwrap{position:relative;height:calc(var(--vh-region,732px) - 56px)}   /* обычная высота карточки (без пина) */
-.menu-hpin{position:relative;height:100%;overflow:hidden;background:var(--bg);z-index:2}
-.menu-hscroll{position:absolute;left:0;top:0;width:402px;height:500px;overflow-x:auto;overflow-y:hidden;
-  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x pan-y}
+.menu-hpin{position:relative;height:100%;overflow:hidden;background:var(--bg);z-index:2;--cimg:min(500px, calc(var(--vh-region,732px) - 230px))}
+.menu-hscroll{position:absolute;left:0;top:0;width:402px;height:100%;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x}
 .menu-hscroll::-webkit-scrollbar{display:none}
 .menu-htrack{display:flex;height:100%;will-change:scroll-position}
 .menu-hslide{flex:0 0 402px;width:402px;height:100%;scroll-snap-align:start}
-.menu-htext{position:absolute;left:16px;top:532px;width:340px;z-index:3}
+.menu-htext{position:absolute;left:16px;top:calc(var(--cimg,500px) + 24px);width:340px;z-index:3;pointer-events:none}
 .menu-htitle,.int-htitle{margin:0 0 12px}
 .menu-hdesc,.int-hdesc{width:300px;color:rgba(225,225,225,.78)}
 .rvtext .hline{display:block;overflow:hidden}
 .rvtext .hli{display:block;transform:translateY(110%);transition:transform 1.5s cubic-bezier(.33,1,.68,1)}
 .rvtext.reveal .hli{transform:translateY(0)}
-.menu-pag{position:absolute;top:16px;right:16px;z-index:3}   /* пагинация в правом верхнем углу, как в макете */
+.menu-pag{position:absolute;top:16px;right:16px;z-index:3;pointer-events:none}   /* пагинация в правом верхнем углу, как в макете */
 .sc__dots{position:absolute;top:16px;right:16px;z-index:3}
 .sc__content{display:flex;flex-direction:column;gap:52px;padding:32px 16px 0}
 .sc__text{display:flex;flex-direction:column;gap:24px}
@@ -274,16 +274,18 @@ a{color:inherit;text-decoration:none}
 .menu-cta{flex:none;margin-left:16px;width:370px}
 
 /* ===================== BOOKING SCREEN (макеты 740:18363 / 740:18387) ===================== */
-#booking{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:28;background:transparent;
+#booking{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:28;background:#0e0e0f;
   opacity:0;visibility:hidden;transition:opacity .35s ease, visibility .35s ease}   /* закрытие — простое затухание */
 #booking.open{opacity:1;visibility:visible;transition:opacity 0s, visibility 0s}
-#booking::before{content:"";position:absolute;inset:0;background:#0e0e0f;z-index:0;transform:scaleY(0);transform-origin:bottom}
-#booking.open::before{transform:scaleY(1);transition:transform .5s cubic-bezier(.4,0,.4,1)}   /* равномерный рост снизу вверх, 0.5с */
-#booking .bk-top,#booking .bk-scroll,#booking .bk-fixed{opacity:0}
-#booking.open .bk-top,#booking.open .bk-scroll,#booking.open .bk-fixed{opacity:1;transition:opacity 1.6s cubic-bezier(.33,0,.2,1) .7s}   /* контент — плавно ~0.8с, с 0.6с (после подъёма) */
-#booking.instant::before,#interior-gallery.instant::before{transition:none}   /* переход между модалками: плашка сразу, без роста */
-#booking.instant.open,#interior-gallery.instant.open{background:#0e0e0f}   /* при переходе модалка сразу непрозрачна — лендинг не мелькает */
-#booking.instant.open .bk-top,#booking.instant.open .bk-scroll,#booking.instant.open .bk-fixed{transition:opacity .6s cubic-bezier(.33,0,.2,1)}
+@keyframes ovSweep{from{transform:translateY(100%)}to{transform:translateY(-101%)}}
+@keyframes ovFade{from{opacity:0}to{opacity:1}}
+#booking::before{content:"";position:absolute;inset:0;background:#0e0e0f;z-index:3;transform:translateY(100%)}   /* плашка скрыта над экраном */
+#booking.open::before{animation:none}   /* плашка проходит снизу вверх и уходит за верх */
+#booking .bk-top,#booking .bk-scroll,#booking .bk-fixed{opacity:1}
+#booking.open .bk-top,#booking.open .bk-scroll,#booking.open .bk-fixed{animation:none}   /* контент проявляется под плашкой */
+#booking.instant.open::before,#interior-gallery.instant.open::before{animation:none}
+#booking.instant.open,#interior-gallery.instant.open{background:#0e0e0f}   /* модалка↔модалка: сплошной фон, без лендинга */
+#booking.instant.open .bk-top,#booking.instant.open .bk-scroll,#booking.instant.open .bk-fixed{animation:none}
 .bk-top{position:absolute;top:0;left:0;width:402px;z-index:2}
 .bk-scroll{position:absolute;top:52px;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;padding-top:84px;padding-bottom:88px}
 .bk-scroll::-webkit-scrollbar{width:0;height:0}
@@ -344,14 +346,14 @@ a{color:inherit;text-decoration:none}
 .bk-card.sel{border-color:var(--border-inverted)}
 .bk-card__img{height:160px;background-size:cover;background-position:center;cursor:pointer}
 /* галерея интерьера (полноэкранная, по макету) */
-#interior-gallery{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:47;background:transparent;overflow:hidden;
+#interior-gallery{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:47;background:#0e0e0f;overflow:hidden;
   opacity:0;visibility:hidden;transition:opacity .35s ease, visibility .35s ease}   /* закрытие — простое затухание */
 #interior-gallery.open{opacity:1;visibility:visible;transition:opacity 0s, visibility 0s}
-#interior-gallery::before{content:"";position:absolute;inset:0;background:#0e0e0f;z-index:0;transform:scaleY(0);transform-origin:bottom}
-#interior-gallery.open::before{transform:scaleY(1);transition:transform .5s cubic-bezier(.4,0,.4,1)}
-#interior-gallery .ig-track,#interior-gallery .ig-top,#interior-gallery .ig-bottom{opacity:0}
-#interior-gallery.open .ig-track,#interior-gallery.open .ig-top,#interior-gallery.open .ig-bottom{opacity:1;transition:opacity 1.6s cubic-bezier(.33,0,.2,1) .7s}
-#interior-gallery.instant.open .ig-track,#interior-gallery.instant.open .ig-top,#interior-gallery.instant.open .ig-bottom{transition:opacity .6s cubic-bezier(.33,0,.2,1)}
+#interior-gallery::before{content:"";position:absolute;inset:0;background:#0e0e0f;z-index:3;transform:translateY(100%)}
+#interior-gallery.open::before{animation:none}
+#interior-gallery .ig-track,#interior-gallery .ig-top,#interior-gallery .ig-bottom{opacity:1}
+#interior-gallery.open .ig-track,#interior-gallery.open .ig-top,#interior-gallery.open .ig-bottom{animation:none}
+#interior-gallery.instant.open .ig-track,#interior-gallery.instant.open .ig-top,#interior-gallery.instant.open .ig-bottom{animation:none}
 .ig-track{position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none}
 .ig-track::-webkit-scrollbar{height:0}
 .ig-slide{flex:0 0 402px;width:402px;height:100%;background:#0e0e0f center/cover no-repeat;scroll-snap-align:start}
@@ -907,7 +909,7 @@ a{color:inherit;text-decoration:none}
     var vw=document.documentElement.clientWidth, vh=document.documentElement.clientHeight;
     if(window.matchMedia('(max-width:600px)').matches){
       var visH=(window.visualViewport&&window.visualViewport.height)||vh;
-      if((vh - visH) > 120) return;                 /* клавиатура открыта → не перемасштабируем (макет не «улетает») */
+      if(kbFocused && (vh - visH) > 120) return;    /* клавиатура открыта → не перемасштабируем */
       var H=vh;                                      /* стабильная layout-высота: не прыгает от адрес-бара/клавиатуры */
       var s=vw/402;
       device.style.transformOrigin='top left';
@@ -1529,19 +1531,22 @@ a{color:inherit;text-decoration:none}
         title=document.querySelector(cfg.title), desc=document.querySelector(cfg.desc),
         wrap=document.querySelector(cfg.wrap), cards=cfg.cards,
         idx=0, timer=null, idleT=null, realN=0, armed=false, cur=-1, drag=false, mX=0, mL=0, W=402;
-    function realOf(pos){ return ((pos-1)%realN+realN)%realN; }
+    function realOf(pos){ return ((pos%realN)+realN)%realN; }
     function dotsText(real){ dots.forEach(function(d,j){ d.classList.toggle('on', j===real); });
       if(real!==cur){ cur=real; var c=cards[real]||cards[0]; revealLines(title,c.t); revealLines(desc,c.d); } }
     function go(pos,smooth){ if(scroll) scroll.scrollTo({left:pos*W, behavior:smooth?'smooth':'auto'}); }
-    var startPos=1;
+    var startPos=0;
     if(track){ realN=track.children.length;
-      var cf=track.children[0].cloneNode(true), cl=track.children[realN-1].cloneNode(true);
-      track.insertBefore(cl,track.children[0]); track.appendChild(cf);
+      var orig=[].slice.call(track.children);
+      var f1=document.createDocumentFragment(), f2=document.createDocumentFragment();
+      orig.forEach(function(s){ f1.appendChild(s.cloneNode(true)); f2.appendChild(s.cloneNode(true)); });
+      track.insertBefore(f1, track.firstChild); track.appendChild(f2);          /* [набор][РЕАЛ][набор] — полный буфер с обеих сторон */
       track.style.width=(track.children.length*W)+'px';
-      startPos=(cfg.start==='last')?realN:1; idx=startPos; if(scroll) scroll.scrollLeft=startPos*W;
+      startPos=(cfg.start==='last')?(2*realN-1):realN; idx=startPos; if(scroll) scroll.scrollLeft=startPos*W;
     }
-    function wrapEdges(){ if(drag) return; var pos=Math.round(scroll.scrollLeft/W);
-      if(pos<=0){ scroll.scrollLeft=realN*W; idx=realN; } else if(pos>=realN+1){ scroll.scrollLeft=W; idx=1; } else idx=pos; }
+    function wrapEdges(){ var pos=Math.round(scroll.scrollLeft/W);
+      if(pos < realN){ pos+=realN; scroll.scrollLeft=pos*W; } else if(pos >= 2*realN){ pos-=realN; scroll.scrollLeft=pos*W; }
+      idx=pos; }
     function step(){ idx++; go(idx,true); }
     function startAuto(){ if(!timer&&armed) timer=setInterval(step,2600); }
     function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
@@ -1560,7 +1565,7 @@ a{color:inherit;text-decoration:none}
       window.addEventListener('mouseup',function(){ if(!drag) return; drag=false;
         scroll.style.scrollSnapType='x mandatory'; scroll.style.cursor='grab';
         var pos=Math.round(scroll.scrollLeft/W);
-        if(pos<=0){ scroll.scrollLeft=realN*W; idx=realN; } else if(pos>=realN+1){ scroll.scrollLeft=W; idx=1; } else { go(pos,true); idx=pos; }
+        if(pos < realN){ pos+=realN; scroll.scrollLeft=pos*W; } else if(pos >= 2*realN){ pos-=realN; scroll.scrollLeft=pos*W; } else { go(pos,true); } idx=pos;
         uEnd(); });
       var st=false, se=null;
       scroll.addEventListener('scroll',function(){
@@ -1696,10 +1701,17 @@ a{color:inherit;text-decoration:none}
     }
     var heroLoader=document.getElementById('hero-loader'), heroMain=document.getElementById('hero-main'),
         heroSecEl=document.querySelector('.hero');
+    function robustPlay(v){ if(!v) return; try{ v.muted=true; }catch(e){}
+      var p=v.play(); if(p&&p.catch) p.catch(function(){
+        v.addEventListener('canplay',function on(){ v.removeEventListener('canplay',on); v.play().catch(function(){}); },{once:true});
+      }); }
     if(heroLoader){ heroLoader.playbackRate=0.51;                     /* 2.04с → ~4с (двери ~наполовину к ~2.35с) */
       heroLoader.addEventListener('loadedmetadata',function(){ if(heroLoader.duration) heroLoader.playbackRate=heroLoader.duration/4; });
-      var p1=heroLoader.play(); if(p1&&p1.catch) p1.catch(function(){}); }
-    if(heroMain){ var p2=heroMain.play(); if(p2&&p2.catch) p2.catch(function(){}); }
+      robustPlay(heroLoader); }
+    if(heroMain){ robustPlay(heroMain); }
+    /* запасной старт по первому тачу/клику (строгие мобильные политики автоплея) */
+    document.addEventListener('touchstart',function once(){ robustPlay(heroLoader); robustPlay(heroMain); },{once:true,passive:true});
+    document.addEventListener('click',function once(){ robustPlay(heroLoader); robustPlay(heroMain); },{once:true});
     if(heroSecEl){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ heroSecEl.classList.add('media-in'); }); }); }  /* 0с: видео из opacity (≤0.6с) */
     setTimeout(function(){ pl.classList.add('logo-on'); }, 2150);     /* 2.15с: овал проявляется из opacity (1.3с) */
     setTimeout(function(){ flyLogo(); }, 3550);                        /* отлёт сразу после появления (плавно, 1.1с) */
