@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FAME — ресторан &amp; лаунж</title>
+<meta name="description" content="FAME — пространство, где изысканная кухня, атмосфера приватности и вечерний ритм города соединяются в одном впечатлении.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow"><style>
+/* =====================================================================
+   FAME — точная копия макета Figma. Мобильный фрейм: 402 × 874 (iPhone 17).
+   Ширина зафиксирована на 402px; на экранах уже 402px фрейм пропорционально
+   масштабируется скриптом (1:1). Фото (WebP), шрифты и логотипы встроены в файл.
+   Параллакс при скролле: MENU, Interior и Loyalty.
+   Фото футера (контакты) не было прислано — временно грузится с Figma (~7 дней).
+   ===================================================================== */
+@font-face{font-family:"TT Commons";font-weight:400;font-style:normal;font-display:swap;src:url(ttc-r.7f267f05.woff2) format("woff2")}
+@font-face{font-family:"TT Commons";font-weight:500;font-style:normal;font-display:swap;src:url(ttc-m.d9115d0b.woff2) format("woff2")}
+@font-face{font-family:"Playfair Display";font-weight:400;font-style:normal;font-display:swap;src:url(pf-r.6741aae1.woff2) format("woff2")}
+@font-face{font-family:"Playfair Display";font-weight:500;font-style:normal;font-display:swap;src:url(pf-m.f2faf1fe.woff2) format("woff2")}
+
+:root{
+  --img-hero:url("hero.40867eea.webp");
+  --img-menu-bg:url("menu.283527be.webp");
+  --img-hookah:url("hookan.e6ff777b.webp");
+  --img-kitchen:url("kitchen.e20d7d31.webp"); --img-bar:url("bar.d7d9d4fd.webp");
+  --img-int-bg:url("interior.e157c39d.webp");
+  --img-hall:url("main_hall.5646658f.webp");
+  --img-int-hall:url("int_hall.072101e3.webp");
+  --img-int-pano:url("int_panorama.b58c45b1.webp");
+  --img-int-kamin:url("int_kamin.073542ff.webp");
+  --img-int-noir:url("int_noir.62c1c0d5.webp");
+  --img-int-belv:url("int_belveder.fdb1d737.webp");
+  --img-int-vino:url("int_vinoteka.4804a7ca.webp");
+  --img-loyalty:url("loalty.2267e551.webp");
+  --smk1:url("smk1.75e94faa.webp"); --smk2:url("smk2.3526dd5e.webp"); --smk3:url("smk3.96ca22cb.webp"); --nsm1:url("nsm1.d6cb3966.webp"); --nsm2:url("nsm2.7df9c65d.webp"); --nsm3:url("nsm3.f6fcb8e6.webp");
+  --onyx1:url("onyx1.92271fbf.webp"); --onyx2:url("onyx2.5836e7e7.webp"); --onyx3:url("onyx3.30b1a70b.webp"); --onyx4:url("onyx4.f3a2a378.webp"); --onyx5:url("onyx5.92271fbf.webp"); --onyx6:url("onyx6.d1be6edb.webp");
+  --grot1:url("grot1.946888c7.webp"); --grot2:url("grot2.0424a43b.webp"); --grot3:url("grot3.15749323.webp"); --grot4:url("grot4.50e37d16.webp");
+  --lozha1:url("lozha1.1192ef52.webp"); --lozha2:url("lozha2.ca74a8c7.webp"); --lozha3:url("lozha3.339388e8.webp");
+  --sumrak1:url("sumrak1.bb64c08f.webp"); --sumrak2:url("sumrak2.8e14d66d.webp"); --sumrak3:url("sumrak3.af686119.webp"); --sumrak4:url("sumrak4.ba659c79.webp"); --sumrak5:url("sumrak5.146ee68d.webp");
+  --plamya1:url("plamya1.30b1a70b.webp"); --plamya2:url("plamya2.3786d7f8.webp"); --plamya3:url("plamya3.8bfb273c.webp"); --plamya4:url("plamya4.2b7b2065.webp"); --plamya5:url("plamya5.5006e60b.webp"); --plamya6:url("plamya6.14118b5e.webp"); --plamya7:url("plamya7.295b9b2d.webp");
+  --img-footer:url("location.94842ac1.webp");
+
+  --bg:#0e0e0f; --c-primary:#e1e1e1; --c-secondary:#676770; --c-caption:#4c4c54;
+  --c-secondary-l:rgba(225,225,225,.5); --border:#2c2c33;
+  --inverted:#e1e1e1; --c-inverted:#0e0e0f; --btn-light-border:#ababb2;
+  --fill-tetriaty:#1a1a1f; --fill-secondary:#141417; --text-tertiary:#6f7480;
+  --btn-neutral:#2c2c33; --btn-neutral-border:rgba(76,76,84,.4); --border-inverted:#80808a;
+  --border-focus:#c28f72; --negative:#ab4547;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+html{-webkit-text-size-adjust:100%}
+body{background:#000;font-family:"TT Commons",sans-serif;color:var(--c-primary)}
+/* внешняя «сцена»: центрирует девайс и делает леттербокс */
+#shell{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:#000;overflow:hidden}
+/* видимая зона iPhone 17: строго 402×874, масштабируется под экран целиком */
+#device{position:relative;width:402px;height:874px;overflow:hidden;background:var(--bg);
+  transform-origin:center center;box-shadow:0 30px 120px rgba(0,0,0,.55)}
+/* нативные бары iOS/Safari */
+.native-bar{position:absolute;left:0;width:402px;z-index:30;background:var(--bg);overflow:hidden;pointer-events:none}
+.native-bar img{display:block;width:402px;height:auto}
+.native-bar--top{top:0;height:44px}
+.native-bar--bottom{bottom:0;height:98px}
+/* область веб-контента между барами (706px) — здесь скроллится лендинг */
+#viewport{position:absolute;top:44px;bottom:98px;left:0;right:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#device.scroll-lock #viewport{overflow:hidden;touch-action:none}   /* блок скролла на время прелоудера + появления hero */
+#viewport::-webkit-scrollbar{width:0;height:0}
+#content{position:relative;width:402px}
+img,svg{display:block}
+a{color:inherit;text-decoration:none}
+
+.t-body{font-family:"TT Commons";font-weight:400;font-size:16px;line-height:1;letter-spacing:.03em}
+.t-body.wrap-lh{line-height:1.2}
+.t-disp-xs{font-family:"Playfair Display";font-weight:400;font-size:48px;line-height:1;letter-spacing:1px;text-transform:uppercase}
+.t-disp-m{font-family:"Playfair Display";font-weight:400;font-size:72px;line-height:1;letter-spacing:0;text-transform:uppercase}
+.t-h2{font-family:"Playfair Display";font-weight:500;font-size:32px;line-height:1;letter-spacing:1px;text-transform:uppercase}
+
+.btn{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;height:44px;
+  padding:0 16px;border:1px solid var(--border);border-radius:2px;background:var(--bg);color:var(--c-primary);
+  cursor:pointer;font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.03em;transition:border-color .25s ease}
+.btn span:first-child{white-space:nowrap}
+.btn .ico{flex:none;width:12px;height:12px;line-height:0}
+.btn .ico svg{width:12px;height:12px;transition:transform .25s ease}
+.btn:hover{border-color:#43434e}
+.btn:hover .ico svg{transform:translateX(3px)}
+.btn:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.btn--transparent{background:transparent}
+.btn--light{background:var(--inverted);border-color:var(--btn-light-border);color:var(--c-inverted);width:280px}
+
+.dots{display:flex;flex-direction:column;gap:4px}
+.dots i{width:5px;height:5px;border-radius:999px;background:var(--c-primary)}
+.dots i:not(.on){opacity:.3}
+
+/* ---------------- HERO 402×706 (между нативными барами) ---------------- */
+.hero{position:relative;width:402px;height:calc(var(--vh-region,732px) - 56px);overflow:hidden;background:#0e0e0f}   /* +20px вниз: блок уходит под кнопку с запасом (без зазора) */
+.hero__media{position:absolute;inset:0;overflow:hidden;background:#0e0e0f;opacity:0;transition:opacity .6s ease}
+.hero.media-in .hero__media{opacity:1}                       /* появление видео из opacity ≤0.6с */
+.hero__vid{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
+#hero-loader{opacity:1;transition:opacity .9s ease}          /* лоадер сверху; на 5с гаснет → главное видео (бесшовно) */
+.hero.vid-main #hero-loader{opacity:0}
+.hero__scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(14,14,15,.55),rgba(14,14,15,.35) 45%,rgba(14,14,15,.6))}   /* блэкаут поверх видео */
+.hero__veil{position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgNDAyIDczMicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSdub25lJz48cmVjdCB4PScwJyB5PScwJyBoZWlnaHQ9JzEwMCUnIHdpZHRoPScxMDAlJyBmaWxsPSd1cmwoI2dyYWQpJyBvcGFjaXR5PScxJy8+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSdncmFkJyBncmFkaWVudFVuaXRzPSd1c2VyU3BhY2VPblVzZScgY3g9JzAnIGN5PScwJyByPScxMCcgZ3JhZGllbnRUcmFuc2Zvcm09J21hdHJpeCgxLjY0OWUtMTMgLTc5LjkgMjI3LjA5IC0xLjY3MDllLTcgMjAxIDY3MS43KSc+PHN0b3Agc3RvcC1jb2xvcj0ncmdiYSgxNCwxNCwxNSwxKScgb2Zmc2V0PScwLjA4OTEyMycvPjxzdG9wIHN0b3AtY29sb3I9J3JnYmEoMTQsMTQsMTUsMCknIG9mZnNldD0nMScvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==") center/100% 100% no-repeat}
+.hero__blackout{position:absolute;inset:0;background:#0e0e0f;opacity:0;pointer-events:none}
+.hero__header{position:absolute;top:44px;left:0;width:402px;height:52px;z-index:25;display:flex;align-items:center;
+  justify-content:space-between;mix-blend-mode:difference;color:#fff;transition:transform .3s ease}
+.hero__header.hide{transform:translateY(calc(-100% - 48px))}
+.hero__header .icon-btn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:inherit;cursor:pointer}
+.hero__header .icon-btn svg{width:16px;height:16px}
+.hero__header .brand{display:flex;align-items:center;height:100%;padding-top:20px}
+.hero__header .brand svg{width:40px;height:40px}
+.hero__header .spacer{width:44px;height:44px;opacity:0}
+.hero__logo{position:absolute;left:calc(50% + .5px);top:calc(50% - 28px);transform:translate(-50%,-50%);width:255px;height:52px}
+.hero__logo svg{width:255px;height:52px}
+.hero__bottom{position:absolute;left:16px;bottom:52px;width:353px;display:flex;flex-direction:column;align-items:flex-start}
+.hero__desc{width:353px;color:rgba(225,225,225,.6)}
+
+/* ===== ПРЕЛОУДЕР ===== */
+#preloader{position:absolute;top:44px;left:0;right:0;height:732px;z-index:60;overflow:hidden;pointer-events:none}
+/* логотип-овал «F» по центру (чуть выше середины, как в макете), тот же, что в хедере */
+#pl-logo{position:absolute;left:50%;top:50%;width:72px;height:72px;margin:-36px 0 0 -36px;
+  opacity:0;transition:opacity 1.3s ease, transform 1.1s cubic-bezier(.34,0,.2,1)}
+#pl-logo svg{width:72px;height:72px;display:block}
+#preloader.logo-on #pl-logo{opacity:1}         /* появление из opacity (2с) */
+
+/* стартовые (скрытые) состояния лендинга во время прелоудера */
+#device.pl .hero__header .brand,
+#device.pl #burger{opacity:0}
+#device.pl .cta-bar .btn{transform:translateY(10px);opacity:0}   /* стартовая позиция самой кнопки (подложка видна сразу) */
+#device.pl .hero__header .brand{transition:opacity .45s ease}
+#device.pl #burger{transition:opacity .45s ease}
+@keyframes ctarise{from{transform:translateY(10px);opacity:0}to{transform:translateY(0);opacity:1}}
+#device.cta-enter .cta-bar .btn{animation:ctarise 1.5s cubic-bezier(.33,1,.68,1) both}   /* анимируется только кнопка, подложка на месте */
+.hero__logo svg{overflow:visible}
+.hero__logo svg path{transform-box:fill-box;transform-origin:50% 100%;
+  transition:transform 1.1s cubic-bezier(.16,1,.3,1),opacity .7s ease}
+/* стартовое состояние: буква сжата по ширине и приподнята снизу (как узкий инстанс шрифта) */
+#device.pl .hero__logo svg path{opacity:0;transform:translateY(36%) scaleX(.32) scaleY(.82)}
+
+/* этапы раскрытия */
+#device.rv-mark .hero__logo svg path{opacity:1;transform:none}
+#device.rv-mark .hero__logo svg path:nth-child(1){transition-delay:0s}
+#device.rv-mark .hero__logo svg path:nth-child(2){transition-delay:.1s}
+#device.rv-mark .hero__logo svg path:nth-child(3){transition-delay:.2s}
+#device.rv-mark .hero__logo svg path:nth-child(4){transition-delay:.3s}
+#device.rv-brand .hero__header .brand{opacity:1!important}
+#device.rv-chrome #burger{opacity:1!important}
+#hero-blackout{transition:opacity .8s ease}
+/* hero: строки описания появляются по очереди снизу-вверх через маску (медленно, лаконично) */
+.hero__desc .hline{display:block;overflow:hidden}
+.hero__desc .hli{display:block;transform:translateY(110%);transition:transform 1.5s cubic-bezier(.33,1,.68,1)}
+.hero__desc.reveal .hli{transform:translateY(0)}
+
+/* фиксированная CTA-плашка у нижнего края (макет 737:18077) */
+.cta-bar{position:absolute;left:0;bottom:98px;width:402px;padding:16px;background:var(--bg);z-index:25;
+  display:flex;pointer-events:none;transition:transform .5s cubic-bezier(.4,0,.2,1), opacity .5s ease}
+.cta-bar .btn{width:100%;pointer-events:auto}
+#cta-bar .btn{overflow:hidden}
+#cta-bar .btn .cta-lbl{position:relative;overflow:hidden;flex:1 1 auto;align-self:stretch;text-align:left}
+#cta-bar .btn .cta-lbl__in{position:absolute;inset:0;overflow:hidden;transition:transform .45s cubic-bezier(.33,1,.68,1)}
+#cta-bar .btn .cta-lbl__in .roll{display:block;transition:transform .5s cubic-bezier(.5,0,.2,1);will-change:transform}
+#cta-bar .btn .cta-lbl__in .roll span{display:flex;align-items:center;height:42px}
+#cta-bar .btn .cta-lbl__in .roll span b{display:block;line-height:1;font-weight:400;font-style:normal;white-space:nowrap;transform:translateY(-5px)}
+#cta-bar .btn .cta-lbl__in .roll span:nth-child(2) b{transform:translateY(-1px)}
+#cta-bar .btn:hover .cta-lbl__in .roll,#cta-bar .btn.roll-on .cta-lbl__in .roll{transform:translateY(-50%)}
+.cta-bar.hide{transform:translateY(calc(100% + 24px));opacity:0}
+
+/* ---------------- SHOWCASE (Menu / Interior) ---------------- */
+.showcase{background:var(--bg)}
+.sc__graphic{position:relative;width:402px;height:732px;overflow:hidden}
+.sc__graphic-clip{position:absolute;inset:0;clip-path:inset(30px 60px round 2px);will-change:clip-path}
+.sc__graphic-img{position:absolute;left:0;top:0;width:402px;height:1600px;background-size:cover;background-position:center;will-change:transform}
+.sc--menu .sc__graphic-img{background-image:var(--img-menu-bg);width:598px;height:1340px;left:-118px;top:-42px}   /* точные размеры/позиция начала параллакса по макету */
+.sc--interior .sc__graphic-img{background-image:var(--img-int-bg);width:452px;height:1300px;left:-25px;top:-60px}   /* запас под сильный параллакс */
+.sc__title{position:absolute;left:55px;top:334.5px;width:292px;z-index:2;display:flex;flex-direction:column;align-items:center;opacity:0}
+.sc__title h2{margin-bottom:-3px;text-align:center;white-space:nowrap;color:var(--c-primary);text-box-trim:trim-both;text-box-edge:cap alphabetic}
+.sc__mark{width:81px;height:32px}
+.sc__mark svg{width:81px;height:32px}
+
+.sc__dark{position:relative;background:var(--bg);display:flex;flex-direction:column;padding-bottom:80px}
+.sc__media{position:relative;width:402px;height:472px;overflow:hidden}
+.sc__media-img{position:absolute;left:0;top:0;width:402px;background-size:cover;background-position:center}
+.sc--menu .sc__media-img{height:500px}
+.sc--menu .sc__media,.sc--interior .sc__media{height:500px}
+.sc--interior .sc__media-img{height:500px}
+/* блок меню: pinned horizontal scroll (вертикальный скролл двигает карточки по X) */
+.menu-hwrap{position:relative;height:calc(var(--vh-region,732px) - 56px)}   /* обычная высота карточки (без пина) */
+.menu-hpin{position:relative;height:100%;overflow:hidden;background:var(--bg);z-index:2}
+.menu-hscroll{position:absolute;left:0;top:0;width:402px;height:500px;overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;touch-action:pan-x pan-y}
+.menu-hscroll::-webkit-scrollbar{display:none}
+.menu-htrack{display:flex;height:100%;will-change:scroll-position}
+.menu-hslide{flex:0 0 402px;width:402px;height:100%;scroll-snap-align:start}
+.menu-htext{position:absolute;left:16px;top:532px;width:340px;z-index:3}
+.menu-htitle,.int-htitle{margin:0 0 12px}
+.menu-hdesc,.int-hdesc{width:300px;color:rgba(225,225,225,.78)}
+.rvtext .hline{display:block;overflow:hidden}
+.rvtext .hli{display:block;transform:translateY(110%);transition:transform 1.5s cubic-bezier(.33,1,.68,1)}
+.rvtext.reveal .hli{transform:translateY(0)}
+.menu-pag{position:absolute;top:16px;right:16px;z-index:3}   /* пагинация в правом верхнем углу, как в макете */
+.sc__dots{position:absolute;top:16px;right:16px;z-index:3}
+.sc__content{display:flex;flex-direction:column;gap:52px;padding:32px 16px 0}
+.sc__text{display:flex;flex-direction:column;gap:24px}
+.sc__text h3{color:var(--c-primary)}
+.sc__text p{width:300px;color:var(--c-secondary)}
+
+/* ---------------- LOYALTY 402×900 (parallax) ---------------- */
+.loyalty{position:relative;width:402px;height:900px;overflow:hidden;background:var(--bg)}
+.loyalty__img{position:absolute;left:0;top:0;width:402px;height:1200px;background:var(--img-loyalty) center/cover no-repeat;will-change:transform}
+.loyalty__grad{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg, rgba(14,14,15,0) 24.5%, var(--bg) 62%)}
+.loyalty__card{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);width:370px;height:428px;background:var(--inverted);border-radius:4px;padding:4px;box-shadow:0 10px 60px rgba(0,0,0,.5)}
+.loyalty__inner{height:420px;border:1px solid #fff;border-radius:2px;padding:40px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center}
+.loyalty__inner .eyebrow{color:var(--c-secondary)}
+.loyalty__group{display:flex;flex-direction:column;gap:32px;align-items:center;width:100%}
+.loyalty__group h2{color:var(--c-inverted)}
+.loyalty__group p{color:var(--c-secondary)}
+
+/* ---------------- FOOTER ---------------- */
+.footer{background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;min-height:732px;padding:88px 0 24px;width:402px;overflow:hidden}
+.footer__lead{display:flex;flex-direction:column;gap:32px;padding:0 16px}
+.footer__lead p{color:var(--c-secondary-l)}
+.footer__grid{display:flex;flex-direction:column;gap:32px}
+.contacts{display:flex;align-items:flex-start}
+.contacts.pad{padding:0 16px;gap:58px}
+.contact .label{color:var(--c-secondary);margin-bottom:16px}
+.contact .val,.contact a{color:var(--c-primary);text-decoration:underline;text-underline-offset:3px}
+.social-row{display:flex;gap:6px;align-items:center}
+.social-row .sep{color:var(--c-secondary);text-decoration:none}
+.footer__media{position:relative;width:402px;height:180px;overflow:hidden}
+.footer__media-img{position:absolute;right:0;top:0;width:402px;height:100%;border-radius:2px;background:var(--img-footer) center/cover no-repeat}
+.footer__media .contacts{position:absolute;left:16px;bottom:16px;width:370px;gap:51px;z-index:2}
+.footer__media .label.addr{color:var(--c-secondary-l)}
+.footer__contacts{display:flex;flex-direction:column;gap:24px}
+.footer__contacts .title{padding:0 14px}
+.footer__contacts .title h2{text-align:center;white-space:nowrap;color:var(--c-primary)}
+.footer__legal{display:flex;align-items:center;justify-content:space-between;padding:0 16px;color:var(--c-caption)}
+.footer__legal .links{display:flex;gap:12px;align-items:center}
+
+/* ---------------- BURGER MENU OVERLAY (в области viewport) ---------------- */
+.menu-overlay{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:26;background:var(--bg);overflow-y:auto;
+  visibility:hidden;transform:translateX(-100%);
+  transition:transform 1.05s cubic-bezier(.16,1,.3,1), visibility 1.05s ease}
+.menu-overlay.open{visibility:visible;transform:translateX(0)}
+.menu-overlay__inner{position:relative;width:402px;min-height:100%;display:flex;flex-direction:column;padding-bottom:16px}
+.menu-overlay__header{flex:none;height:52px;display:flex;align-items:center;justify-content:space-between;padding-right:16px}
+.menu-close{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--c-primary);cursor:pointer}
+.menu-close svg{width:16px;height:16px}
+.menu-lang{display:flex;align-items:center;gap:16px;color:var(--c-secondary)}
+.menu-lang .on{color:var(--c-primary)}
+.menu-lang .lang{display:inline-block;overflow:hidden;height:18px;cursor:pointer}
+.menu-lang .lang .roll{display:block;transition:transform .5s cubic-bezier(.5,0,.2,1);will-change:transform}
+.menu-lang .lang .roll span{display:block;height:18px;line-height:18px}
+.menu-lang .lang:hover .roll,.menu-lang .lang.roll-on .roll{transform:translateY(-50%)}
+.menu-nav{flex:none;margin-left:16px;width:370px;display:flex;flex-direction:column;gap:52px}
+.menu-nav a{font-family:"TT Commons";font-weight:400;font-size:52px;line-height:1;letter-spacing:0;color:var(--c-primary);display:block;overflow:hidden;height:52px}
+.menu-nav a .roll{display:block;transition:transform .55s cubic-bezier(.5,0,.2,1);will-change:transform}
+.menu-nav a .roll span{display:block;height:52px;line-height:52px}
+.menu-nav a:hover .roll,.menu-nav a.roll-on .roll{transform:translateY(-50%)}   /* текст прокручивается вверх, снизу — дубликат */
+.menu-gap{flex:1 1 0;min-height:24px}
+.menu-gap--lg{flex-grow:1.3}
+.menu-social{flex:none;margin-left:16px;display:flex;align-items:center;gap:16px}
+.menu-social a{color:var(--c-primary);position:relative;display:inline-block;text-decoration:none}
+.menu-social a::after{content:"";position:absolute;left:0;bottom:-3px;width:100%;height:1px;background:currentColor;
+  transform:scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.5,0,.2,1)}
+.menu-social a:hover::after,.menu-social a.uline::after{transform:scaleX(1)}   /* подчёркивание прочерчивается слева направо */
+.btn .btn-lbl{position:relative;overflow:hidden;align-self:stretch;display:block}
+.btn .btn-lbl .roll{display:block;transition:transform .5s cubic-bezier(.5,0,.2,1);will-change:transform}
+.btn .btn-lbl .roll span{display:flex;align-items:center;height:42px}
+.btn .btn-lbl .roll span b{display:block;line-height:1;font-weight:400;font-style:normal;white-space:nowrap;transform:translateY(-5px)}
+.btn .btn-lbl .roll span:nth-child(2) b{transform:translateY(-1px)}
+.btn:hover .btn-lbl .roll,.btn.roll-on .btn-lbl .roll{transform:translateY(-50%)}
+.menu-social .sep{color:var(--c-secondary);text-decoration:none}
+.menu-cta{flex:none;margin-left:16px;width:370px}
+
+/* ===================== BOOKING SCREEN (макеты 740:18363 / 740:18387) ===================== */
+#booking{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:28;background:transparent;
+  opacity:0;visibility:hidden;transition:opacity .35s ease, visibility .35s ease}   /* закрытие — простое затухание */
+#booking.open{opacity:1;visibility:visible;transition:opacity 0s, visibility 0s}
+#booking::before{content:"";position:absolute;inset:0;background:#0e0e0f;z-index:0;transform:scaleY(0);transform-origin:bottom}
+#booking.open::before{transform:scaleY(1);transition:transform .5s cubic-bezier(.4,0,.4,1)}   /* равномерный рост снизу вверх, 0.5с */
+#booking .bk-top,#booking .bk-scroll,#booking .bk-fixed{opacity:0}
+#booking.open .bk-top,#booking.open .bk-scroll,#booking.open .bk-fixed{opacity:1;transition:opacity 1.6s cubic-bezier(.33,0,.2,1) .7s}   /* контент — плавно ~0.8с, с 0.6с (после подъёма) */
+#booking.instant::before,#interior-gallery.instant::before{transition:none}   /* переход между модалками: плашка сразу, без роста */
+#booking.instant.open,#interior-gallery.instant.open{background:#0e0e0f}   /* при переходе модалка сразу непрозрачна — лендинг не мелькает */
+#booking.instant.open .bk-top,#booking.instant.open .bk-scroll,#booking.instant.open .bk-fixed{transition:opacity .6s cubic-bezier(.33,0,.2,1)}
+.bk-top{position:absolute;top:0;left:0;width:402px;z-index:2}
+.bk-scroll{position:absolute;top:52px;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;padding-top:84px;padding-bottom:88px}
+.bk-scroll::-webkit-scrollbar{width:0;height:0}
+.bk-head{display:flex;height:52px;align-items:center;justify-content:space-between;width:402px;background:var(--bg)}
+.bk-head .icon-btn{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--c-primary);cursor:pointer}
+.bk-head .icon-btn svg{width:16px;height:16px}
+.bk-head .title{font-family:"TT Commons";font-weight:500;font-size:20px;line-height:1;letter-spacing:.6px;color:var(--c-primary)}
+.bk-head .spacer{width:44px;height:44px}
+.bk-tabs{display:flex;gap:8px;padding:16px 16px 32px;background:linear-gradient(to top,rgba(14,14,15,0) 9.375%,var(--bg) 29.167%)}
+.bk-tab{flex:1 0 0;min-width:0;height:36px;display:flex;align-items:center;justify-content:center;padding:0 16px;border-radius:4px;
+  background:var(--fill-tetriaty);color:var(--c-secondary);font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.2px;cursor:pointer;border:0}
+.bk-tab.active{background:var(--inverted);color:var(--c-inverted);font-weight:500}
+.bk-form{display:flex;flex-direction:column;gap:32px;padding:0 16px}
+.bk-group{display:flex;flex-direction:column;gap:16px;width:100%}
+.bk-label{display:flex;height:16px;align-items:center;padding:0 4px}
+.bk-label span{font-family:"TT Commons";font-weight:400;font-size:14px;line-height:1;letter-spacing:.1px;color:var(--text-tertiary)}
+.bk-row{background:var(--fill-secondary);border-radius:4px;height:44px;display:flex;align-items:center;justify-content:space-between;width:100%;border:1px solid transparent}
+.bk-row.req{border-color:var(--negative)}
+.bk-lbl{font-family:"TT Commons";font-weight:400;font-size:16px;line-height:1;letter-spacing:.2px;color:var(--c-secondary)}
+.bk-dropdown{padding:6px 4px 6px 16px;cursor:pointer}
+.bk-dropdown .chev{width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:var(--c-secondary);flex:none}
+.bk-dropdown .chev svg{width:16px;height:16px}
+.bk-input{padding:0 16px}
+/* оптическая вертикальная центровка TT Commons (шрифт сидит выше центра) */
+.picker-item,.picker-item .pk-t,.picker-item .pk-note{
+  text-box-trim:trim-both;text-box-edge:cap alphabetic;
+}
+/* реальные поля ввода (нативная клавиатура iOS) со стейтами */
+.bk-field{background:var(--fill-secondary);border-radius:4px;height:44px;width:100%;padding:2px 16px 0;border:1px solid transparent;
+  font-family:"TT Commons";font-weight:400;font-size:16px;line-height:1;letter-spacing:.2px;color:var(--c-primary);
+  outline:none;-webkit-appearance:none;appearance:none;display:block}
+.bk-field::placeholder{color:var(--c-secondary);font-weight:400;opacity:1}
+.bk-field:not(:placeholder-shown){font-weight:500}
+.bk-field:focus{border-color:var(--border-focus)}
+.bk-field.err{border-color:var(--negative)}
+.bk-field:disabled{opacity:.5}
+.bk-area{height:124px;padding:10px 16px 15px;resize:none;line-height:1.25}
+.bk-fieldwrap{display:flex;flex-direction:column;gap:4px;width:100%}
+.bk-req-msg{display:none;padding:0 4px;font-family:"TT Commons";font-weight:400;font-size:14px;line-height:1;letter-spacing:.1px;color:var(--negative)}
+.bk-req-msg.show{display:block}
+.bk-opt{padding:0 16px;cursor:pointer}
+.bk-opt .bk-lbl.on{color:var(--c-primary)}
+.bk-radio{width:16px;height:16px;flex:none;color:var(--c-caption);display:block}
+.bk-radio svg{width:16px;height:16px;display:block}
+.bk-radio .dot{display:none}
+.bk-radio.on{color:var(--c-primary)}
+.bk-radio.on .dot{display:block}
+.bk-textarea{background:var(--fill-secondary);border-radius:4px;height:124px;padding:16px;width:100%}
+.bk-textarea .bk-lbl{display:block}
+/* VIP cards */
+.bk-vip{display:flex;gap:16px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;width:100%;padding-bottom:2px;position:relative}
+.bk-vip::-webkit-scrollbar{height:0}
+.bk-card{flex:0 0 200px;position:relative;background:var(--fill-secondary);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;gap:24px;border:1px solid transparent}
+.bk-cap-tip{position:absolute;top:8px;z-index:5;background:var(--inverted);border-radius:6px;padding:8px 8px 6px;
+  box-shadow:0 8px 8px rgba(0,0,0,.08),0 1px 2px rgba(0,0,0,.05);pointer-events:none;
+  font-family:"TT Commons";font-weight:400;font-size:14px;line-height:1;letter-spacing:.1px;color:var(--c-secondary)}
+.bk-cap-tip{padding:9px 8px 5px}
+.bk-card.sel{border-color:var(--border-inverted)}
+.bk-card__img{height:160px;background-size:cover;background-position:center;cursor:pointer}
+/* галерея интерьера (полноэкранная, по макету) */
+#interior-gallery{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:47;background:transparent;overflow:hidden;
+  opacity:0;visibility:hidden;transition:opacity .35s ease, visibility .35s ease}   /* закрытие — простое затухание */
+#interior-gallery.open{opacity:1;visibility:visible;transition:opacity 0s, visibility 0s}
+#interior-gallery::before{content:"";position:absolute;inset:0;background:#0e0e0f;z-index:0;transform:scaleY(0);transform-origin:bottom}
+#interior-gallery.open::before{transform:scaleY(1);transition:transform .5s cubic-bezier(.4,0,.4,1)}
+#interior-gallery .ig-track,#interior-gallery .ig-top,#interior-gallery .ig-bottom{opacity:0}
+#interior-gallery.open .ig-track,#interior-gallery.open .ig-top,#interior-gallery.open .ig-bottom{opacity:1;transition:opacity 1.6s cubic-bezier(.33,0,.2,1) .7s}
+#interior-gallery.instant.open .ig-track,#interior-gallery.instant.open .ig-top,#interior-gallery.instant.open .ig-bottom{transition:opacity .6s cubic-bezier(.33,0,.2,1)}
+.ig-track{position:absolute;inset:0;display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none}
+.ig-track::-webkit-scrollbar{height:0}
+.ig-slide{flex:0 0 402px;width:402px;height:100%;background:#0e0e0f center/cover no-repeat;scroll-snap-align:start}
+.ig-top{position:absolute;top:0;left:0;right:0;z-index:2}
+.ig-head{height:52px;background:rgba(14,14,15,.9);display:flex;align-items:center;justify-content:space-between}
+.ig-back{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--c-primary);cursor:pointer}
+.ig-back svg{width:16px;height:16px}
+.ig-title{font-family:"TT Commons";font-weight:500;font-size:20px;line-height:1;letter-spacing:.6px;color:var(--c-primary)}
+.ig-spacer{width:44px;height:44px}
+.ig-tabs{background:rgba(14,14,15,.9);display:flex;gap:8px;padding:16px 16px 0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;height:52px}
+.ig-tabs::-webkit-scrollbar{height:0}
+.ig-tab{height:36px;padding:0 16px;flex:none;border:0;border-radius:4px;background:var(--fill-tetriaty);color:var(--c-secondary);white-space:nowrap;font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.2px;cursor:pointer;text-box-trim:trim-both;text-box-edge:cap alphabetic}
+.ig-tab.active{background:var(--inverted);color:var(--c-inverted);font-weight:500}
+.ig-topfade{height:32px;background:linear-gradient(to bottom,rgba(14,14,15,.9) 9.375%,rgba(14,14,15,0))}
+.ig-bottom{position:absolute;bottom:0;left:0;right:0;z-index:2}
+.ig-botfade{height:52px;background:linear-gradient(to top,rgba(14,14,15,.9) 9.375%,rgba(14,14,15,0))}
+.ig-content{background:rgba(14,14,15,.9);display:flex;flex-direction:column;gap:24px;padding:0 16px 24px}
+.ig-desc{font-family:"TT Commons";font-weight:400;font-size:14px;line-height:1.25;letter-spacing:.1px;color:#f4ece5;max-width:300px}
+.ig-dots{display:flex;gap:4px;align-items:center}
+.ig-dot{width:5px;height:5px;border-radius:999px;background:#e1e1e1;opacity:.3;transition:opacity .2s}
+.ig-dot.on{opacity:1}
+.ig-btnwrap{background:rgba(14,14,15,.9);padding:0 16px 20px}
+.ig-book{height:44px;border-radius:2px;background:var(--inverted);border:1px solid var(--btn-light-border);display:flex;align-items:center;justify-content:center;color:var(--c-inverted);font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.2px;cursor:pointer;text-box-trim:trim-both;text-box-edge:cap alphabetic}
+/* disabled VIP-карточка (не проходит по вместимости) */
+.bk-card.disabled{opacity:.4}
+.bk-card.disabled .bk-card__btn{opacity:.5}
+/* экран успешной брони */
+#bk-success{position:absolute;inset:0;z-index:44;background:var(--bg);display:flex;flex-direction:column;visibility:hidden;opacity:0;transition:opacity .3s ease,visibility .3s ease}
+#bk-success.open{visibility:visible;opacity:1}
+.succ__head{height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;background:var(--bg)}
+.succ__spacer{width:44px;height:44px}
+.succ__close{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--c-primary);cursor:pointer}
+.succ__close svg{width:16px;height:16px}
+.succ__hero{flex:none;display:flex;flex-direction:column;gap:16px;align-items:center;padding:0 16px 24px;background:var(--bg);z-index:2}
+.succ__scrollwrap{flex:1;min-height:0;position:relative}
+.succ__scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;padding-bottom:120px}
+.succ__scroll::-webkit-scrollbar{width:0;height:0}
+.succ__topfade{position:absolute;top:0;left:0;right:0;height:16px;z-index:2;pointer-events:none;opacity:0;transition:opacity .2s ease;background:linear-gradient(to bottom,var(--bg) 40%,rgba(14,14,15,0))}
+#bk-success.scrolled .succ__topfade{opacity:1}
+.succ__body{display:flex;flex-direction:column;gap:24px;padding:0 16px}
+.succ__check{width:32px;height:32px}
+.succ__check svg{width:32px;height:32px;display:block}
+.succ__title{font-family:"Playfair Display";font-weight:500;font-size:20px;line-height:1;letter-spacing:1px;text-transform:uppercase;color:var(--c-primary)}
+.succ__sub{font-family:"TT Commons";font-weight:400;font-size:16px;line-height:1.25;letter-spacing:.2px;color:var(--c-secondary);text-align:center}
+.succ__card{background:var(--fill-secondary);border-radius:4px;display:flex;flex-direction:column}
+.succ__row{height:44px;display:flex;align-items:center;justify-content:space-between;padding:6px 16px;position:relative}
+.succ__card--divided .succ__row:not(:last-child)::after{content:"";position:absolute;left:11px;right:11px;bottom:0;height:1px;background:var(--border)}
+.succ__row .k{font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.2px;color:var(--c-secondary)}
+.succ__row .v{font-family:"TT Commons";font-weight:500;font-size:16px;letter-spacing:.2px;color:var(--c-primary);text-align:right}
+.succ__row .v--reg{font-weight:400}
+.succ__comment{display:flex;flex-direction:column;gap:24px;padding:16px;position:relative}
+.succ__comment::before{content:"";position:absolute;left:11px;right:11px;top:0;height:1px;background:var(--border)}
+.succ__comment .k{font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.2px;color:var(--c-secondary)}
+.succ__comment-text{font-family:"TT Commons";font-weight:400;font-size:16px;line-height:1.25;letter-spacing:.2px;color:var(--c-primary)}
+.succ__addr{height:200px;border-radius:2px;overflow:hidden;position:relative}
+.succ__map{position:absolute;inset:0;background:var(--img-footer) center/cover no-repeat}
+.succ__addr-info{position:absolute;left:16px;top:16px;display:flex;flex-direction:column;gap:16px;font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.2px}
+.succ__addr-info .a-label{color:var(--c-secondary-l)}
+.succ__addr-info .a-value{color:var(--inverted);text-decoration:underline}
+.succ__fixed{position:absolute;left:0;right:0;bottom:0;pointer-events:none}
+.succ__grad{height:16px;background:linear-gradient(to top,var(--bg) 9.375%,rgba(14,14,15,0))}
+.succ__bar{background:var(--bg);display:flex;flex-direction:column;gap:12px;padding:0 16px 12px;pointer-events:auto}
+.succ__menu{height:44px;border-radius:2px;background:var(--inverted);border:1px solid var(--btn-light-border);display:flex;align-items:center;justify-content:center;color:var(--c-inverted);font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.2px;cursor:pointer}
+.succ__call{height:32px;display:flex;align-items:center;justify-content:center;color:var(--c-secondary);font-family:"TT Commons";font-weight:500;font-size:16px;letter-spacing:.2px;text-decoration:underline;cursor:pointer}
+/* псевдо-загрузка перед экраном успеха */
+#bk-loading{position:absolute;inset:0;z-index:46;background:var(--bg);display:flex;align-items:center;justify-content:center;visibility:hidden;opacity:0;transition:opacity .2s ease,visibility .2s ease}
+#bk-loading.open{visibility:visible;opacity:1}
+.spinner{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);border-top-color:var(--c-primary);animation:bkspin .8s linear infinite}
+@keyframes bkspin{to{transform:rotate(360deg)}}
+.bk-card__body{display:flex;flex-direction:column;gap:24px;padding:0 16px 20px}
+.bk-card__title{font-family:"TT Commons";font-weight:400;font-size:20px;line-height:1.08;letter-spacing:.3px;color:var(--c-primary)}
+.bk-card__meta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.bk-card__meta .m{display:flex;gap:4px;align-items:center;font-family:"TT Commons";font-weight:400;font-size:16px;line-height:1;letter-spacing:.2px}
+.bk-card__meta .m .v{color:var(--c-secondary)}
+.bk-card__meta .m .k{color:var(--c-caption)}
+.bk-card__meta .dot{width:2px;height:2px;border-radius:999px;background:var(--c-caption);flex:none}
+.bk-card__btn{height:32px;border-radius:2px;background:var(--btn-neutral);border:1px solid var(--btn-neutral-border);display:flex;align-items:center;justify-content:center;color:var(--c-primary);font-family:"TT Commons";font-weight:500;font-size:16px;letter-spacing:.2px;cursor:pointer}
+.bk-card.sel .bk-card__btn{opacity:.3}
+/* переключение вкладок */
+#booking[data-tab="main"] .bk-only-vip{display:none}
+#booking[data-tab="vip"] .bk-only-main{display:none}
+/* фиксированная кнопка */
+.bk-fixed{position:absolute;left:0;bottom:0;width:402px;pointer-events:none}
+.bk-fixed .grad{height:16px;background:linear-gradient(to top,var(--bg) 9.375%,rgba(14,14,15,0))}
+.bk-fixed .bar{background:var(--bg);padding:0 16px 20px;pointer-events:auto}
+.bk-submit{width:100%;height:44px;border-radius:2px;background:var(--inverted);border:1px solid var(--btn-light-border);opacity:.4;
+  display:flex;align-items:center;justify-content:center;color:var(--c-inverted);font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.2px;cursor:not-allowed}
+.bk-submit.active{opacity:1;cursor:pointer}
+
+/* ===================== МОДАЛКИ (гости / дата / время) ===================== */
+.modal{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:40;visibility:hidden;opacity:0;transition:opacity .3s ease,visibility .3s ease}
+.modal.open{visibility:visible;opacity:1}
+.modal__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.8)}
+.modal__sheet{position:absolute;left:0;bottom:0;width:402px;background:var(--fill-secondary);border-radius:8px 8px 0 0;
+  display:flex;flex-direction:column;transform:translateY(24px);transition:transform .3s ease}
+.modal.open .modal__sheet{transform:none}
+.modal__head{display:flex;height:52px;align-items:center;justify-content:space-between;width:402px}
+.modal__head .spc{width:44px;height:44px;flex:none}
+.modal__title{font-family:"TT Commons";font-weight:500;font-size:20px;line-height:1;letter-spacing:.6px;color:var(--c-primary)}
+.modal__close{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--c-primary);cursor:pointer;flex:none}
+.modal__close svg{width:16px;height:16px}
+.modal__foot{padding:16px 16px 20px}
+.modal__confirm{width:100%;height:44px;border-radius:2px;background:var(--inverted);border:1px solid var(--btn-light-border);
+  display:flex;align-items:center;justify-content:center;color:var(--c-inverted);font-family:"TT Commons";font-weight:400;font-size:16px;letter-spacing:.2px;cursor:pointer}
+.m-tabs{display:flex;gap:8px;padding:16px}
+/* скролл-пикер */
+.picker-wrap{position:relative;height:320px;overflow:hidden}
+.picker-bar{position:absolute;left:32px;right:32px;top:120px;height:44px;border-radius:4px;background:var(--inverted);z-index:0}
+.picker-window{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;scroll-snap-type:y mandatory;scroll-padding-top:120px;z-index:1}
+.picker-window::-webkit-scrollbar{width:0;height:0}
+.picker-list{width:338px;margin:0 auto;padding:120px 0 156px}
+.picker-item{height:44px;display:flex;align-items:center;justify-content:center;scroll-snap-align:start;
+  font-family:"TT Commons";font-weight:500;font-size:16px;letter-spacing:.2px;color:var(--c-secondary);cursor:pointer}
+.picker-item.sel{color:var(--c-inverted)}
+.picker-fade{position:absolute;left:0;right:0;height:16px;z-index:2;pointer-events:none}
+.picker-fade.top{top:0;background:linear-gradient(to bottom,var(--fill-secondary) 9.375%,rgba(20,20,23,0))}
+.picker-fade.bot{bottom:0;background:linear-gradient(to top,var(--fill-secondary) 9.375%,rgba(20,20,23,0))}
+/* переключение табов даты */
+#m-date[data-tab="near"] .date-far{display:none}
+#m-date[data-tab="far"] .date-near{display:none}
+/* календарь */
+.cal{display:flex;flex-direction:column}
+.cal__head{display:flex;align-items:center;justify-content:space-between;height:48px;padding:16px 20px 8px}
+.cal__month{font-family:"TT Commons";font-weight:400;font-size:14px;line-height:1;letter-spacing:.1px;color:var(--c-secondary);cursor:pointer;background:none;border:0;padding:0}
+.cal__nav{display:flex;gap:24px}
+.cal__nav button{width:16px;height:16px;background:none;border:0;color:var(--c-secondary);cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}
+.cal__nav button:disabled{opacity:.3;cursor:default}
+.cal__nav svg{width:16px;height:16px}
+.cal__viewport{position:relative;height:320px;overflow:hidden}
+.cal__scroll{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;padding:0 16px}
+.cal__scroll::-webkit-scrollbar{width:0;height:0}
+.cal__fade{position:absolute;left:0;right:0;height:16px;z-index:2;pointer-events:none}
+.cal__fade.top{top:0;background:linear-gradient(to bottom,var(--fill-secondary) 9.375%,rgba(20,20,23,0))}
+.cal__fade.bot{bottom:0;background:linear-gradient(to top,var(--fill-secondary) 9.375%,rgba(20,20,23,0))}
+.cal__mon{display:flex;flex-direction:column;gap:8px;padding-bottom:8px}
+.cal__week{display:grid;grid-template-columns:repeat(7,1fr);column-gap:8px}
+.cal__cell{height:52px;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;border:1px solid transparent}
+.cal__cell .wd{font-family:"TT Commons";font-size:14px;letter-spacing:.1px;color:var(--c-caption)}
+.cal__cell .dn{font-family:"TT Commons";font-size:16px;letter-spacing:.2px;color:var(--c-primary)}
+.cal__cell.empty{visibility:hidden;cursor:default}
+.cal__cell.off{cursor:default}
+.cal__cell.off .dn,.cal__cell.off .wd{color:var(--c-caption);opacity:.55}
+.cal__cell.today{border-color:var(--border-inverted)}
+.cal__cell.sel{background:var(--inverted);border-color:var(--inverted)}
+.cal__cell.sel .wd,.cal__cell.sel .dn{color:var(--c-inverted)}
+/* недоступные слоты времени */
+.picker-item .pk-note{color:var(--c-secondary);font-family:"TT Commons";font-weight:500;font-size:16px;letter-spacing:.2px}
+.picker-item.off{opacity:.4;cursor:default;justify-content:space-between;padding:0 16px}
+.my-row{display:flex}
+/* «Ближайшая дата»: тянем пикер до высоты вкладки календаря (48 шапка + 320) → без прыжка */
+.date-near .picker-wrap{height:368px}
+.date-near .picker-list{padding-bottom:204px}
+.my-col{flex:1 0 0;min-width:0;position:relative}
+.my-col .picker-bar{left:12px;right:12px}
+.my-col .picker-list{width:100%}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ===== оптическая вертикальная центровка TT Commons =====
+   шрифт сидит выше геометрического центра — опускаем текст ниже.
+   для span-текста используем transform (фон не двигается),
+   для кнопок/табов с прямым текстом — асимметричный верхний паддинг (фон border-box не смещается). */
+.btn span:first-child,.bk-lbl,.succ__row .k,.succ__row .v,.m .v,.m .k,
+.modal__title,.succ__title,.gal__title,.succ__sub,.ig-desc,.bk-req-msg{transform:translateY(2px)}
+.bk-tab,.ig-tab,.bk-submit,.modal__confirm,.ig-book,.succ__menu,.succ__call,.bk-card__btn{padding-top:3px!important}
+.bk-field:not(.bk-area){padding-top:4px!important}
+
+/* ===== реальный мобильный девайс: убираем фейковые бары, лендинг на весь экран =====
+   дизайн шириной 402 масштабируется по реальной ширине (iPhone 16/Pro/Pro Max и новее),
+   высота секций = реальному экрану (--screenh задаётся из JS с учётом панели браузера) */
+@media (max-width:600px){
+  #shell{align-items:flex-start;justify-content:flex-start}
+  #device{height:var(--screenh,732px);transform-origin:top left;box-shadow:none}
+  .native-bar{display:none!important}
+  #viewport{top:0;bottom:0}
+  .hero__header{top:0}
+  .cta-bar{bottom:0}
+  .menu-overlay{top:0;bottom:0}
+  #booking{top:0;bottom:0}
+  #interior-gallery{top:0;bottom:0}
+  .modal{top:0;bottom:0}
+  #preloader{top:0;height:var(--screenh,732px)}
+  .hero{height:calc(var(--vh-region,732px) - 56px)}
+  .sc__graphic{height:var(--screenh,732px)}
+  .footer{min-height:var(--screenh,732px)}
+}
+</style>
+</head>
+<body>
+<div id="shell">
+<div id="device" class="pl">
+
+  <!-- НАТИВНЫЙ СТАТУС-БАР iOS -->
+  <div class="native-bar native-bar--top"><img src="native-top.b42dbcba.webp" alt=""></div>
+
+  <!-- SITE HEADER — прикреплён к верхнему краю; у футера уезжает наверх -->
+  <header class="hero__header" id="site-header">
+    <button class="icon-btn" id="burger" aria-label="Открыть меню" aria-controls="menu-overlay" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.6 5C15.8209 5 16 5.17909 16 5.4V6.6C16 6.82091 15.8209 7 15.6 7H0.4C0.179086 7 0 6.82091 0 6.6V5.4C0 5.17909 0.179086 5 0.4 5H15.6Z" fill="currentColor"/>
+<path d="M9.6 10C9.82091 10 10 10.1791 10 10.4V11.6C10 11.8209 9.82091 12 9.6 12H0.4C0.179086 12 0 11.8209 0 11.6V10.4C0 10.1791 0.179086 10 0.4 10H9.6Z" fill="currentColor"/>
+</svg></button>
+    <a class="brand" href="#" aria-label="FAME"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<foreignObject x="-8" y="-11" width="56" height="62"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(6px);clip-path:url(#bgblur_0_716_17306_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="12">
+<path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z" fill="white" fill-opacity="0.7"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z" fill="white" fill-opacity="0.7"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z" fill="white" fill-opacity="0.7"/>
+</g>
+<foreignObject x="-8" y="-11" width="56" height="62"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(6px);clip-path:url(#bgblur_1_716_17306_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="12">
+<path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z" fill="white" fill-opacity="0.2"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z" fill="white" fill-opacity="0.2"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z" fill="white" fill-opacity="0.2"/>
+</g>
+<path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z" fill="#E1E1E1"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z" fill="#E1E1E1"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z" fill="#E1E1E1"/>
+<defs>
+<clipPath id="bgblur_0_716_17306_clip_path" transform="translate(8 11)"><path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z"/>
+</clipPath><clipPath id="bgblur_1_716_17306_clip_path" transform="translate(8 11)"><path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z"/>
+</clipPath></defs>
+</svg></a>
+    <span class="spacer" aria-hidden="true"></span>
+  </header>
+
+  <!-- ФИКСИРОВАННАЯ CTA-ПЛАШКА — прикреплена к низу; у футера уезжает вниз -->
+  <div class="cta-bar" id="cta-bar"><button class="btn"><span>Забронировать столик</span><span class="ico"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.8376 7.03553L12.4395 7.52714C12.4929 7.58331 12.5223 7.65555 12.5223 7.73035L12.5223 8.2676C12.5223 8.34237 12.4929 8.41457 12.4396 8.47073L11.8384 8.96678L1.28363 8.66546C1.12134 8.66083 0.992188 8.52794 0.992188 8.36559V7.65837C0.992188 7.49626 1.12097 7.36347 1.28301 7.35851L11.8376 7.03553Z" fill="currentColor"/>
+<path d="M8.33507 12.5742H9.59021C9.67127 12.5742 9.74954 12.5468 9.81029 12.4971L14.9175 8.47073C14.9708 8.41457 15.0002 8.34237 15.0002 8.2676V7.73035C15.0002 7.65555 14.9707 7.58331 14.9174 7.52714L9.8097 3.537C9.74896 3.48736 9.67071 3.45996 9.58968 3.45996L8.33484 3.45996C8.04883 3.45996 7.89632 3.77209 8.0852 3.9709L11.8376 7.03553L12.4395 7.52714C12.4929 7.58331 12.5223 7.65555 12.5223 7.73035L12.5223 8.2676C12.5223 8.34237 12.4929 8.41457 12.4396 8.47073L11.8384 8.96678L8.08535 12.0633C7.89658 12.2621 8.04911 12.5742 8.33507 12.5742Z" fill="currentColor"/>
+</svg></span></button></div>
+
+  <!-- ВЕБ-КОНТЕНТ (скроллится между барами) -->
+  <div id="viewport">
+  <div id="content">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__media">
+      <video class="hero__vid" id="hero-main" src="stage.1543fb27.mp4" muted playsinline loop preload="auto"></video>
+      <video class="hero__vid" id="hero-loader" src="loader.1f79659f.mp4" muted playsinline preload="auto"></video>
+    </div>
+    <div class="hero__scrim"></div>
+    <div class="hero__veil"></div>
+    <div class="hero__blackout" id="hero-blackout"></div>
+    <div class="hero__logo"><svg viewBox="0 0 255 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M33.5939 9.51652L33.5401 9.37402C32.1669 5.87706 29.8745 1.86017 24.2819 1.86017H8.90047V26.0616H22.0088C27.2205 26.0616 27.886 24.3285 28.3706 21.4709L28.4014 21.2783H29.713V32.7089H28.4014L28.3706 32.5202C27.8898 29.6626 27.2205 27.9256 22.0088 27.9256H8.90047V46.2539C8.90047 49.3118 9.7582 50.4633 12.166 50.6598L12.3814 50.6713V52H0.00390625V50.6713L0.215454 50.6598C2.62326 50.4595 3.48099 49.308 3.48099 46.2539V5.74996C3.48099 2.74596 2.62326 1.60984 0.215454 1.41727L0.00390625 1.39802V0H33.3631L34.9171 9.51652H33.5939Z" fill="#E1E1E1"/>
+<path d="M103.717 50.6482C101.359 50.4595 99.709 49.0345 98.509 46.1499L79.1966 0.142497L79.1427 0H72.3155V1.39031L72.5193 1.41727C73.4694 1.53666 74.1733 1.9526 74.5771 2.61502C75.1195 3.51622 75.081 4.8295 74.481 6.41238L59.2341 46.1614C58.1302 49.0422 56.5225 50.4672 54.18 50.652L53.9685 50.6674V51.9961H64.1228V50.6674L63.9112 50.652C62.515 50.5365 61.5727 50.1167 61.1073 49.4042C60.6457 48.6879 60.6573 47.6519 61.1496 46.327L65.7498 34.4767H88.0085L93.0549 46.3309C93.5395 47.4901 93.5549 48.5069 93.0857 49.2656C92.6049 50.0512 91.6087 50.5442 90.2894 50.652L90.0778 50.6674V51.9961H103.932V50.6674L103.721 50.652L103.717 50.6482ZM87.22 32.6126H66.446L76.3657 6.72048L87.22 32.6126Z" fill="#E1E1E1"/>
+<path d="M191.01 51.9923H177.598V50.6636L177.809 50.6482C179.155 50.5442 180.075 50.1514 180.617 49.4581C181.175 48.7418 181.325 47.702 181.075 46.2808L173.844 8.19552L158.754 51.9923H156.354L156.3 51.8421L140.184 7.85661L134.257 46.277C133.988 47.9061 134.107 48.969 134.63 49.6353C135.096 50.2245 135.919 50.548 137.226 50.652L137.438 50.6674V51.9961H127.726V50.6674L127.938 50.652C130.618 50.4364 131.826 49.1885 132.242 46.2115L138.53 5.723C138.788 3.95912 138.688 2.94238 138.188 2.32232C137.769 1.79855 137.026 1.51355 135.853 1.42112L135.642 1.40572V0H142.546L142.6 0.1502L159.174 44.8867L174.632 0H180.948V1.39801L180.736 1.41727C179.586 1.5097 178.817 1.83321 178.39 2.3955C177.882 3.06562 177.801 4.11702 178.132 5.70375L186.344 46.1922C187.002 49.3118 188.125 50.4325 190.798 50.6443L191.01 50.6597V51.9923Z" fill="#E1E1E1"/>
+<path d="M252.541 42.4758H253.86L252.383 51.9923H218.505V50.6636L218.72 50.652C221.128 50.4518 221.986 49.3002 221.986 46.2462V5.74996C221.986 2.74596 221.128 1.60984 218.72 1.41727L218.505 1.39801V0H252.383L253.86 9.51651H252.541L252.483 9.36631C251.299 6.14279 249.052 1.86017 243.229 1.86017H227.405V25.1026H241.002C245.775 25.1026 246.822 23.67 247.364 20.4387L247.395 20.2462H248.706V31.75H247.395L247.364 31.5612C246.825 28.33 245.775 26.8896 241.002 26.8896H227.405V50.2091H243.233C249.033 50.2091 251.291 45.8803 252.487 42.6298L252.541 42.4796V42.4758Z" fill="#E1E1E1"/>
+</svg></div>
+    <div class="hero__bottom">
+      <p class="hero__desc t-body">Пространство, где изысканная кухня, атмосфера приватности и вечерний ритм города соединяются в одном впечатлении.</p>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="showcase sc--menu" id="menu">
+    <div class="sc__graphic">
+      <div class="sc__graphic-clip"><div class="sc__graphic-img"></div></div>
+      <div class="sc__title" data-parallax="60">
+        <h2 class="t-disp-xs">Menu</h2>
+        <span class="sc__mark"><svg viewBox="0 0 81 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M58.1261 4.78261C58.1838 4.89855 58.1261 5 57.9529 5.08696C57.8085 5.17391 57.6498 5.23188 57.4766 5.26087C56.8126 5.43478 55.932 5.44928 54.835 5.30435C53.3627 5.13043 51.8326 4.91304 50.2448 4.65218C48.657 4.36232 47.0115 4.05797 45.3082 3.73913C44.1245 4.78261 43.0419 5.78261 42.0604 6.73913C41.1077 7.66667 40.1983 8.57971 39.3322 9.47826C38.4662 10.3768 37.6434 11.2464 36.8639 12.087C36.0845 12.9275 35.3194 13.7536 34.5688 14.5652C34.4822 14.6812 34.3234 14.8551 34.0925 15.087C33.8904 15.2899 33.6739 15.5217 33.4429 15.7826C33.212 16.0145 32.981 16.2464 32.7501 16.4783C32.548 16.7101 32.3892 16.8696 32.2737 16.9565C33.313 16.9565 34.2946 16.9855 35.2184 17.0435C36.1711 17.0725 36.9361 17.1159 37.5135 17.1739C37.8599 17.2319 38.0476 17.3333 38.0764 17.4783C38.1342 17.5942 38.1053 17.7101 37.9898 17.8261C37.9032 17.8841 37.73 17.8986 37.4702 17.8696C37.2392 17.8406 36.9938 17.8261 36.734 17.8261C36.2432 17.7681 35.5215 17.7101 34.5688 17.6522C33.645 17.5942 32.7068 17.5797 31.7541 17.6087C29.4734 20.0145 27.2793 22.1159 25.1719 23.913C23.0933 25.7101 21.0292 27.2029 18.9794 28.3913C16.9586 29.5797 14.9089 30.4783 12.8303 31.087C10.7806 31.6957 8.6587 32 6.46464 32C5.59857 32 4.76136 31.8985 3.95302 31.6957C3.17355 31.4928 2.48069 31.1594 1.87444 30.6957C1.26818 30.2319 0.791841 29.6232 0.445411 28.8696C0.0989801 28.1159 -0.0453659 27.1884 0.0123725 26.087C0.070111 24.9855 0.344369 23.8116 0.835145 22.5652C1.35479 21.3188 2.04765 20.087 2.91373 18.8696C2.53843 18.6377 2.11983 18.1304 1.65792 17.3478C1.22488 16.5652 1.03723 15.3913 1.09497 13.8261C1.09497 13.1304 1.21044 12.3623 1.4414 11.5217C1.70122 10.6522 2.07652 9.78261 2.5673 8.91304C3.08694 8.04348 3.72207 7.2029 4.47267 6.3913C5.22327 5.57971 6.11821 4.85507 7.1575 4.21739C8.13906 3.6087 9.17835 3.04348 10.2754 2.52174C11.3724 2 12.6138 1.55073 13.9995 1.17391C15.3852 0.797101 16.9586 0.507247 18.7196 0.304349C20.5095 0.10145 22.5737 0 24.9121 0C26.8463 0 28.8094 0.10145 30.8014 0.304349C32.8222 0.507247 34.742 0.753624 36.5608 1.04348C38.3796 1.30435 40.0395 1.5942 41.5407 1.91304C43.0708 2.2029 44.3122 2.43478 45.2649 2.6087C45.669 2.28986 46.232 1.89855 46.9537 1.43478C47.7043 0.971016 48.4694 0.623189 49.2488 0.391304C49.422 0.333334 49.6386 0.289856 49.8984 0.260871C50.1582 0.231884 50.2737 0.289856 50.2448 0.434785C50.2159 0.550725 50.1005 0.637682 49.8984 0.695653C49.6963 0.753624 49.5664 0.797101 49.5086 0.826087C48.989 0.971016 48.4116 1.26087 47.7765 1.69565C47.1414 2.13044 46.6506 2.50725 46.3042 2.82609C47.5167 3.08696 48.8447 3.3913 50.2881 3.73913C51.7316 4.05797 53.3049 4.37681 55.0082 4.69565C55.5567 4.78261 56.0042 4.85507 56.3507 4.91304C56.726 4.94203 57.0724 4.92754 57.3899 4.86957C57.6209 4.84058 57.7941 4.81159 57.9096 4.78261C58.0251 4.72464 58.0972 4.72464 58.1261 4.78261ZM44.0957 3.47826C43.4317 3.36232 42.3491 3.2029 40.8479 3C39.3755 2.76812 37.73 2.55073 35.9112 2.34783C34.0925 2.11594 32.2016 1.92754 30.2384 1.78261C28.2753 1.6087 26.4854 1.52174 24.8688 1.52174C22.7324 1.52174 20.8126 1.6087 19.1094 1.78261C17.4349 1.95652 15.9049 2.2029 14.5192 2.52174C13.1623 2.84058 11.9354 3.21739 10.8383 3.65218C9.77017 4.08696 8.78861 4.56522 7.89367 5.08696C6.76777 5.75362 5.81509 6.46377 5.03562 7.21739C4.25615 7.97101 3.62102 8.73913 3.13025 9.52174C2.63947 10.2754 2.27861 11.029 2.04765 11.7826C1.84557 12.5362 1.74453 13.2319 1.74453 13.8696C1.71566 15.029 1.83113 15.9855 2.09096 16.7391C2.37965 17.4928 2.75495 18.0725 3.21686 18.4783C4.74692 16.3913 6.68116 14.5362 9.01957 12.913C10.1743 12.1304 11.3435 11.4638 12.5272 10.913C13.7397 10.3333 14.9233 9.85507 16.0781 9.47826C17.2329 9.10145 18.3299 8.82609 19.3692 8.65217C20.4373 8.47826 21.4045 8.3913 22.2705 8.3913C23.6274 8.3913 24.6378 8.6087 25.3018 9.04348C25.8503 9.3913 26.1534 9.89855 26.2112 10.5652C26.2689 11.2319 26.139 11.9855 25.8215 12.8261C25.5039 13.6377 25.0275 14.5072 24.3924 15.4348C23.7862 16.3333 23.0644 17.2174 22.2272 18.087C22.6603 17.913 23.2088 17.7681 23.8728 17.6522C24.5656 17.5362 25.1286 17.4493 25.5616 17.3913C26.37 17.3043 27.0773 17.2464 27.6835 17.2174C28.2898 17.1884 28.9249 17.1449 29.5889 17.087C29.7621 16.942 29.9786 16.7391 30.2384 16.4783C30.5271 16.2174 30.8158 15.942 31.1045 15.6522C31.3932 15.3333 31.6675 15.0435 31.9273 14.7826C32.1871 14.4928 32.3892 14.2754 32.5335 14.1304C34.5544 12.1304 36.5031 10.2754 38.3796 8.56522C40.2561 6.82609 42.1614 5.13044 44.0957 3.47826ZM28.9393 17.6957C28.2176 17.7536 27.4814 17.8116 26.7308 17.8696C25.9802 17.8986 25.2729 17.9565 24.6089 18.0435C24.0027 18.1594 23.3531 18.3333 22.6603 18.5652C21.9963 18.7681 21.4333 19.029 20.9714 19.3478C20.7116 19.5217 20.4085 19.7681 20.062 20.087C19.7156 20.4058 19.3692 20.7246 19.0228 21.0435C18.7052 21.3043 18.4021 21.5217 18.1134 21.6957C17.8247 21.8406 17.6082 21.8406 17.4638 21.6957C17.4061 21.6377 17.3916 21.5362 17.4205 21.3913C17.4782 21.2464 17.5649 21.1014 17.6803 20.9565C17.8247 20.7826 17.969 20.6232 18.1134 20.4783C18.2866 20.3043 18.4454 20.1594 18.5897 20.0435C18.8784 19.8116 19.2537 19.5507 19.7156 19.2609C20.1775 18.971 20.6683 18.7101 21.1879 18.4783C22.0252 17.6087 22.7758 16.7246 23.4397 15.8261C24.1037 14.8986 24.6234 14.029 24.9987 13.2174C25.4028 12.4058 25.6194 11.6812 25.6482 11.0435C25.706 10.4058 25.5472 9.91304 25.1719 9.56522C24.8543 9.27536 24.5079 9.10145 24.1326 9.04348C23.7862 8.98551 23.382 8.95652 22.9201 8.95652C22.054 8.95652 21.0725 9.11594 19.9754 9.43478C18.9073 9.75362 17.7958 10.1739 16.641 10.6957C15.5151 11.1884 14.3748 11.7681 13.22 12.4348C12.0941 13.0725 11.026 13.7391 10.0156 14.4348C8.83192 15.2464 7.67715 16.1449 6.55125 17.1304C5.45422 18.087 4.47267 19.087 3.60659 20.1304C2.76938 21.1449 2.07652 22.1739 1.52801 23.2174C1.00836 24.2319 0.719668 25.1884 0.66193 26.087C0.604191 27.1014 0.719668 27.942 1.00836 28.6087C1.32592 29.2464 1.75896 29.7681 2.30748 30.1739C2.85599 30.5797 3.49111 30.8551 4.21284 31C4.96344 31.1739 5.72848 31.2609 6.50795 31.2609C8.32671 31.2609 10.1743 30.8841 12.0508 30.1304C13.9273 29.3768 15.8038 28.3768 17.6803 27.1304C19.5857 25.8551 21.4766 24.4058 23.3531 22.7826C25.2585 21.1304 27.1206 19.4348 28.9393 17.6957Z" fill="#E1E1E1"/>
+<path d="M49.7519 16.1739C48.8281 17.0145 47.9187 17.8696 47.0238 18.7391C46.1288 19.5797 45.2916 20.3913 44.5121 21.1739C43.7615 21.9565 43.0687 22.6812 42.4335 23.3478C41.8273 24.0145 41.3365 24.5652 40.9612 25C40.2972 25.8406 39.7776 26.5507 39.4023 27.1304C39.0558 27.6812 39.0414 28.029 39.359 28.1739C39.5322 28.2609 39.7776 28.2319 40.0951 28.087C40.4416 27.942 40.8169 27.7536 41.221 27.5217C41.6541 27.2609 42.0727 26.9855 42.4768 26.6957C42.881 26.3768 43.2419 26.1014 43.5594 25.8696C44.2523 25.3188 44.974 24.7101 45.7246 24.0435C46.5041 23.3768 47.1537 22.8116 47.6733 22.3478C47.731 22.2899 47.8177 22.2464 47.9331 22.2174C48.0486 22.1594 48.1352 22.1884 48.193 22.3043C48.2507 22.4493 48.2507 22.5652 48.193 22.6522C48.1352 22.7101 48.063 22.7826 47.9764 22.8696C47.3413 23.4203 46.634 24.029 45.8545 24.6957C45.1039 25.3333 44.4688 25.8696 43.9492 26.3043C43.6316 26.5652 43.2563 26.8551 42.8233 27.1739C42.4191 27.4638 42.0005 27.7391 41.5675 28C41.1344 28.2609 40.7158 28.4783 40.3117 28.6522C39.9364 28.8261 39.6044 28.913 39.3157 28.913C38.9404 28.913 38.6228 28.8261 38.363 28.6522C38.1032 28.5072 37.9155 28.2754 37.8 27.9565C37.7134 27.6377 37.7279 27.2609 37.8433 26.8261C37.9588 26.3623 38.2186 25.8261 38.6228 25.2174C37.3526 26.2899 36.1689 27.1739 35.0719 27.8696C33.9749 28.5652 33.0799 28.913 32.3871 28.913C31.6365 28.913 31.1746 28.6667 31.0013 28.1739C30.8281 27.6812 30.8714 27.058 31.1312 26.3043C31.3622 25.5507 31.7664 24.7391 32.3438 23.8696C32.8923 22.971 33.5418 22.1449 34.2924 21.3913C35.1585 20.5217 36.1256 19.6957 37.1938 18.913C38.2908 18.1304 39.359 17.4783 40.3983 16.9565C41.4664 16.4348 42.448 16.0725 43.3429 15.8696C44.2379 15.6667 44.9163 15.6957 45.3782 15.9565C45.6669 16.1304 45.7824 16.4638 45.7246 16.9565C45.6958 17.4493 45.2627 18.1014 44.4255 18.913C45.2916 18.1884 46.0133 17.6232 46.5907 17.2174C47.197 16.7826 47.6877 16.4928 48.063 16.3478C48.5827 16.1739 49.1456 16.1159 49.7519 16.1739ZM45.0318 16.5217C44.6276 16.2029 43.6461 16.5652 42.0871 17.6087C40.5282 18.6232 38.5939 20.2319 36.2844 22.4348C35.6204 23.0725 34.9997 23.7246 34.4223 24.3913C33.8738 25.029 33.4263 25.6232 33.0799 26.1739C32.7046 26.6957 32.4592 27.1449 32.3438 27.5217C32.2283 27.8985 32.3004 28.1449 32.5603 28.2609C32.7624 28.3478 33.1232 28.2609 33.6429 28C34.1914 27.7101 34.8409 27.3043 35.5915 26.7826C36.371 26.2319 37.2082 25.5652 38.1032 24.7826C38.9981 24 39.9075 23.1304 40.8313 22.1739C41.2643 21.7391 41.7551 21.2319 42.3036 20.6522C42.881 20.0725 43.4007 19.5072 43.8626 18.9565C44.3533 18.4058 44.7286 17.913 44.9885 17.4783C45.2483 17.0145 45.2627 16.6957 45.0318 16.5217Z" fill="#E1E1E1"/>
+<path d="M69.8645 22.6087C69.98 22.7246 69.98 22.8406 69.8645 22.9565C69.7779 23.0725 69.6768 23.1739 69.5614 23.2609C68.8974 23.8985 68.1323 24.5797 67.2662 25.3043C66.4002 26 65.563 26.6232 64.7546 27.1739C63.8886 27.8116 63.0225 28.2899 62.1564 28.6087C61.3192 28.9565 60.6552 29.0725 60.1644 28.9565C59.9046 28.8985 59.6736 28.7536 59.4716 28.5217C59.2983 28.2899 59.1829 28 59.1251 27.6522C59.0963 27.3043 59.1396 26.913 59.255 26.4783C59.3994 26.0435 59.6448 25.5652 59.9912 25.0435C60.251 24.6667 60.5109 24.3333 60.7707 24.0435C61.0305 23.7246 61.3048 23.4203 61.5935 23.1304C61.8821 22.8116 62.1997 22.4928 62.5461 22.1739C62.8926 21.8551 63.2823 21.4928 63.7153 21.087C64.0906 20.7391 64.5525 20.3333 65.1011 19.8696C65.6784 19.4058 66.2125 18.9565 66.7033 18.5217C67.1941 18.058 67.5694 17.6522 67.8292 17.3043C68.1179 16.9275 68.1756 16.6667 68.0024 16.5217C67.8581 16.4058 67.425 16.5072 66.7033 16.8261C65.9816 17.1159 65.1299 17.5507 64.1484 18.1304C63.1957 18.6812 62.1853 19.3188 61.1171 20.0435C60.0778 20.7681 59.154 21.4928 58.3457 22.2174C57.5373 22.913 56.8589 23.5362 56.3104 24.087C55.7619 24.6377 55.2567 25.1739 54.7948 25.6957C54.3617 26.2174 53.9287 26.7536 53.4956 27.3043C53.0626 27.8551 52.5574 28.4783 51.98 29.1739C51.8357 29.1739 51.7202 29.1014 51.6336 28.9565C51.5758 28.8406 51.5325 28.6957 51.5037 28.5217C51.5037 28.3188 51.5037 28.1304 51.5037 27.9565C51.5325 27.7536 51.5758 27.5942 51.6336 27.4783C51.9223 26.9275 52.2254 26.4058 52.543 25.913C52.8894 25.3913 53.2502 24.8841 53.6255 24.3913C54.0297 23.8986 54.4772 23.3913 54.968 22.8696C55.4587 22.3188 55.9928 21.7246 56.5702 21.087C56.9166 20.7391 57.3641 20.3188 57.9126 19.8261C58.49 19.3333 59.0241 18.8551 59.5149 18.3913C60.0345 17.9275 60.4387 17.5217 60.7274 17.1739C61.0161 16.8261 61.0594 16.6087 60.8573 16.5217C60.5975 16.4058 60.0489 16.5507 59.2117 16.9565C58.3745 17.3333 57.4218 17.8551 56.3537 18.5217C55.2855 19.1594 54.2029 19.8841 53.1059 20.6957C52.0089 21.5072 51.0851 22.2754 50.3345 23C49.6416 23.6667 49.0642 24.2319 48.6023 24.6957C48.1693 25.1304 47.7651 25.5652 47.3898 26C47.0434 26.4058 46.6825 26.8551 46.3072 27.3478C45.903 27.8406 45.4123 28.4493 44.8349 29.1739C44.6905 29.1739 44.5895 29.1014 44.5317 28.9565C44.4451 28.8406 44.3874 28.6957 44.3585 28.5217C44.3297 28.3188 44.3297 28.1304 44.3585 27.9565C44.3585 27.7536 44.3874 27.5942 44.4451 27.4783C44.9937 26.4638 45.7442 25.3478 46.6969 24.1304C47.6207 22.913 48.7322 21.6087 50.0313 20.2174C50.7242 19.4638 51.4315 18.7826 52.1532 18.1739C52.9038 17.5362 53.5389 17.0435 54.0586 16.6957C54.4339 16.4638 54.8814 16.2899 55.401 16.1739C55.9495 16.058 56.498 16 57.0465 16C56.6424 16.2609 56.1949 16.6087 55.7041 17.0435C55.2134 17.4493 54.6937 17.913 54.1452 18.4348C53.5967 18.9275 53.0337 19.4638 52.4563 20.0435C51.9078 20.5942 51.3882 21.1594 50.8974 21.7391C51.6769 21.1014 52.5718 20.4203 53.5822 19.6957C54.5927 18.971 55.5887 18.3043 56.5702 17.6957C57.5518 17.087 58.4756 16.6087 59.3416 16.2609C60.2366 15.913 60.9439 15.7826 61.4635 15.8696C61.81 15.9275 62.0409 16.0725 62.1564 16.3043C62.3007 16.5072 62.3585 16.7681 62.3296 17.087C62.3007 17.4058 62.1997 17.7536 62.0265 18.1304C61.8821 18.4783 61.6801 18.8261 61.4202 19.1739C62.1131 18.7101 62.8204 18.2609 63.5421 17.8261C64.2639 17.3913 64.9423 17.0145 65.5774 16.6957C66.2414 16.3478 66.8332 16.1014 67.3529 15.9565C67.9014 15.7826 68.32 15.7536 68.6087 15.8696C69.3015 16.1304 69.6191 16.5362 69.5614 17.087C69.5325 17.6087 69.3015 18.1739 68.8685 18.7826C68.4643 19.3913 67.9447 20.0145 67.3096 20.6522C66.6744 21.2609 66.097 21.7971 65.5774 22.2609C64.8845 22.8985 64.2494 23.5072 63.672 24.087C63.0946 24.6377 62.575 25.1594 62.1131 25.6522C61.5068 26.3188 61.0594 26.8696 60.7707 27.3043C60.482 27.7101 60.4676 28.029 60.7274 28.2609C60.8429 28.3478 61.0305 28.3623 61.2903 28.3043C61.5501 28.2464 61.8533 28.1449 62.1997 28C62.5461 27.8261 62.9214 27.6232 63.3256 27.3913C63.7586 27.1304 64.1917 26.8406 64.6247 26.5217C65.5485 25.8551 66.4146 25.1884 67.2229 24.5217C68.0313 23.8261 68.6808 23.2609 69.1716 22.8261C69.2871 22.7101 69.4026 22.6232 69.5181 22.5652C69.6335 22.4783 69.749 22.4928 69.8645 22.6087Z" fill="#E1E1E1"/>
+<path d="M80.4316 15.913C80.7781 16.1159 80.9657 16.3768 80.9946 16.6957C81.0235 17.0145 80.9368 17.3478 80.7348 17.6957C80.5327 18.0435 80.244 18.4058 79.8687 18.7826C79.5223 19.1304 79.147 19.4493 78.7428 19.7391C78.3964 19.971 77.9489 20.2174 77.4004 20.4783C76.8807 20.7101 76.3466 20.913 75.7981 21.087C75.2785 21.2319 74.7733 21.3333 74.2825 21.3913C73.8206 21.4493 73.4886 21.4058 73.2865 21.2609C72.6225 21.8985 71.9585 22.5942 71.2945 23.3478C70.6305 24.0725 70.0676 24.7826 69.6057 25.4783C69.1726 26.1449 68.8984 26.7391 68.7829 27.2609C68.6386 27.7536 68.7685 28.087 69.1726 28.2609C69.5768 28.4058 70.1686 28.3623 70.9481 28.1304C71.7276 27.8696 72.5648 27.4493 73.4597 26.8696C74.499 26.2029 75.5239 25.4493 76.5343 24.6087C77.5447 23.7681 78.3531 23.058 78.9593 22.4783C79.0459 22.3913 79.147 22.3188 79.2624 22.2609C79.4068 22.2029 79.5078 22.2174 79.5656 22.3043C79.6522 22.4203 79.6522 22.5362 79.5656 22.6522C79.5078 22.7391 79.4356 22.8261 79.349 22.913C78.5984 23.5797 77.819 24.2609 77.0106 24.9565C76.2023 25.6232 75.3218 26.2899 74.3691 26.9565C73.6185 27.5072 72.7524 28 71.7709 28.4348C70.8182 28.8406 69.9232 29.0145 69.086 28.9565C68.5086 28.8985 68.0179 28.6957 67.6137 28.3478C67.2095 27.971 67.0508 27.3913 67.1374 26.6087C67.1374 26.4058 67.1951 26.1304 67.3106 25.7826C67.3972 25.4058 67.5704 24.971 67.8302 24.4783C68.0612 23.9855 68.3932 23.4493 68.8262 22.8696C69.2593 22.2609 69.8222 21.6232 70.5151 20.9565C71.3234 20.1739 72.2183 19.4348 73.1999 18.7391C74.2103 18.0145 75.1774 17.4203 76.1013 16.9565C77.0539 16.4638 77.92 16.1159 78.6995 15.913C79.479 15.7101 80.0563 15.7101 80.4316 15.913ZM80.1718 16.3043C80.0275 16.1884 79.6955 16.2754 79.1758 16.5652C78.6851 16.8551 78.1077 17.2464 77.4437 17.7391C76.7797 18.2029 76.0868 18.7391 75.3651 19.3478C74.6722 19.9275 74.066 20.4783 73.5463 21C73.7195 21.058 73.9649 21.058 74.2825 21C74.6289 20.942 75.0187 20.8261 75.4517 20.6522C75.8847 20.4783 76.3322 20.2609 76.7941 20C77.2849 19.7101 77.7757 19.3768 78.2664 19C78.9882 18.4203 79.5367 17.8696 79.912 17.3478C80.3162 16.8261 80.4028 16.4783 80.1718 16.3043Z" fill="#E1E1E1"/>
+</svg></span>
+      </div>
+    </div>
+    <div class="menu-hwrap">
+      <div class="menu-hpin sc__dark" id="hookah">
+        <div class="menu-hscroll" id="menu-scroll">
+          <div class="menu-htrack" id="menu-track">
+            <div class="menu-hslide"><div class="sc__media"><div class="sc__media-img" style="background-image:var(--img-hookah)"></div></div></div>
+            <div class="menu-hslide"><div class="sc__media"><div class="sc__media-img" style="background-image:var(--img-kitchen)"></div></div></div>
+            <div class="menu-hslide"><div class="sc__media"><div class="sc__media-img" style="background-image:var(--img-bar)"></div></div></div>
+          </div>
+        </div>
+        <div class="menu-htext">
+          <h3 class="t-h2 menu-htitle rvtext"></h3>
+          <p class="t-body menu-hdesc rvtext"></p>
+        </div>
+        <div class="dots menu-pag" id="menu-dots"><i class="on"></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERIOR -->
+  <section class="showcase sc--interior" id="interior">
+    <div class="sc__graphic">
+      <div class="sc__graphic-clip"><div class="sc__graphic-img"></div></div>
+      <div class="sc__title" data-parallax="60">
+        <h2 class="t-disp-xs">Interior</h2>
+        <span class="sc__mark"><svg viewBox="0 0 81 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M58.1261 4.78261C58.1838 4.89855 58.1261 5 57.9529 5.08696C57.8085 5.17391 57.6498 5.23188 57.4766 5.26087C56.8126 5.43478 55.932 5.44928 54.835 5.30435C53.3627 5.13043 51.8326 4.91304 50.2448 4.65218C48.657 4.36232 47.0115 4.05797 45.3082 3.73913C44.1245 4.78261 43.0419 5.78261 42.0604 6.73913C41.1077 7.66667 40.1983 8.57971 39.3322 9.47826C38.4662 10.3768 37.6434 11.2464 36.8639 12.087C36.0845 12.9275 35.3194 13.7536 34.5688 14.5652C34.4822 14.6812 34.3234 14.8551 34.0925 15.087C33.8904 15.2899 33.6739 15.5217 33.4429 15.7826C33.212 16.0145 32.981 16.2464 32.7501 16.4783C32.548 16.7101 32.3892 16.8696 32.2737 16.9565C33.313 16.9565 34.2946 16.9855 35.2184 17.0435C36.1711 17.0725 36.9361 17.1159 37.5135 17.1739C37.8599 17.2319 38.0476 17.3333 38.0764 17.4783C38.1342 17.5942 38.1053 17.7101 37.9898 17.8261C37.9032 17.8841 37.73 17.8986 37.4702 17.8696C37.2392 17.8406 36.9938 17.8261 36.734 17.8261C36.2432 17.7681 35.5215 17.7101 34.5688 17.6522C33.645 17.5942 32.7068 17.5797 31.7541 17.6087C29.4734 20.0145 27.2793 22.1159 25.1719 23.913C23.0933 25.7101 21.0292 27.2029 18.9794 28.3913C16.9586 29.5797 14.9089 30.4783 12.8303 31.087C10.7806 31.6957 8.6587 32 6.46464 32C5.59857 32 4.76136 31.8985 3.95302 31.6957C3.17355 31.4928 2.48069 31.1594 1.87444 30.6957C1.26818 30.2319 0.791841 29.6232 0.445411 28.8696C0.0989801 28.1159 -0.0453659 27.1884 0.0123725 26.087C0.070111 24.9855 0.344369 23.8116 0.835145 22.5652C1.35479 21.3188 2.04765 20.087 2.91373 18.8696C2.53843 18.6377 2.11983 18.1304 1.65792 17.3478C1.22488 16.5652 1.03723 15.3913 1.09497 13.8261C1.09497 13.1304 1.21044 12.3623 1.4414 11.5217C1.70122 10.6522 2.07652 9.78261 2.5673 8.91304C3.08694 8.04348 3.72207 7.2029 4.47267 6.3913C5.22327 5.57971 6.11821 4.85507 7.1575 4.21739C8.13906 3.6087 9.17835 3.04348 10.2754 2.52174C11.3724 2 12.6138 1.55073 13.9995 1.17391C15.3852 0.797101 16.9586 0.507247 18.7196 0.304349C20.5095 0.10145 22.5737 0 24.9121 0C26.8463 0 28.8094 0.10145 30.8014 0.304349C32.8222 0.507247 34.742 0.753624 36.5608 1.04348C38.3796 1.30435 40.0395 1.5942 41.5407 1.91304C43.0708 2.2029 44.3122 2.43478 45.2649 2.6087C45.669 2.28986 46.232 1.89855 46.9537 1.43478C47.7043 0.971016 48.4694 0.623189 49.2488 0.391304C49.422 0.333334 49.6386 0.289856 49.8984 0.260871C50.1582 0.231884 50.2737 0.289856 50.2448 0.434785C50.2159 0.550725 50.1005 0.637682 49.8984 0.695653C49.6963 0.753624 49.5664 0.797101 49.5086 0.826087C48.989 0.971016 48.4116 1.26087 47.7765 1.69565C47.1414 2.13044 46.6506 2.50725 46.3042 2.82609C47.5167 3.08696 48.8447 3.3913 50.2881 3.73913C51.7316 4.05797 53.3049 4.37681 55.0082 4.69565C55.5567 4.78261 56.0042 4.85507 56.3507 4.91304C56.726 4.94203 57.0724 4.92754 57.3899 4.86957C57.6209 4.84058 57.7941 4.81159 57.9096 4.78261C58.0251 4.72464 58.0972 4.72464 58.1261 4.78261ZM44.0957 3.47826C43.4317 3.36232 42.3491 3.2029 40.8479 3C39.3755 2.76812 37.73 2.55073 35.9112 2.34783C34.0925 2.11594 32.2016 1.92754 30.2384 1.78261C28.2753 1.6087 26.4854 1.52174 24.8688 1.52174C22.7324 1.52174 20.8126 1.6087 19.1094 1.78261C17.4349 1.95652 15.9049 2.2029 14.5192 2.52174C13.1623 2.84058 11.9354 3.21739 10.8383 3.65218C9.77017 4.08696 8.78861 4.56522 7.89367 5.08696C6.76777 5.75362 5.81509 6.46377 5.03562 7.21739C4.25615 7.97101 3.62102 8.73913 3.13025 9.52174C2.63947 10.2754 2.27861 11.029 2.04765 11.7826C1.84557 12.5362 1.74453 13.2319 1.74453 13.8696C1.71566 15.029 1.83113 15.9855 2.09096 16.7391C2.37965 17.4928 2.75495 18.0725 3.21686 18.4783C4.74692 16.3913 6.68116 14.5362 9.01957 12.913C10.1743 12.1304 11.3435 11.4638 12.5272 10.913C13.7397 10.3333 14.9233 9.85507 16.0781 9.47826C17.2329 9.10145 18.3299 8.82609 19.3692 8.65217C20.4373 8.47826 21.4045 8.3913 22.2705 8.3913C23.6274 8.3913 24.6378 8.6087 25.3018 9.04348C25.8503 9.3913 26.1534 9.89855 26.2112 10.5652C26.2689 11.2319 26.139 11.9855 25.8215 12.8261C25.5039 13.6377 25.0275 14.5072 24.3924 15.4348C23.7862 16.3333 23.0644 17.2174 22.2272 18.087C22.6603 17.913 23.2088 17.7681 23.8728 17.6522C24.5656 17.5362 25.1286 17.4493 25.5616 17.3913C26.37 17.3043 27.0773 17.2464 27.6835 17.2174C28.2898 17.1884 28.9249 17.1449 29.5889 17.087C29.7621 16.942 29.9786 16.7391 30.2384 16.4783C30.5271 16.2174 30.8158 15.942 31.1045 15.6522C31.3932 15.3333 31.6675 15.0435 31.9273 14.7826C32.1871 14.4928 32.3892 14.2754 32.5335 14.1304C34.5544 12.1304 36.5031 10.2754 38.3796 8.56522C40.2561 6.82609 42.1614 5.13044 44.0957 3.47826ZM28.9393 17.6957C28.2176 17.7536 27.4814 17.8116 26.7308 17.8696C25.9802 17.8986 25.2729 17.9565 24.6089 18.0435C24.0027 18.1594 23.3531 18.3333 22.6603 18.5652C21.9963 18.7681 21.4333 19.029 20.9714 19.3478C20.7116 19.5217 20.4085 19.7681 20.062 20.087C19.7156 20.4058 19.3692 20.7246 19.0228 21.0435C18.7052 21.3043 18.4021 21.5217 18.1134 21.6957C17.8247 21.8406 17.6082 21.8406 17.4638 21.6957C17.4061 21.6377 17.3916 21.5362 17.4205 21.3913C17.4782 21.2464 17.5649 21.1014 17.6803 20.9565C17.8247 20.7826 17.969 20.6232 18.1134 20.4783C18.2866 20.3043 18.4454 20.1594 18.5897 20.0435C18.8784 19.8116 19.2537 19.5507 19.7156 19.2609C20.1775 18.971 20.6683 18.7101 21.1879 18.4783C22.0252 17.6087 22.7758 16.7246 23.4397 15.8261C24.1037 14.8986 24.6234 14.029 24.9987 13.2174C25.4028 12.4058 25.6194 11.6812 25.6482 11.0435C25.706 10.4058 25.5472 9.91304 25.1719 9.56522C24.8543 9.27536 24.5079 9.10145 24.1326 9.04348C23.7862 8.98551 23.382 8.95652 22.9201 8.95652C22.054 8.95652 21.0725 9.11594 19.9754 9.43478C18.9073 9.75362 17.7958 10.1739 16.641 10.6957C15.5151 11.1884 14.3748 11.7681 13.22 12.4348C12.0941 13.0725 11.026 13.7391 10.0156 14.4348C8.83192 15.2464 7.67715 16.1449 6.55125 17.1304C5.45422 18.087 4.47267 19.087 3.60659 20.1304C2.76938 21.1449 2.07652 22.1739 1.52801 23.2174C1.00836 24.2319 0.719668 25.1884 0.66193 26.087C0.604191 27.1014 0.719668 27.942 1.00836 28.6087C1.32592 29.2464 1.75896 29.7681 2.30748 30.1739C2.85599 30.5797 3.49111 30.8551 4.21284 31C4.96344 31.1739 5.72848 31.2609 6.50795 31.2609C8.32671 31.2609 10.1743 30.8841 12.0508 30.1304C13.9273 29.3768 15.8038 28.3768 17.6803 27.1304C19.5857 25.8551 21.4766 24.4058 23.3531 22.7826C25.2585 21.1304 27.1206 19.4348 28.9393 17.6957Z" fill="#E1E1E1"/>
+<path d="M49.7519 16.1739C48.8281 17.0145 47.9187 17.8696 47.0238 18.7391C46.1288 19.5797 45.2916 20.3913 44.5121 21.1739C43.7615 21.9565 43.0687 22.6812 42.4335 23.3478C41.8273 24.0145 41.3365 24.5652 40.9612 25C40.2972 25.8406 39.7776 26.5507 39.4023 27.1304C39.0558 27.6812 39.0414 28.029 39.359 28.1739C39.5322 28.2609 39.7776 28.2319 40.0951 28.087C40.4416 27.942 40.8169 27.7536 41.221 27.5217C41.6541 27.2609 42.0727 26.9855 42.4768 26.6957C42.881 26.3768 43.2419 26.1014 43.5594 25.8696C44.2523 25.3188 44.974 24.7101 45.7246 24.0435C46.5041 23.3768 47.1537 22.8116 47.6733 22.3478C47.731 22.2899 47.8177 22.2464 47.9331 22.2174C48.0486 22.1594 48.1352 22.1884 48.193 22.3043C48.2507 22.4493 48.2507 22.5652 48.193 22.6522C48.1352 22.7101 48.063 22.7826 47.9764 22.8696C47.3413 23.4203 46.634 24.029 45.8545 24.6957C45.1039 25.3333 44.4688 25.8696 43.9492 26.3043C43.6316 26.5652 43.2563 26.8551 42.8233 27.1739C42.4191 27.4638 42.0005 27.7391 41.5675 28C41.1344 28.2609 40.7158 28.4783 40.3117 28.6522C39.9364 28.8261 39.6044 28.913 39.3157 28.913C38.9404 28.913 38.6228 28.8261 38.363 28.6522C38.1032 28.5072 37.9155 28.2754 37.8 27.9565C37.7134 27.6377 37.7279 27.2609 37.8433 26.8261C37.9588 26.3623 38.2186 25.8261 38.6228 25.2174C37.3526 26.2899 36.1689 27.1739 35.0719 27.8696C33.9749 28.5652 33.0799 28.913 32.3871 28.913C31.6365 28.913 31.1746 28.6667 31.0013 28.1739C30.8281 27.6812 30.8714 27.058 31.1312 26.3043C31.3622 25.5507 31.7664 24.7391 32.3438 23.8696C32.8923 22.971 33.5418 22.1449 34.2924 21.3913C35.1585 20.5217 36.1256 19.6957 37.1938 18.913C38.2908 18.1304 39.359 17.4783 40.3983 16.9565C41.4664 16.4348 42.448 16.0725 43.3429 15.8696C44.2379 15.6667 44.9163 15.6957 45.3782 15.9565C45.6669 16.1304 45.7824 16.4638 45.7246 16.9565C45.6958 17.4493 45.2627 18.1014 44.4255 18.913C45.2916 18.1884 46.0133 17.6232 46.5907 17.2174C47.197 16.7826 47.6877 16.4928 48.063 16.3478C48.5827 16.1739 49.1456 16.1159 49.7519 16.1739ZM45.0318 16.5217C44.6276 16.2029 43.6461 16.5652 42.0871 17.6087C40.5282 18.6232 38.5939 20.2319 36.2844 22.4348C35.6204 23.0725 34.9997 23.7246 34.4223 24.3913C33.8738 25.029 33.4263 25.6232 33.0799 26.1739C32.7046 26.6957 32.4592 27.1449 32.3438 27.5217C32.2283 27.8985 32.3004 28.1449 32.5603 28.2609C32.7624 28.3478 33.1232 28.2609 33.6429 28C34.1914 27.7101 34.8409 27.3043 35.5915 26.7826C36.371 26.2319 37.2082 25.5652 38.1032 24.7826C38.9981 24 39.9075 23.1304 40.8313 22.1739C41.2643 21.7391 41.7551 21.2319 42.3036 20.6522C42.881 20.0725 43.4007 19.5072 43.8626 18.9565C44.3533 18.4058 44.7286 17.913 44.9885 17.4783C45.2483 17.0145 45.2627 16.6957 45.0318 16.5217Z" fill="#E1E1E1"/>
+<path d="M69.8645 22.6087C69.98 22.7246 69.98 22.8406 69.8645 22.9565C69.7779 23.0725 69.6768 23.1739 69.5614 23.2609C68.8974 23.8985 68.1323 24.5797 67.2662 25.3043C66.4002 26 65.563 26.6232 64.7546 27.1739C63.8886 27.8116 63.0225 28.2899 62.1564 28.6087C61.3192 28.9565 60.6552 29.0725 60.1644 28.9565C59.9046 28.8985 59.6736 28.7536 59.4716 28.5217C59.2983 28.2899 59.1829 28 59.1251 27.6522C59.0963 27.3043 59.1396 26.913 59.255 26.4783C59.3994 26.0435 59.6448 25.5652 59.9912 25.0435C60.251 24.6667 60.5109 24.3333 60.7707 24.0435C61.0305 23.7246 61.3048 23.4203 61.5935 23.1304C61.8821 22.8116 62.1997 22.4928 62.5461 22.1739C62.8926 21.8551 63.2823 21.4928 63.7153 21.087C64.0906 20.7391 64.5525 20.3333 65.1011 19.8696C65.6784 19.4058 66.2125 18.9565 66.7033 18.5217C67.1941 18.058 67.5694 17.6522 67.8292 17.3043C68.1179 16.9275 68.1756 16.6667 68.0024 16.5217C67.8581 16.4058 67.425 16.5072 66.7033 16.8261C65.9816 17.1159 65.1299 17.5507 64.1484 18.1304C63.1957 18.6812 62.1853 19.3188 61.1171 20.0435C60.0778 20.7681 59.154 21.4928 58.3457 22.2174C57.5373 22.913 56.8589 23.5362 56.3104 24.087C55.7619 24.6377 55.2567 25.1739 54.7948 25.6957C54.3617 26.2174 53.9287 26.7536 53.4956 27.3043C53.0626 27.8551 52.5574 28.4783 51.98 29.1739C51.8357 29.1739 51.7202 29.1014 51.6336 28.9565C51.5758 28.8406 51.5325 28.6957 51.5037 28.5217C51.5037 28.3188 51.5037 28.1304 51.5037 27.9565C51.5325 27.7536 51.5758 27.5942 51.6336 27.4783C51.9223 26.9275 52.2254 26.4058 52.543 25.913C52.8894 25.3913 53.2502 24.8841 53.6255 24.3913C54.0297 23.8986 54.4772 23.3913 54.968 22.8696C55.4587 22.3188 55.9928 21.7246 56.5702 21.087C56.9166 20.7391 57.3641 20.3188 57.9126 19.8261C58.49 19.3333 59.0241 18.8551 59.5149 18.3913C60.0345 17.9275 60.4387 17.5217 60.7274 17.1739C61.0161 16.8261 61.0594 16.6087 60.8573 16.5217C60.5975 16.4058 60.0489 16.5507 59.2117 16.9565C58.3745 17.3333 57.4218 17.8551 56.3537 18.5217C55.2855 19.1594 54.2029 19.8841 53.1059 20.6957C52.0089 21.5072 51.0851 22.2754 50.3345 23C49.6416 23.6667 49.0642 24.2319 48.6023 24.6957C48.1693 25.1304 47.7651 25.5652 47.3898 26C47.0434 26.4058 46.6825 26.8551 46.3072 27.3478C45.903 27.8406 45.4123 28.4493 44.8349 29.1739C44.6905 29.1739 44.5895 29.1014 44.5317 28.9565C44.4451 28.8406 44.3874 28.6957 44.3585 28.5217C44.3297 28.3188 44.3297 28.1304 44.3585 27.9565C44.3585 27.7536 44.3874 27.5942 44.4451 27.4783C44.9937 26.4638 45.7442 25.3478 46.6969 24.1304C47.6207 22.913 48.7322 21.6087 50.0313 20.2174C50.7242 19.4638 51.4315 18.7826 52.1532 18.1739C52.9038 17.5362 53.5389 17.0435 54.0586 16.6957C54.4339 16.4638 54.8814 16.2899 55.401 16.1739C55.9495 16.058 56.498 16 57.0465 16C56.6424 16.2609 56.1949 16.6087 55.7041 17.0435C55.2134 17.4493 54.6937 17.913 54.1452 18.4348C53.5967 18.9275 53.0337 19.4638 52.4563 20.0435C51.9078 20.5942 51.3882 21.1594 50.8974 21.7391C51.6769 21.1014 52.5718 20.4203 53.5822 19.6957C54.5927 18.971 55.5887 18.3043 56.5702 17.6957C57.5518 17.087 58.4756 16.6087 59.3416 16.2609C60.2366 15.913 60.9439 15.7826 61.4635 15.8696C61.81 15.9275 62.0409 16.0725 62.1564 16.3043C62.3007 16.5072 62.3585 16.7681 62.3296 17.087C62.3007 17.4058 62.1997 17.7536 62.0265 18.1304C61.8821 18.4783 61.6801 18.8261 61.4202 19.1739C62.1131 18.7101 62.8204 18.2609 63.5421 17.8261C64.2639 17.3913 64.9423 17.0145 65.5774 16.6957C66.2414 16.3478 66.8332 16.1014 67.3529 15.9565C67.9014 15.7826 68.32 15.7536 68.6087 15.8696C69.3015 16.1304 69.6191 16.5362 69.5614 17.087C69.5325 17.6087 69.3015 18.1739 68.8685 18.7826C68.4643 19.3913 67.9447 20.0145 67.3096 20.6522C66.6744 21.2609 66.097 21.7971 65.5774 22.2609C64.8845 22.8985 64.2494 23.5072 63.672 24.087C63.0946 24.6377 62.575 25.1594 62.1131 25.6522C61.5068 26.3188 61.0594 26.8696 60.7707 27.3043C60.482 27.7101 60.4676 28.029 60.7274 28.2609C60.8429 28.3478 61.0305 28.3623 61.2903 28.3043C61.5501 28.2464 61.8533 28.1449 62.1997 28C62.5461 27.8261 62.9214 27.6232 63.3256 27.3913C63.7586 27.1304 64.1917 26.8406 64.6247 26.5217C65.5485 25.8551 66.4146 25.1884 67.2229 24.5217C68.0313 23.8261 68.6808 23.2609 69.1716 22.8261C69.2871 22.7101 69.4026 22.6232 69.5181 22.5652C69.6335 22.4783 69.749 22.4928 69.8645 22.6087Z" fill="#E1E1E1"/>
+<path d="M80.4316 15.913C80.7781 16.1159 80.9657 16.3768 80.9946 16.6957C81.0235 17.0145 80.9368 17.3478 80.7348 17.6957C80.5327 18.0435 80.244 18.4058 79.8687 18.7826C79.5223 19.1304 79.147 19.4493 78.7428 19.7391C78.3964 19.971 77.9489 20.2174 77.4004 20.4783C76.8807 20.7101 76.3466 20.913 75.7981 21.087C75.2785 21.2319 74.7733 21.3333 74.2825 21.3913C73.8206 21.4493 73.4886 21.4058 73.2865 21.2609C72.6225 21.8985 71.9585 22.5942 71.2945 23.3478C70.6305 24.0725 70.0676 24.7826 69.6057 25.4783C69.1726 26.1449 68.8984 26.7391 68.7829 27.2609C68.6386 27.7536 68.7685 28.087 69.1726 28.2609C69.5768 28.4058 70.1686 28.3623 70.9481 28.1304C71.7276 27.8696 72.5648 27.4493 73.4597 26.8696C74.499 26.2029 75.5239 25.4493 76.5343 24.6087C77.5447 23.7681 78.3531 23.058 78.9593 22.4783C79.0459 22.3913 79.147 22.3188 79.2624 22.2609C79.4068 22.2029 79.5078 22.2174 79.5656 22.3043C79.6522 22.4203 79.6522 22.5362 79.5656 22.6522C79.5078 22.7391 79.4356 22.8261 79.349 22.913C78.5984 23.5797 77.819 24.2609 77.0106 24.9565C76.2023 25.6232 75.3218 26.2899 74.3691 26.9565C73.6185 27.5072 72.7524 28 71.7709 28.4348C70.8182 28.8406 69.9232 29.0145 69.086 28.9565C68.5086 28.8985 68.0179 28.6957 67.6137 28.3478C67.2095 27.971 67.0508 27.3913 67.1374 26.6087C67.1374 26.4058 67.1951 26.1304 67.3106 25.7826C67.3972 25.4058 67.5704 24.971 67.8302 24.4783C68.0612 23.9855 68.3932 23.4493 68.8262 22.8696C69.2593 22.2609 69.8222 21.6232 70.5151 20.9565C71.3234 20.1739 72.2183 19.4348 73.1999 18.7391C74.2103 18.0145 75.1774 17.4203 76.1013 16.9565C77.0539 16.4638 77.92 16.1159 78.6995 15.913C79.479 15.7101 80.0563 15.7101 80.4316 15.913ZM80.1718 16.3043C80.0275 16.1884 79.6955 16.2754 79.1758 16.5652C78.6851 16.8551 78.1077 17.2464 77.4437 17.7391C76.7797 18.2029 76.0868 18.7391 75.3651 19.3478C74.6722 19.9275 74.066 20.4783 73.5463 21C73.7195 21.058 73.9649 21.058 74.2825 21C74.6289 20.942 75.0187 20.8261 75.4517 20.6522C75.8847 20.4783 76.3322 20.2609 76.7941 20C77.2849 19.7101 77.7757 19.3768 78.2664 19C78.9882 18.4203 79.5367 17.8696 79.912 17.3478C80.3162 16.8261 80.4028 16.4783 80.1718 16.3043Z" fill="#E1E1E1"/>
+</svg></span>
+      </div>
+    </div>
+    <div class="menu-hwrap int-hwrap">
+      <div class="menu-hpin sc__dark" id="hall">
+        <div class="menu-hscroll" id="int-scroll">
+          <div class="menu-htrack" id="int-track">
+            <div class="menu-hslide"><div class="sc__media"><div class="sc__media-img" style="background-image:var(--img-int-hall)"></div></div></div>
+            <div class="menu-hslide"><div class="sc__media"><div class="sc__media-img" style="background-image:var(--img-int-pano)"></div></div></div>
+            <div class="menu-hslide"><div class="sc__media"><div class="sc__media-img" style="background-image:var(--img-int-kamin)"></div></div></div>
+            <div class="menu-hslide"><div class="sc__media"><div class="sc__media-img" style="background-image:var(--img-int-noir)"></div></div></div>
+            <div class="menu-hslide"><div class="sc__media"><div class="sc__media-img" style="background-image:var(--img-int-belv)"></div></div></div>
+            <div class="menu-hslide"><div class="sc__media"><div class="sc__media-img" style="background-image:var(--img-int-vino)"></div></div></div>
+          </div>
+        </div>
+        <div class="menu-htext">
+          <h3 class="t-h2 int-htitle rvtext"></h3>
+          <p class="t-body int-hdesc rvtext"></p>
+        </div>
+        <div class="dots menu-pag" id="int-dots"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOYALTY -->
+  <section class="loyalty" id="loyalty">
+    <div class="loyalty__img" data-parallax="220"></div>
+    <div class="loyalty__grad"></div>
+    <div class="loyalty__card" id="loyalty-card">
+      <div class="loyalty__inner">
+        <p class="eyebrow t-body">Decor title</p>
+        <div class="loyalty__group">
+          <h2 class="t-h2">Loyalty program</h2>
+          <p class="t-body wrap-lh">Лояльная программа с эксклюзивными привилегиями, персональными бонусами и особым статусом для самых ценимых гостей.</p>
+        </div>
+        <button class="btn btn--light"><span>Войти в клуб</span><span class="ico"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.8376 7.03553L12.4395 7.52714C12.4929 7.58331 12.5223 7.65555 12.5223 7.73035L12.5223 8.2676C12.5223 8.34237 12.4929 8.41457 12.4396 8.47073L11.8384 8.96678L1.28363 8.66546C1.12134 8.66083 0.992188 8.52794 0.992188 8.36559V7.65837C0.992188 7.49626 1.12097 7.36347 1.28301 7.35851L11.8376 7.03553Z" fill="currentColor"/>
+<path d="M8.33507 12.5742H9.59021C9.67127 12.5742 9.74954 12.5468 9.81029 12.4971L14.9175 8.47073C14.9708 8.41457 15.0002 8.34237 15.0002 8.2676V7.73035C15.0002 7.65555 14.9707 7.58331 14.9174 7.52714L9.8097 3.537C9.74896 3.48736 9.67071 3.45996 9.58968 3.45996L8.33484 3.45996C8.04883 3.45996 7.89632 3.77209 8.0852 3.9709L11.8376 7.03553L12.4395 7.52714C12.4929 7.58331 12.5223 7.65555 12.5223 7.73035L12.5223 8.2676C12.5223 8.34237 12.4929 8.41457 12.4396 8.47073L11.8384 8.96678L8.08535 12.0633C7.89658 12.2621 8.04911 12.5742 8.33507 12.5742Z" fill="currentColor"/>
+</svg></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__lead">
+      <p class="t-body wrap-lh">Забронируйте столик заранее и проведите вечер в атмосфере, где каждая деталь создана для вашего удовольствия.</p>
+      <button class="btn"><span>Забронировать стол</span><span class="ico"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.8376 7.03553L12.4395 7.52714C12.4929 7.58331 12.5223 7.65555 12.5223 7.73035L12.5223 8.2676C12.5223 8.34237 12.4929 8.41457 12.4396 8.47073L11.8384 8.96678L1.28363 8.66546C1.12134 8.66083 0.992188 8.52794 0.992188 8.36559V7.65837C0.992188 7.49626 1.12097 7.36347 1.28301 7.35851L11.8376 7.03553Z" fill="currentColor"/>
+<path d="M8.33507 12.5742H9.59021C9.67127 12.5742 9.74954 12.5468 9.81029 12.4971L14.9175 8.47073C14.9708 8.41457 15.0002 8.34237 15.0002 8.2676V7.73035C15.0002 7.65555 14.9707 7.58331 14.9174 7.52714L9.8097 3.537C9.74896 3.48736 9.67071 3.45996 9.58968 3.45996L8.33484 3.45996C8.04883 3.45996 7.89632 3.77209 8.0852 3.9709L11.8376 7.03553L12.4395 7.52714C12.4929 7.58331 12.5223 7.65555 12.5223 7.73035L12.5223 8.2676C12.5223 8.34237 12.4929 8.41457 12.4396 8.47073L11.8384 8.96678L8.08535 12.0633C7.89658 12.2621 8.04911 12.5742 8.33507 12.5742Z" fill="currentColor"/>
+</svg></span></button>
+    </div>
+    <div class="footer__grid">
+      <div class="contacts pad">
+        <div class="contact">
+          <div class="label t-body">Email</div>
+          <a class="t-body" href="mailto:Fame@gmail.com">Fame@gmail.com</a>
+        </div>
+        <div class="contact">
+          <div class="label t-body">Social</div>
+          <div class="social-row t-body"><a href="#">Telegram</a><span class="sep">/</span><a href="#">Instagram</a></div>
+        </div>
+      </div>
+      <div class="footer__media">
+        <div class="footer__media-img"></div>
+        <div class="contacts">
+          <div class="contact">
+            <div class="label t-body">Phone</div>
+            <a class="t-body" href="tel:+74999518888">+7 (499) 951-88-88</a>
+          </div>
+          <div class="contact">
+            <div class="label addr t-body">Address</div>
+            <a class="t-body" href="#">Germasogeia 4048</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__contacts" id="contacts">
+      <div class="title"><h2 class="t-disp-m">Contacts</h2></div>
+      <div class="footer__legal t-body">
+        <div class="links"><a href="#">Terms of Services</a><span>/</span><a href="#">Privacy Policy</a></div>
+        <span>©FAME 2026.</span>
+      </div>
+    </div>
+  </footer>
+
+  </div><!-- /#content -->
+  </div><!-- /#viewport -->
+
+  <!-- НАТИВНАЯ ПАНЕЛЬ SAFARI -->
+  <div class="native-bar native-bar--bottom"><img src="native-bot.8899d3f0.webp" alt=""></div>
+
+  <!-- BURGER MENU OVERLAY -->
+  <div class="menu-overlay" id="menu-overlay" role="dialog" aria-modal="true" aria-label="Навигация" aria-hidden="true">
+    <div class="menu-overlay__inner">
+      <div class="menu-overlay__header">
+        <button class="menu-close" id="menu-close" aria-label="Закрыть меню"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.34338 12.9995H3.63031C3.71342 12.9995 3.79367 12.9721 3.85597 12.9224L7.99969 9.6183L12.144 12.9229C12.2063 12.9726 12.2866 13 12.3697 13H13.6566C13.9498 13 14.1062 12.688 13.9127 12.4892L9.79911 8.47101C9.74444 8.41485 9.71429 8.34265 9.71429 8.26789L9.71429 7.73066C9.71429 7.65587 9.74447 7.58363 9.79919 7.52746L13.9144 3.51141C14.1081 3.31261 13.9517 3.00049 13.6585 3.00049L12.3718 3.00049C12.2888 3.00049 12.2085 3.02789 12.1462 3.07752L8.00031 6.38163L3.85375 3.07703C3.79147 3.02739 3.71124 3 3.62816 3H2.34153C2.04827 3 1.8919 3.31212 2.08556 3.51091L6.20081 7.52746C6.25553 7.58363 6.28571 7.65587 6.28571 7.73066V8.26789C6.28571 8.34265 6.25556 8.41485 6.20089 8.47101L2.08733 12.4887C1.89378 12.6875 2.05017 12.9995 2.34338 12.9995Z" fill="currentColor"/>
+</svg></button>
+        <div class="menu-lang t-body"><span class="lang">Rus</span><span>/</span><span class="lang on">Eng</span><span>/</span><span class="lang">Gre</span></div>
+      </div>
+      <div class="menu-gap menu-gap--lg"></div>
+      <nav class="menu-nav">
+        <a href="#hookah" data-target="hookah">Menu</a>
+        <a href="#hall" data-target="hall">Interior</a>
+        <a href="#loyalty-card" data-target="loyalty-card" data-align-bottom="20">Loyalty</a>
+        <a href="#contacts" data-target="contacts">Contacts</a>
+      </nav>
+      <div class="menu-gap"></div>
+      <div class="menu-social t-body"><a href="#">Telegram</a><span class="sep">/</span><a href="#">Instagram</a></div>
+      <div class="menu-gap"></div>
+      <button class="btn btn--light menu-cta"><span>Забронировать стол</span><span class="ico"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.8376 7.03553L12.4395 7.52714C12.4929 7.58331 12.5223 7.65555 12.5223 7.73035L12.5223 8.2676C12.5223 8.34237 12.4929 8.41457 12.4396 8.47073L11.8384 8.96678L1.28363 8.66546C1.12134 8.66083 0.992188 8.52794 0.992188 8.36559V7.65837C0.992188 7.49626 1.12097 7.36347 1.28301 7.35851L11.8376 7.03553Z" fill="currentColor"/>
+<path d="M8.33507 12.5742H9.59021C9.67127 12.5742 9.74954 12.5468 9.81029 12.4971L14.9175 8.47073C14.9708 8.41457 15.0002 8.34237 15.0002 8.2676V7.73035C15.0002 7.65555 14.9707 7.58331 14.9174 7.52714L9.8097 3.537C9.74896 3.48736 9.67071 3.45996 9.58968 3.45996L8.33484 3.45996C8.04883 3.45996 7.89632 3.77209 8.0852 3.9709L11.8376 7.03553L12.4395 7.52714C12.4929 7.58331 12.5223 7.65555 12.5223 7.73035L12.5223 8.2676C12.5223 8.34237 12.4929 8.41457 12.4396 8.47073L11.8384 8.96678L8.08535 12.0633C7.89658 12.2621 8.04911 12.5742 8.33507 12.5742Z" fill="currentColor"/>
+</svg></span></button>
+    </div>
+  </div>
+
+<!-- BOOKING SCREEN -->
+<div id="booking" data-tab="main" aria-hidden="true">
+  <div class="bk-top">
+    <div class="bk-head">
+      <button class="icon-btn" id="bk-back" aria-label="Назад"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.45631 2.58474L2.69349 7.47991C2.6333 7.5417 2.6001 7.62116 2.6001 7.70344V8.29442C2.6001 8.37666 2.63327 8.45609 2.69341 8.51786L8.45388 13.4152C8.5224 13.4698 8.61068 13.5 8.70212 13.5H10.1178C10.4404 13.5 10.6124 13.1568 10.3995 12.9381L5.87433 8.51786C5.8142 8.45609 5.78103 8.37666 5.78103 8.29442L5.78103 7.70344C5.78103 7.62116 5.81423 7.5417 5.87442 7.47991L10.4014 3.06203C10.6145 2.84335 10.4424 2.5 10.1198 2.5L8.70448 2.5C8.61308 2.5 8.52483 2.53013 8.45631 2.58474Z" fill="currentColor"/>
+</svg></button>
+      <span class="title">Бронирование</span>
+      <span class="spacer" aria-hidden="true"></span>
+    </div>
+    <div class="bk-tabs">
+      <button class="bk-tab active" data-tab="main">Основной зал</button>
+      <button class="bk-tab" data-tab="vip">Вип зоны</button>
+    </div>
+  </div>
+  <div class="bk-scroll">
+    <div class="bk-form">
+      <div class="bk-group">
+        <div class="bk-fieldwrap"><div class="bk-row bk-dropdown" data-open="guests"><span class="bk-lbl">Кол-во гостей</span><span class="chev"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7.53923 2.58474L13.3021 7.47991C13.3622 7.5417 13.3954 7.62116 13.3954 7.70345V8.29442C13.3954 8.37666 13.3623 8.45609 13.3021 8.51786L7.54167 13.4152C7.47314 13.4698 7.38486 13.5 7.29343 13.5H5.87773C5.55519 13.5 5.38315 13.1568 5.59607 12.9381L10.1212 8.51786C10.1813 8.45609 10.2145 8.37666 10.2145 8.29442L10.2145 7.70345C10.2145 7.62116 10.1813 7.5417 10.1211 7.47991L5.59413 3.06203C5.38108 2.84335 5.5531 2.5 5.8757 2.5L7.29107 2.5C7.38246 2.5 7.47071 2.53013 7.53923 2.58474Z" fill="currentColor"/>
+</svg></span></div><span class="bk-req-msg" id="msg-guests">Обязательное поле</span></div>
+        <div class="bk-fieldwrap"><div class="bk-row bk-dropdown" data-open="date"><span class="bk-lbl">Дата визита</span><span class="chev"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7.53923 2.58474L13.3021 7.47991C13.3622 7.5417 13.3954 7.62116 13.3954 7.70345V8.29442C13.3954 8.37666 13.3623 8.45609 13.3021 8.51786L7.54167 13.4152C7.47314 13.4698 7.38486 13.5 7.29343 13.5H5.87773C5.55519 13.5 5.38315 13.1568 5.59607 12.9381L10.1212 8.51786C10.1813 8.45609 10.2145 8.37666 10.2145 8.29442L10.2145 7.70345C10.2145 7.62116 10.1813 7.5417 10.1211 7.47991L5.59413 3.06203C5.38108 2.84335 5.5531 2.5 5.8757 2.5L7.29107 2.5C7.38246 2.5 7.47071 2.53013 7.53923 2.58474Z" fill="currentColor"/>
+</svg></span></div><span class="bk-req-msg" id="msg-date">Обязательное поле</span></div>
+        <div class="bk-fieldwrap"><div class="bk-row bk-dropdown" data-open="time"><span class="bk-lbl">Время</span><span class="chev"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7.53923 2.58474L13.3021 7.47991C13.3622 7.5417 13.3954 7.62116 13.3954 7.70345V8.29442C13.3954 8.37666 13.3623 8.45609 13.3021 8.51786L7.54167 13.4152C7.47314 13.4698 7.38486 13.5 7.29343 13.5H5.87773C5.55519 13.5 5.38315 13.1568 5.59607 12.9381L10.1212 8.51786C10.1813 8.45609 10.2145 8.37666 10.2145 8.29442L10.2145 7.70345C10.2145 7.62116 10.1813 7.5417 10.1211 7.47991L5.59413 3.06203C5.38108 2.84335 5.5531 2.5 5.8757 2.5L7.29107 2.5C7.38246 2.5 7.47071 2.53013 7.53923 2.58474Z" fill="currentColor"/>
+</svg></span></div><span class="bk-req-msg" id="msg-time">Обязательное поле</span></div>
+      </div>
+      <div class="bk-group bk-only-main">
+        <div class="bk-label"><span>Выберите тип зала</span></div>
+        <div class="bk-row bk-opt" data-radio="zone"><span class="bk-lbl on">Курящая зона</span><span class="bk-radio on"><svg viewBox='0 0 16 16' fill='none'><circle cx='8' cy='8' r='7' stroke='currentColor' stroke-width='1'/><circle class='dot' cx='8' cy='8' r='4' fill='currentColor'/></svg></span></div>
+        <div class="bk-row bk-opt" data-radio="zone"><span class="bk-lbl">Некурящая зона</span><span class="bk-radio"><svg viewBox='0 0 16 16' fill='none'><circle cx='8' cy='8' r='7' stroke='currentColor' stroke-width='1'/><circle class='dot' cx='8' cy='8' r='4' fill='currentColor'/></svg></span></div>
+        <span class="bk-req-msg" id="msg-zone">Обязательное поле</span>
+      </div>
+      <div class="bk-group bk-only-vip">
+        <div class="bk-label"><span>Выберите тип зала</span></div>
+        <div class="bk-vip"><div class="bk-card sel" data-idx="0" data-cap="12"><div class="bk-card__img" style="background-image:var(--onyx1)" data-card-img></div><div class="bk-card__body"><div style="display:flex;flex-direction:column;gap:8px;width:100%"><p class="bk-card__title">Панорама</p><div class="bk-card__meta"><span class="m"><span class="v">900€</span><span class="k">Депозит</span></span><span class="dot"></span><span class="m"><span class="v">12</span><span class="k">Гостей</span></span></div></div><div class="bk-card__btn">Выбрано</div></div></div><div class="bk-card" data-idx="1" data-cap="6"><div class="bk-card__img" style="background-image:var(--plamya1)" data-card-img></div><div class="bk-card__body"><div style="display:flex;flex-direction:column;gap:8px;width:100%"><p class="bk-card__title">Камин</p><div class="bk-card__meta"><span class="m"><span class="v">750€</span><span class="k">Депозит</span></span><span class="dot"></span><span class="m"><span class="v">6</span><span class="k">Гостей</span></span></div></div><div class="bk-card__btn">Выбрать</div></div></div><div class="bk-card" data-idx="2" data-cap="10"><div class="bk-card__img" style="background-image:var(--sumrak1)" data-card-img></div><div class="bk-card__body"><div style="display:flex;flex-direction:column;gap:8px;width:100%"><p class="bk-card__title">Нуар</p><div class="bk-card__meta"><span class="m"><span class="v">600€</span><span class="k">Депозит</span></span><span class="dot"></span><span class="m"><span class="v">10</span><span class="k">Гостей</span></span></div></div><div class="bk-card__btn">Выбрать</div></div></div><div class="bk-card" data-idx="3" data-cap="8"><div class="bk-card__img" style="background-image:var(--lozha1)" data-card-img></div><div class="bk-card__body"><div style="display:flex;flex-direction:column;gap:8px;width:100%"><p class="bk-card__title">Бельведер</p><div class="bk-card__meta"><span class="m"><span class="v">500€</span><span class="k">Депозит</span></span><span class="dot"></span><span class="m"><span class="v">8</span><span class="k">Гостей</span></span></div></div><div class="bk-card__btn">Выбрать</div></div></div><div class="bk-card" data-idx="4" data-cap="4"><div class="bk-card__img" style="background-image:var(--grot1)" data-card-img></div><div class="bk-card__body"><div style="display:flex;flex-direction:column;gap:8px;width:100%"><p class="bk-card__title">Винотека</p><div class="bk-card__meta"><span class="m"><span class="v">400€</span><span class="k">Депозит</span></span><span class="dot"></span><span class="m"><span class="v">4</span><span class="k">Гостей</span></span></div></div><div class="bk-card__btn">Выбрать</div></div></div></div>
+      </div>
+      <div class="bk-group">
+        <div class="bk-label"><span>Контакты для потверждения брони</span></div>
+        <div class="bk-fieldwrap"><input class="bk-field" id="bk-name" type="text" placeholder="Имя" autocomplete="name" enterkeyhint="next"><span class="bk-req-msg" id="msg-name">Обязательное поле</span></div>
+        <div class="bk-fieldwrap"><input class="bk-field" id="bk-phone" type="tel" inputmode="tel" placeholder="Телефон" autocomplete="tel" enterkeyhint="done"><span class="bk-req-msg" id="msg-phone">Обязательное поле</span></div>
+        <div class="bk-row bk-opt" data-toggle="1"><span class="bk-lbl">Без потверждения</span><span class="bk-radio"><svg viewBox='0 0 16 16' fill='none'><circle cx='8' cy='8' r='7' stroke='currentColor' stroke-width='1'/><circle class='dot' cx='8' cy='8' r='4' fill='currentColor'/></svg></span></div>
+      </div>
+      <textarea class="bk-field bk-area" placeholder="Пожелания к брони"></textarea>
+    </div>
+  </div>
+  <div class="bk-fixed">
+    <div class="grad"></div>
+    <div class="bar"><div class="bk-submit">Забронировать</div></div>
+  </div>
+  <div id="bk-success" aria-hidden="true"><div class="succ__head"><span class="succ__spacer"></span><button class="succ__close" id="succ-close" aria-label="Закрыть"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.34338 12.9995H3.63031C3.71342 12.9995 3.79367 12.9721 3.85597 12.9224L7.99969 9.6183L12.144 12.9229C12.2063 12.9726 12.2866 13 12.3697 13H13.6566C13.9498 13 14.1062 12.688 13.9127 12.4892L9.79911 8.47101C9.74444 8.41485 9.71429 8.34265 9.71429 8.26789L9.71429 7.73066C9.71429 7.65587 9.74447 7.58363 9.79919 7.52746L13.9144 3.51141C14.1081 3.31261 13.9517 3.00049 13.6585 3.00049L12.3718 3.00049C12.2888 3.00049 12.2085 3.02789 12.1462 3.07752L8.00031 6.38163L3.85375 3.07703C3.79147 3.02739 3.71124 3 3.62816 3H2.34153C2.04827 3 1.8919 3.31212 2.08556 3.51091L6.20081 7.52746C6.25553 7.58363 6.28571 7.65587 6.28571 7.73066V8.26789C6.28571 8.34265 6.25556 8.41485 6.20089 8.47101L2.08733 12.4887C1.89378 12.6875 2.05017 12.9995 2.34338 12.9995Z" fill="currentColor"/>
+</svg></button></div><div class="succ__hero"><div class="succ__check"><svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 16C0 7.17811 7.17811 0 16 0C24.8219 0 32 7.17811 32 16C32 24.8236 24.8219 32 16 32C7.17811 32 0 24.8236 0 16ZM20.9817 11.1507C21.4816 10.6508 22.2921 10.6508 22.7919 11.1507C23.2918 11.6506 23.2918 12.461 22.7919 12.9609L14.9029 20.8499C14.4031 21.3498 13.5918 21.3506 13.0919 20.8507L9.2075 16.9628C8.70786 16.4627 8.70822 15.6523 9.20832 15.1526C9.70842 14.653 10.5189 14.6533 11.0185 15.1534L13.9974 18.135L20.9817 11.1507Z" fill="#C28F72"/>
+</svg></div><p class="succ__title">Бронирование</p></div><div class="succ__scrollwrap"><div class="succ__scroll"><div class="succ__body"><p class="succ__sub">Бронь подтверждена! В случае опоздания резерв держится 15 минут. Если вы задерживаетесь, пожалуйста, свяжитесь с нами.</p><div class="succ__card succ__card--divided"><div class="succ__row"><span class="k">Кол-во гостей:</span><span class="v" id="succ-guests">—</span></div><div class="succ__row"><span class="k">Дата:</span><span class="v" id="succ-date">—</span></div><div class="succ__row"><span class="k">Время:</span><span class="v" id="succ-time">—</span></div></div><div class="succ__card"><div class="succ__row"><span class="k">Зал:</span><span class="v v--reg" id="succ-zal">—</span></div><div class="succ__comment" id="succ-comment-wrap"><span class="k">Комментарий:</span><p class="succ__comment-text" id="succ-comment"></p></div></div><div class="succ__addr"><div class="succ__map"></div><div class="succ__addr-info"><span class="a-label">Address</span><span class="a-value">Germasogeia 4048</span></div></div></div></div><div class="succ__topfade"></div></div><div class="succ__fixed"><div class="succ__grad"></div><div class="succ__bar"><div class="succ__menu" id="succ-menu">Смотреть меню</div><a class="succ__call" href="tel:+35700000000">Позвонить</a></div></div></div><div id="bk-loading" aria-hidden="true"><div class="spinner"></div></div>
+</div>
+<div class="modal" id="m-guests" aria-hidden="true"><div class="modal__backdrop" data-close></div><div class="modal__sheet"><div class="modal__head"><span class="spc"></span><span class="modal__title">Укажите кол-во гостей</span><button class="modal__close" data-close aria-label="Закрыть"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.34338 12.9995H3.63031C3.71342 12.9995 3.79367 12.9721 3.85597 12.9224L7.99969 9.6183L12.144 12.9229C12.2063 12.9726 12.2866 13 12.3697 13H13.6566C13.9498 13 14.1062 12.688 13.9127 12.4892L9.79911 8.47101C9.74444 8.41485 9.71429 8.34265 9.71429 8.26789L9.71429 7.73066C9.71429 7.65587 9.74447 7.58363 9.79919 7.52746L13.9144 3.51141C14.1081 3.31261 13.9517 3.00049 13.6585 3.00049L12.3718 3.00049C12.2888 3.00049 12.2085 3.02789 12.1462 3.07752L8.00031 6.38163L3.85375 3.07703C3.79147 3.02739 3.71124 3 3.62816 3H2.34153C2.04827 3 1.8919 3.31212 2.08556 3.51091L6.20081 7.52746C6.25553 7.58363 6.28571 7.65587 6.28571 7.73066V8.26789C6.28571 8.34265 6.25556 8.41485 6.20089 8.47101L2.08733 12.4887C1.89378 12.6875 2.05017 12.9995 2.34338 12.9995Z" fill="currentColor"/>
+</svg></button></div><div class="picker-wrap"><div class="picker-bar"></div><div class="picker-window"><div class="picker-list"><div class="picker-item">1 гость</div><div class="picker-item sel">2 гостя</div><div class="picker-item">3 гостя</div><div class="picker-item">4 гостя</div><div class="picker-item">5 гостей</div><div class="picker-item">6 гостей</div><div class="picker-item">7 гостей</div><div class="picker-item">8 гостей</div><div class="picker-item">9 гостей</div><div class="picker-item">10 гостей</div><div class="picker-item">11 гостей</div><div class="picker-item">12 гостей</div><div class="picker-item">13 гостей</div><div class="picker-item">14 гостей</div><div class="picker-item">15 гостей</div><div class="picker-item">16 гостей</div><div class="picker-item">17 гостей</div><div class="picker-item">18 гостей</div><div class="picker-item">19 гостей</div><div class="picker-item">20 гостей</div><div class="picker-item">21 гость</div><div class="picker-item">22 гостя</div><div class="picker-item">23 гостя</div><div class="picker-item">24 гостя</div><div class="picker-item">25 гостей</div><div class="picker-item">26 гостей</div><div class="picker-item">27 гостей</div><div class="picker-item">28 гостей</div><div class="picker-item">29 гостей</div><div class="picker-item">30 гостей</div></div></div><div class="picker-fade top"></div><div class="picker-fade bot"></div></div><div class="modal__foot"><button class="modal__confirm" data-confirm>Потвердить</button></div></div></div><div class="modal" id="m-time" aria-hidden="true"><div class="modal__backdrop" data-close></div><div class="modal__sheet"><div class="modal__head"><span class="spc"></span><span class="modal__title">Укажите время визита</span><button class="modal__close" data-close aria-label="Закрыть"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.34338 12.9995H3.63031C3.71342 12.9995 3.79367 12.9721 3.85597 12.9224L7.99969 9.6183L12.144 12.9229C12.2063 12.9726 12.2866 13 12.3697 13H13.6566C13.9498 13 14.1062 12.688 13.9127 12.4892L9.79911 8.47101C9.74444 8.41485 9.71429 8.34265 9.71429 8.26789L9.71429 7.73066C9.71429 7.65587 9.74447 7.58363 9.79919 7.52746L13.9144 3.51141C14.1081 3.31261 13.9517 3.00049 13.6585 3.00049L12.3718 3.00049C12.2888 3.00049 12.2085 3.02789 12.1462 3.07752L8.00031 6.38163L3.85375 3.07703C3.79147 3.02739 3.71124 3 3.62816 3H2.34153C2.04827 3 1.8919 3.31212 2.08556 3.51091L6.20081 7.52746C6.25553 7.58363 6.28571 7.65587 6.28571 7.73066V8.26789C6.28571 8.34265 6.25556 8.41485 6.20089 8.47101L2.08733 12.4887C1.89378 12.6875 2.05017 12.9995 2.34338 12.9995Z" fill="currentColor"/>
+</svg></button></div><div class="picker-wrap"><div class="picker-bar"></div><div class="picker-window"><div class="picker-list"><div class="picker-item"><span class="pk-t">12:00</span></div><div class="picker-item"><span class="pk-t">12:30</span></div><div class="picker-item"><span class="pk-t">13:00</span></div><div class="picker-item"><span class="pk-t">13:30</span></div><div class="picker-item"><span class="pk-t">14:00</span></div><div class="picker-item off" data-off="1"><span class="pk-t">14:30</span><span class="pk-note">Нет свободных столов</span></div><div class="picker-item"><span class="pk-t">15:00</span></div><div class="picker-item"><span class="pk-t">15:30</span></div><div class="picker-item"><span class="pk-t">16:00</span></div><div class="picker-item"><span class="pk-t">16:30</span></div><div class="picker-item"><span class="pk-t">17:00</span></div><div class="picker-item"><span class="pk-t">17:30</span></div><div class="picker-item"><span class="pk-t">18:00</span></div><div class="picker-item"><span class="pk-t">18:30</span></div><div class="picker-item off" data-off="1"><span class="pk-t">19:00</span><span class="pk-note">Нет свободных столов</span></div><div class="picker-item off" data-off="1"><span class="pk-t">19:30</span><span class="pk-note">Нет свободных столов</span></div><div class="picker-item"><span class="pk-t">20:00</span></div><div class="picker-item"><span class="pk-t">20:30</span></div><div class="picker-item off" data-off="1"><span class="pk-t">21:00</span><span class="pk-note">Нет свободных столов</span></div><div class="picker-item"><span class="pk-t">21:30</span></div><div class="picker-item sel"><span class="pk-t">22:00</span></div><div class="picker-item"><span class="pk-t">22:30</span></div><div class="picker-item"><span class="pk-t">23:00</span></div><div class="picker-item"><span class="pk-t">23:30</span></div></div></div><div class="picker-fade top"></div><div class="picker-fade bot"></div></div><div class="modal__foot"><button class="modal__confirm" data-confirm>Потвердить</button></div></div></div><div class="modal" id="m-date" aria-hidden="true" data-tab="near"><div class="modal__backdrop" data-close></div><div class="modal__sheet"><div class="modal__head"><span class="spc"></span><span class="modal__title">Укажите дату визита</span><button class="modal__close" data-close aria-label="Закрыть"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.34338 12.9995H3.63031C3.71342 12.9995 3.79367 12.9721 3.85597 12.9224L7.99969 9.6183L12.144 12.9229C12.2063 12.9726 12.2866 13 12.3697 13H13.6566C13.9498 13 14.1062 12.688 13.9127 12.4892L9.79911 8.47101C9.74444 8.41485 9.71429 8.34265 9.71429 8.26789L9.71429 7.73066C9.71429 7.65587 9.74447 7.58363 9.79919 7.52746L13.9144 3.51141C14.1081 3.31261 13.9517 3.00049 13.6585 3.00049L12.3718 3.00049C12.2888 3.00049 12.2085 3.02789 12.1462 3.07752L8.00031 6.38163L3.85375 3.07703C3.79147 3.02739 3.71124 3 3.62816 3H2.34153C2.04827 3 1.8919 3.31212 2.08556 3.51091L6.20081 7.52746C6.25553 7.58363 6.28571 7.65587 6.28571 7.73066V8.26789C6.28571 8.34265 6.25556 8.41485 6.20089 8.47101L2.08733 12.4887C1.89378 12.6875 2.05017 12.9995 2.34338 12.9995Z" fill="currentColor"/>
+</svg></button></div><div class="m-tabs"><button class="bk-tab active" data-dtab="near">Ближайшая дата</button><button class="bk-tab" data-dtab="far">Дальняя дата</button></div><div class="date-near"><div class="picker-wrap"><div class="picker-bar"></div><div class="picker-window"><div class="picker-list"><div class="picker-item sel">Сегодня, 15 авг</div><div class="picker-item">Завтра, 16 авг</div><div class="picker-item">Пн, 17 авг</div><div class="picker-item">Вт, 18 авг</div><div class="picker-item">Ср, 19 авг</div><div class="picker-item">Чт, 20 авг</div><div class="picker-item">Пт, 21 авг</div><div class="picker-item">Сб, 22 авг</div><div class="picker-item">Вс, 23 авг</div><div class="picker-item">Пн, 24 авг</div><div class="picker-item">Вт, 25 авг</div><div class="picker-item">Ср, 26 авг</div><div class="picker-item">Чт, 27 авг</div><div class="picker-item">Пт, 28 авг</div></div></div><div class="picker-fade top"></div><div class="picker-fade bot"></div></div></div><div class="date-far"><div class="cal"><div class="cal__head"><button class="cal__month" id="cal-month" data-open-monthyear>—</button><div class="cal__nav"><button data-cal="-1" aria-label="Предыдущий месяц"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.45631 2.58474L2.69349 7.47991C2.6333 7.5417 2.6001 7.62116 2.6001 7.70344V8.29442C2.6001 8.37666 2.63327 8.45609 2.69341 8.51786L8.45388 13.4152C8.5224 13.4698 8.61068 13.5 8.70212 13.5H10.1178C10.4404 13.5 10.6124 13.1568 10.3995 12.9381L5.87433 8.51786C5.8142 8.45609 5.78103 8.37666 5.78103 8.29442L5.78103 7.70344C5.78103 7.62116 5.81423 7.5417 5.87442 7.47991L10.4014 3.06203C10.6145 2.84335 10.4424 2.5 10.1198 2.5L8.70448 2.5C8.61308 2.5 8.52483 2.53013 8.45631 2.58474Z" fill="currentColor"/>
+</svg></button><button data-cal="1" aria-label="Следующий месяц"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7.53923 2.58474L13.3021 7.47991C13.3622 7.5417 13.3954 7.62116 13.3954 7.70345V8.29442C13.3954 8.37666 13.3623 8.45609 13.3021 8.51786L7.54167 13.4152C7.47314 13.4698 7.38486 13.5 7.29343 13.5H5.87773C5.55519 13.5 5.38315 13.1568 5.59607 12.9381L10.1212 8.51786C10.1813 8.45609 10.2145 8.37666 10.2145 8.29442L10.2145 7.70345C10.2145 7.62116 10.1813 7.5417 10.1211 7.47991L5.59413 3.06203C5.38108 2.84335 5.5531 2.5 5.8757 2.5L7.29107 2.5C7.38246 2.5 7.47071 2.53013 7.53923 2.58474Z" fill="currentColor"/>
+</svg></button></div></div><div class="cal__viewport"><div class="cal__scroll" id="cal-scroll"></div><div class="cal__fade top"></div><div class="cal__fade bot"></div></div></div></div><div class="modal__foot"><button class="modal__confirm" data-confirm>Потвердить</button></div></div></div><div class="modal" id="m-monthyear" aria-hidden="true"><div class="modal__backdrop" data-close></div><div class="modal__sheet"><div class="modal__head"><span class="spc"></span><span class="modal__title">Месяц и год</span><button class="modal__close" data-close aria-label="Закрыть"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.34338 12.9995H3.63031C3.71342 12.9995 3.79367 12.9721 3.85597 12.9224L7.99969 9.6183L12.144 12.9229C12.2063 12.9726 12.2866 13 12.3697 13H13.6566C13.9498 13 14.1062 12.688 13.9127 12.4892L9.79911 8.47101C9.74444 8.41485 9.71429 8.34265 9.71429 8.26789L9.71429 7.73066C9.71429 7.65587 9.74447 7.58363 9.79919 7.52746L13.9144 3.51141C14.1081 3.31261 13.9517 3.00049 13.6585 3.00049L12.3718 3.00049C12.2888 3.00049 12.2085 3.02789 12.1462 3.07752L8.00031 6.38163L3.85375 3.07703C3.79147 3.02739 3.71124 3 3.62816 3H2.34153C2.04827 3 1.8919 3.31212 2.08556 3.51091L6.20081 7.52746C6.25553 7.58363 6.28571 7.65587 6.28571 7.73066V8.26789C6.28571 8.34265 6.25556 8.41485 6.20089 8.47101L2.08733 12.4887C1.89378 12.6875 2.05017 12.9995 2.34338 12.9995Z" fill="currentColor"/>
+</svg></button></div><div class="my-row"><div class="my-col"><div class="picker-wrap"><div class="picker-bar"></div><div class="picker-window"><div class="picker-list"><div class="picker-item">Январь</div><div class="picker-item">Февраль</div><div class="picker-item">Март</div><div class="picker-item">Апрель</div><div class="picker-item">Май</div><div class="picker-item">Июнь</div><div class="picker-item">Июль</div><div class="picker-item sel">Август</div><div class="picker-item">Сентябрь</div><div class="picker-item">Октябрь</div><div class="picker-item">Ноябрь</div><div class="picker-item">Декабрь</div></div></div><div class="picker-fade top"></div><div class="picker-fade bot"></div></div></div><div class="my-col"><div class="picker-wrap"><div class="picker-bar"></div><div class="picker-window"><div class="picker-list"><div class="picker-item sel">2026</div><div class="picker-item">2027</div><div class="picker-item">2028</div><div class="picker-item">2029</div></div></div><div class="picker-fade top"></div><div class="picker-fade bot"></div></div></div></div><div class="modal__foot"><button class="modal__confirm" data-confirm>Потвердить</button></div></div></div><div id="interior-gallery" aria-hidden="true"><div class="ig-track" id="ig-track"></div><div class="ig-top"><div class="ig-head"><button class="ig-back" id="ig-back" aria-label="Назад"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8.45631 2.58474L2.69349 7.47991C2.6333 7.5417 2.6001 7.62116 2.6001 7.70344V8.29442C2.6001 8.37666 2.63327 8.45609 2.69341 8.51786L8.45388 13.4152C8.5224 13.4698 8.61068 13.5 8.70212 13.5H10.1178C10.4404 13.5 10.6124 13.1568 10.3995 12.9381L5.87433 8.51786C5.8142 8.45609 5.78103 8.37666 5.78103 8.29442L5.78103 7.70344C5.78103 7.62116 5.81423 7.5417 5.87442 7.47991L10.4014 3.06203C10.6145 2.84335 10.4424 2.5 10.1198 2.5L8.70448 2.5C8.61308 2.5 8.52483 2.53013 8.45631 2.58474Z" fill="currentColor"/>
+</svg></button><span class="ig-title">Интерьер</span><span class="ig-spacer"></span></div><div class="ig-tabs" id="ig-tabs"></div><div class="ig-topfade"></div></div><div class="ig-bottom"><div class="ig-botfade"></div><div class="ig-content"><p class="ig-desc" id="ig-desc"></p><div class="ig-dots" id="ig-dots"></div></div><div class="ig-btnwrap"><div class="ig-book" id="ig-book">Забронировать</div></div></div></div>
+<div id="preloader"><div id="pl-logo"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<foreignObject x="-8" y="-11" width="56" height="62"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(6px);clip-path:url(#bgblur_0_716_17306_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="12">
+<path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z" fill="white" fill-opacity="0.7"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z" fill="white" fill-opacity="0.7"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z" fill="white" fill-opacity="0.7"/>
+</g>
+<foreignObject x="-8" y="-11" width="56" height="62"><div xmlns="http://www.w3.org/1999/xhtml" style="backdrop-filter:blur(6px);clip-path:url(#bgblur_1_716_17306_clip_path);height:100%;width:100%"></div></foreignObject><g data-figma-bg-blur-radius="12">
+<path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z" fill="white" fill-opacity="0.2"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z" fill="white" fill-opacity="0.2"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z" fill="white" fill-opacity="0.2"/>
+</g>
+<path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z" fill="#E1E1E1"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z" fill="#E1E1E1"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z" fill="#E1E1E1"/>
+<defs>
+<clipPath id="bgblur_0_716_17306_clip_path" transform="translate(8 11)"><path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z"/>
+</clipPath><clipPath id="bgblur_1_716_17306_clip_path" transform="translate(8 11)"><path d="M25.7694 13.7021H26.1018L25.5475 10.2897H13.8995V10.6503C14.1111 10.6679 14.2907 10.7051 14.4424 10.763C14.4858 10.7785 14.5261 10.7971 14.5653 10.8167C15.0525 11.0648 15.2011 11.5753 15.2011 12.37V27.6279C15.2011 28.7378 14.9245 29.2928 13.8984 29.3755V29.7082H21.5279V29.3755C20.5028 29.2917 20.2251 28.7378 20.2251 27.6279V20.2625H20.381C22.3206 20.2625 22.653 20.9001 22.8471 22.0658H23.1795V20.3265C24.3211 20.5157 24.572 21.1151 24.7299 22.0658H25.0623V17.932H24.7299C24.572 18.8828 24.3211 19.4833 23.1795 19.6713V17.932H22.8471C22.653 19.0967 22.3206 19.7354 20.381 19.7354H20.2251V10.8157H20.2881C22.5322 10.8157 23.3911 12.5633 23.835 13.7011H24.1673L23.7534 11.1516C24.8982 11.7138 25.4432 12.8702 25.7673 13.7011L25.7694 13.7021ZM17.0592 10.8178H17.0685C18.0935 10.9015 18.3712 11.4554 18.3712 12.5374V19.7375H17.0592V10.8178ZM17.0633 27.8604C17.0602 27.786 17.0592 27.7095 17.0592 27.6289V20.2635H18.3712V27.4636C18.3712 28.5415 18.0956 29.0964 17.0778 29.1822H17.0675L17.0633 27.8604Z"/>
+<path d="M19.998 36.8308C12.3139 36.8308 6.0625 29.2804 6.0625 20C6.0625 10.7196 12.3139 3.16919 19.998 3.16919C27.6821 3.16919 33.9335 10.7196 33.9335 20C33.9335 29.2804 27.6821 36.8308 19.998 36.8308ZM19.998 4.20264C12.8837 4.20264 7.09476 11.289 7.09476 20C7.09476 28.7109 12.8837 35.7973 19.998 35.7973C27.1123 35.7973 32.9012 28.7109 32.9012 20C32.9012 11.289 27.1123 4.20264 19.998 4.20264Z"/>
+<path d="M20 39C11.1773 39 4 30.4761 4 20C4 9.5239 11.1773 1 20 1C28.8227 1 36 9.52287 36 20C36 30.4771 28.8227 39 20 39ZM20 2.03345C11.7471 2.03345 5.03226 10.0933 5.03226 20C5.03226 29.9067 11.7471 37.9665 20 37.9665C28.2529 37.9665 34.9677 29.9067 34.9677 20C34.9677 10.0933 28.2529 2.03345 20 2.03345Z"/>
+</clipPath></defs>
+</svg></div></div>
+</div><!-- /#device -->
+</div><!-- /#shell -->
+
+<script>
+(function(){
+  var device=document.getElementById('device'),
+      viewport=document.getElementById('viewport');
+  var px=[].slice.call(document.querySelectorAll('[data-parallax]'));
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var ticking=false;
+  var header=document.getElementById('site-header'),
+      cta=document.getElementById('cta-bar'),
+      cardEl=document.getElementById('loyalty-card'),
+      ctaBtns=[document.getElementById('open-menu'), document.getElementById('open-interior')],
+      footerEl=document.querySelector('.footer');
+
+  /* закреплённый CTA (снизу): у футера прячется всегда; у секционных кнопок «Меню»/«Посмотреть залы»
+     — только при медленном скролле (при быстром остаётся прикреплён) */
+  var lastY=0, lastT=0, fastScroll=false, idleTimer=null;
+  function updateHeader(){
+    if(!footerEl) return;
+    var vp=viewport.getBoundingClientRect(), fr=footerEl.getBoundingClientRect();
+    var hideCta = (fr.top - vp.top) <= vp.height - 8;           /* футер входит снизу */
+    var ctaZone = 76*(vp.height/732) + 8;                        /* высота CTA-плашки в текущем масштабе */
+    var guard = ctaZone + vp.height*0.14;                        /* зона у самой CTA-плашки (+небольшой запас) */
+    if(!fastScroll){
+      [].forEach.call(ctaBtns,function(b){
+        if(!b) return; var br=b.getBoundingClientRect();
+        if(br.top < vp.bottom && br.bottom > vp.bottom - guard) hideCta = true;  /* секционная кнопка вплотную к CTA */
+      });
+    }
+    if(cta) cta.classList.toggle('hide', hideCta);
+  }
+
+  /* десктоп: вписываем макет 402×874 целиком; мобайл: на весь реальный экран по ширине */
+  function fit(){
+    var vw=document.documentElement.clientWidth, vh=document.documentElement.clientHeight;
+    if(window.matchMedia('(max-width:600px)').matches){
+      var H=(window.visualViewport&&window.visualViewport.height)||vh;
+      var s=vw/402;
+      device.style.transformOrigin='top left';
+      device.style.transform='scale('+s+')';
+      var dh=H/s;                                   /* дизайн-высота, дающая после масштаба реальную H */
+      device.style.height=dh+'px';
+      document.documentElement.style.setProperty('--screenh', dh+'px');
+      document.documentElement.style.setProperty('--vh-region', dh+'px');
+    } else {
+      device.style.transformOrigin='';
+      device.style.height='';
+      device.style.transform='scale('+Math.min(vw/402, vh/874, 1)+')';
+      document.documentElement.style.setProperty('--vh-region', '732px');
+    }
+  }
+  /* параллакс считаем относительно видимой области viewport */
+  function parallax(){
+    if(reduce) return;
+    var vp=viewport.getBoundingClientRect();
+    for(var i=0;i<px.length;i++){
+      var el=px[i], wrap=el.parentElement, r=wrap.getBoundingClientRect();
+      if(r.bottom<vp.top-40||r.top>vp.bottom+40) continue;
+      var travel=parseFloat(el.getAttribute('data-parallax'))||0;
+      var p=(vp.bottom-r.top)/(vp.height+r.height); p=p<0?0:p>1?1:p;
+      el.style.transform='translate3d(0,'+(-p*travel).toFixed(1)+'px,0)';
+    }
+  }
+  function onScroll(){
+    var y=viewport.scrollTop, now=(window.performance&&performance.now)?performance.now():Date.now();
+    var dt=now-lastT; if(dt>0 && lastT) fastScroll = Math.abs(y-lastY)/dt > 1.2;   /* px/мс — порог «быстро» */
+    lastY=y; lastT=now;
+    clearTimeout(idleTimer);
+    idleTimer=setTimeout(function(){ fastScroll=false; updateHeader(); }, 150);      /* скролл остановился → медленный режим */
+    if(!ticking){ticking=true;requestAnimationFrame(function(){parallax();updateHeader();menuH();heroScroll();menuDecor();ctaLabelUpdate();ticking=false;});}
+  }
+  fit(); parallax(); updateHeader(); menuH(); heroScroll(); menuDecor(); ctaLabelUpdate();
+  window.addEventListener('resize',function(){fit();parallax();updateHeader();menuH();heroScroll();menuDecor();ctaLabelUpdate();});
+  if(window.visualViewport) window.visualViewport.addEventListener('resize',function(){fit();parallax();updateHeader();menuH();heroScroll();menuDecor();ctaLabelUpdate();});
+  viewport.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('load',function(){fit();parallax();updateHeader();menuH();heroScroll();menuDecor();ctaLabelUpdate();});
+
+  /* --- бургер-меню --- */
+  var burger=document.getElementById('burger'),
+      overlay=document.getElementById('menu-overlay'),
+      closeBtn=document.getElementById('menu-close');
+  function openMenu(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');if(burger)burger.setAttribute('aria-expanded','true');}
+  function closeMenu(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');if(burger)burger.setAttribute('aria-expanded','false');}
+  if(burger) burger.addEventListener('click',openMenu);
+  if(closeBtn) closeBtn.addEventListener('click',closeMenu);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('open'))closeMenu();});
+
+  var content=document.getElementById('content');
+  function offsetWithin(el){ var y=0; while(el && el!==content){ y+=el.offsetTop; el=el.offsetParent; } return y; }
+  function rollHTML(t){ return '<span class="roll"><span><b>'+t+'</b></span><span><b>'+t+'</b></span></span>'; }
+  /* text-roll на кнопках при наведении/нажатии (кроме фикс-CTA — там своя обвязка) */
+  [].forEach.call(document.querySelectorAll('.btn'),function(btn){
+    if(btn.closest('#cta-bar')) return;
+    var span=btn.querySelector('span:not(.ico):not(.cta-lbl)');
+    if(!span) return; var txt=span.textContent.trim(); if(!txt) return;
+    span.classList.add('btn-lbl'); span.innerHTML=rollHTML(txt);
+    btn.addEventListener('touchstart',function(){ btn.classList.add('roll-on'); },{passive:true});
+    btn.addEventListener('touchend',function(){ setTimeout(function(){ btn.classList.remove('roll-on'); },500); },{passive:true});
+  });
+  var socials=overlay.querySelectorAll('.menu-social a');
+  [].forEach.call(socials,function(a){
+    a.addEventListener('click',function(){ a.classList.add('uline'); setTimeout(function(){ a.classList.remove('uline'); }, 700); });   /* прочерчивание подчёркивания при нажатии */
+  });
+  var langs=overlay.querySelectorAll('.menu-lang .lang');
+  [].forEach.call(langs,function(s){
+    var txt=s.textContent.trim();
+    s.innerHTML='<span class="roll"><span>'+txt+'</span><span>'+txt+'</span></span>';   /* text-roll как у пунктов меню */
+    s.addEventListener('click',function(){
+      [].forEach.call(langs,function(l){ l.classList.remove('on'); });
+      s.classList.add('on'); s.classList.add('roll-on');
+      setTimeout(function(){ s.classList.remove('roll-on'); }, 600);
+    });
+  });
+  var links=overlay.querySelectorAll('.menu-nav a[data-target]');
+  [].forEach.call(links,function(a){
+    var txt=a.textContent.trim();
+    a.innerHTML='<span class="roll"><span>'+txt+'</span><span>'+txt+'</span></span>';   /* две копии под маской для прокрутки */
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      a.classList.add('roll-on');                          /* прокрутка при нажатии (в т.ч. на тач) */
+      var sec=document.getElementById(a.getAttribute('data-target'));
+      setTimeout(function(){
+        closeMenu();
+        [].forEach.call(links,function(l){ l.classList.remove('roll-on'); });
+        if(!sec) return;
+        var top=offsetWithin(sec);
+        var ab=a.getAttribute('data-align-bottom');
+        if(ab!==null){ top = top + sec.offsetHeight - viewport.clientHeight + parseFloat(ab||0); }
+        if(top<0) top=0;
+        viewport.scrollTo({top:top, behavior:reduce?'auto':'smooth'});
+      }, 450);                                             /* даём проиграть анимацию перед переходом */
+    });
+  });
+  /* --- страница бронирования --- */
+  var booking=document.getElementById('booking'), bkBack=document.getElementById('bk-back');
+  /* --- единый стек навигации модалок (хедер-назад и кнопка браузера) --- */
+  var navStack=[];
+  function navGo(open,undo){ open(); navStack.push(undo); try{ history.pushState({n:navStack.length},''); }catch(e){} }
+  window.addEventListener('popstate',function(){ if(navStack.length){ var u=navStack.pop(); u(); } });
+  function _showBooking(instant){ if(booking){ booking.classList.toggle('instant',!!instant); booking.classList.add('open'); booking.setAttribute('aria-hidden','false'); } }
+  function _hideBooking(){ if(booking){ booking.classList.remove('open'); booking.setAttribute('aria-hidden','true'); } }
+  function openBooking(){ if(!booking)return; closeMenu(); navGo(function(){ _hideGallery(); _showBooking(false); }, function(){ _hideBooking(); }); }
+  function closeBooking(){ _hideBooking(); }
+  if(bkBack) bkBack.addEventListener('click',function(){ if(navStack.length) history.back(); else _hideBooking(); });
+  /* закреплённый CTA: действие зависит от режима (бронь / меню) */
+  var ctaMode='book';
+  var ctaBtnEl=document.querySelector('#cta-bar .btn');
+  var ctaLbl=ctaBtnEl?ctaBtnEl.querySelector('span'):null;
+  if(ctaLbl){ ctaLbl.classList.add('cta-lbl'); ctaLbl.innerHTML='<span class="cta-lbl__in">'+rollHTML(ctaLbl.textContent)+'</span>'; ctaLbl.setAttribute('data-t','Забронировать столик'); }
+  function setCtaLabel(txt){
+    if(!ctaLbl || ctaLbl.getAttribute('data-t')===txt) return;
+    ctaLbl.setAttribute('data-t',txt);
+    var cur=ctaLbl.querySelector('.cta-lbl__in:last-child');
+    var nu=document.createElement('span'); nu.className='cta-lbl__in'; nu.innerHTML=rollHTML(txt);
+    nu.style.transform='translateY(110%)';
+    ctaLbl.appendChild(nu); nu.getBoundingClientRect();
+    if(cur) cur.style.transform='translateY(-110%)';
+    nu.style.transform='translateY(0)';
+    setTimeout(function(){ var all=ctaLbl.querySelectorAll('.cta-lbl__in');
+      for(var i=0;i<all.length-1;i++){ if(all[i].parentNode) all[i].parentNode.removeChild(all[i]); } },520);
+  }
+  if(ctaBtnEl){ ctaBtnEl.addEventListener('touchstart',function(){ ctaBtnEl.classList.add('roll-on'); },{passive:true});
+    ctaBtnEl.addEventListener('touchend',function(){ setTimeout(function(){ ctaBtnEl.classList.remove('roll-on'); },500); },{passive:true}); }
+  if(ctaBtnEl) ctaBtnEl.addEventListener('click',function(e){
+    e.preventDefault();
+    if(ctaMode==='menu') openMenu();                       /* блок меню → меню */
+    else if(ctaMode==='interior') openInteriorGallery(0);  /* блок интерьера → залы */
+    else openBooking();                                    /* обычный режим → бронь */
+  });
+  [].forEach.call(document.querySelectorAll('.footer__lead .btn, .menu-cta'),function(b){
+    b.addEventListener('click',function(e){ e.preventDefault(); openBooking(); });
+  });
+  if(booking){
+    [].forEach.call(booking.querySelectorAll('.bk-tab'),function(t){
+      t.addEventListener('click',function(){
+        booking.setAttribute('data-tab', t.getAttribute('data-tab'));
+        [].forEach.call(booking.querySelectorAll('.bk-tab'),function(x){ x.classList.toggle('active', x===t); });
+        applyVipFilter();
+        updateSubmit();
+      });
+    });
+    [].forEach.call(booking.querySelectorAll('[data-radio="zone"]'),function(r){
+      r.addEventListener('click',function(){
+        [].forEach.call(booking.querySelectorAll('[data-radio="zone"]'),function(x){
+          var on=x===r;
+          x.querySelector('.bk-radio').classList.toggle('on',on);
+          x.querySelector('.bk-lbl').classList.toggle('on',on);
+          x.classList.remove('req');
+        });
+        var zm=document.getElementById('msg-zone'); if(zm) zm.classList.remove('show');
+        updateSubmit();
+      });
+    });
+    [].forEach.call(booking.querySelectorAll('[data-toggle]'),function(t){
+      t.addEventListener('click',function(){
+        var on=t.querySelector('.bk-radio').classList.toggle('on');
+        t.querySelector('.bk-lbl').classList.toggle('on', on);
+        updateSubmit();
+      });
+    });
+    var nameEl=document.getElementById('bk-name');
+    if(nameEl){ nameEl.addEventListener('input',function(){ if(nameEl.value.trim()){ nameEl.classList.remove('err'); var m=document.getElementById('msg-name'); if(m) m.classList.remove('show'); } updateSubmit(); }); }
+    var phoneEl=document.getElementById('bk-phone');
+    if(phoneEl){
+      phoneEl.addEventListener('input',function(){ if(phoneValid(phoneEl.value)){ phoneEl.classList.remove('err'); var m=document.getElementById('msg-phone'); if(m) m.classList.remove('show'); } updateSubmit(); });
+      phoneEl.addEventListener('blur',function(){
+        var v=phoneEl.value.trim();
+        if(v.length>0 && !phoneValid(v)){ phoneEl.classList.add('err'); var m=document.getElementById('msg-phone'); if(m){ m.textContent='Введите корректный номер'; m.classList.add('show'); } }
+        updateSubmit();
+      });
+    }
+    function selectCard(card){
+      [].forEach.call(booking.querySelectorAll('.bk-card'),function(c){
+        var cur=c===card; c.classList.toggle('sel',cur);
+        var b=c.querySelector('.bk-card__btn'); if(b) b.textContent=cur?'Выбрано':'Выбрать';
+      });
+      updateSubmit();
+    }
+    function ensureCardVisible(card){
+      var vip=card.closest('.bk-vip'); if(!vip) return;
+      var cr=card.getBoundingClientRect(), vr=vip.getBoundingClientRect(), pad=16;
+      if(cr.left < vr.left) vip.scrollBy({left:cr.left-vr.left-pad, behavior:'smooth'});
+      else if(cr.right > vr.right) vip.scrollBy({left:cr.right-vr.right+pad, behavior:'smooth'});
+    }
+    var capTip=null;
+    function hideCapTip(){ if(capTip&&capTip.parentNode) capTip.parentNode.removeChild(capTip); }
+    function personWord(n){ n=+n; return (n%10>=2&&n%10<=4&&(n%100<10||n%100>=20))?'человека':'человек'; }
+    function showCapTooltip(card){
+      hideCapTip();
+      var vip=card.closest('.bk-vip'); if(!vip) return;
+      if(!capTip) capTip=document.createElement('div');
+      capTip.className='bk-cap-tip';
+      var cap=card.getAttribute('data-cap');
+      capTip.textContent='*Вмещает только '+cap+' '+personWord(cap);
+      capTip.style.left=(card.offsetLeft+8)+'px';
+      capTip.style.width=(card.offsetWidth-16)+'px';
+      vip.appendChild(capTip);                              /* вне disabled-карточки → активный, не приглушённый */
+      clearTimeout(capTip._t); capTip._t=setTimeout(hideCapTip, 3000);
+    }
+    var vipScroll=booking.querySelector('.bk-vip');
+    if(vipScroll) vipScroll.addEventListener('scroll',hideCapTip,{passive:true});
+    [].forEach.call(booking.querySelectorAll('.bk-card'),function(card){
+      card.addEventListener('click',function(e){
+        if(card.classList.contains('disabled')){ showCapTooltip(card); return; }   /* неактивная: только подсказка, без галереи */
+        if(e.target.closest('[data-card-img]')){ var zi=+card.getAttribute('data-idx')+1;
+          navGo(function(){ _showGallery(zi,true); _hideBooking(); }, function(){ _hideGallery(); _showBooking(true); }); return; }
+        hideCapTip(); selectCard(card); ensureCardVisible(card);
+      });
+    });
+    var submitBtn=booking.querySelector('.bk-submit');
+    var loadEl=document.getElementById('bk-loading');
+    if(submitBtn) submitBtn.addEventListener('click',function(){
+      if(!bookingValid()){ highlightMissing(); return; }
+      if(loadEl){ loadEl.classList.add('open'); loadEl.setAttribute('aria-hidden','false'); }
+      setTimeout(function(){
+        if(loadEl){ loadEl.classList.remove('open'); loadEl.setAttribute('aria-hidden','true'); }
+        showSuccess();
+      },1000);
+    });
+    var succEl=document.getElementById('bk-success');
+    var succScroll=succEl&&succEl.querySelector('.succ__scroll');
+    if(succScroll) succScroll.addEventListener('scroll',function(){ succEl.classList.toggle('scrolled', succScroll.scrollTop>2); },{passive:true});
+    function showSuccess(){
+      if(!succEl) return;
+      var tab=booking.getAttribute('data-tab');
+      function lbl(k){ var e=document.querySelector('.bk-dropdown[data-open="'+k+'"] .bk-lbl'); return e?e.textContent.trim():''; }
+      document.getElementById('succ-guests').textContent=lbl('guests');
+      document.getElementById('succ-date').textContent=lbl('date');
+      var tv=lbl('time'); if(/^\d{1,2}:\d{2}$/.test(tv)) tv=tv.replace(':',' : ');
+      document.getElementById('succ-time').textContent=tv;
+      var zal='';
+      if(tab==='vip'){ var card=booking.querySelector('.bk-card.sel'); zal=card?card.querySelector('.bk-card__title').textContent.trim():''; }
+      else { var on=booking.querySelector('[data-radio="zone"] .bk-radio.on'); var row=on?on.closest('[data-radio="zone"]'):null; var zt=row?row.querySelector('.bk-lbl').textContent.trim():''; zal = zt.indexOf('Некур')===0?'Некурящий':(zt.indexOf('Куряща')===0?'Курящий':zt); }
+      document.getElementById('succ-zal').textContent=zal;
+      var ta=booking.querySelector('.bk-area'), cm=ta?ta.value.trim():'', cw=document.getElementById('succ-comment-wrap');
+      if(cm){ document.getElementById('succ-comment').textContent=cm; cw.style.display='flex'; } else { cw.style.display='none'; }
+      if(succScroll) succScroll.scrollTop=0; succEl.classList.remove('scrolled');
+      succEl.classList.add('open'); succEl.setAttribute('aria-hidden','false');
+    }
+    function hideSuccess(){ if(succEl){ succEl.classList.remove('open'); succEl.setAttribute('aria-hidden','true'); } }
+    var succClose=document.getElementById('succ-close'); if(succClose) succClose.addEventListener('click',function(){ hideSuccess(); closeBooking(); });
+    var succMenu=document.getElementById('succ-menu'); if(succMenu) succMenu.addEventListener('click',function(){ hideSuccess(); closeBooking(); });
+    updateSubmit();
+  }
+  var MN=["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"];
+  var MNG=["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"];
+  var WD=["ПН","ВТ","СР","ЧТ","ПТ","СБ","ВС"];
+  var TODAY0=new Date(2026,7,15); TODAY0.setHours(0,0,0,0);
+  var calStart={y:2026,m:7};       /* текущий месяц — раньше нельзя */
+  var CAL_RANGE=15;                /* горизонт отображения, мес. */
+  var calSel=null;                 /* выбранная дата (строка) */
+  var calCur={y:2026,m:7};
+  function monthBlock(y,m){
+    var mon=document.createElement('div'); mon.className='cal__mon';
+    mon.setAttribute('data-y',y); mon.setAttribute('data-m',m);
+    var offset=(new Date(y,m,1).getDay()+6)%7, days=new Date(y,m+1,0).getDate(), day=1;
+    for(var w=0; day<=days; w++){
+      var week=document.createElement('div'); week.className='cal__week';
+      for(var c=0;c<7;c++){
+        var cell=document.createElement('div');
+        if((w===0 && c<offset) || day>days){ cell.className='cal__cell empty'; }
+        else{
+          var dObj=new Date(y,m,day); dObj.setHours(0,0,0,0);
+          cell.className='cal__cell';
+          cell.innerHTML='<span class="wd">'+WD[(dObj.getDay()+6)%7]+'</span><span class="dn">'+day+'</span>';
+          if(dObj.getTime()<TODAY0.getTime()){ cell.classList.add('off'); }
+          else{
+            if(dObj.getTime()===TODAY0.getTime()) cell.classList.add('today');
+            cell.setAttribute('data-label', dObj.getDate()+' '+MNG[m]);
+            (function(el){ el.addEventListener('click',function(){
+              var sc=document.getElementById('cal-scroll');
+              [].forEach.call(sc.querySelectorAll('.cal__cell.sel'),function(x){x.classList.remove('sel');});
+              el.classList.add('sel'); calSel=el.getAttribute('data-label');
+            }); })(cell);
+          }
+          day++;
+        }
+        week.appendChild(cell);
+      }
+      mon.appendChild(week);
+    }
+    return mon;
+  }
+  function buildCalendar(){
+    var sc=document.getElementById('cal-scroll'); if(!sc) return;
+    sc.innerHTML='';
+    for(var k=0;k<CAL_RANGE;k++){ var m=calStart.m+k, y=calStart.y+Math.floor(m/12); m=((m%12)+12)%12; sc.appendChild(monthBlock(y,m)); }
+    sc.scrollTop=0; syncCal();
+  }
+  function syncCal(){
+    var sc=document.getElementById('cal-scroll'), mo=document.getElementById('cal-month'); if(!sc) return;
+    var st=sc.scrollTop, blocks=sc.querySelectorAll('.cal__mon'), cur=blocks[0];
+    for(var i=0;i<blocks.length;i++){ if(blocks[i].offsetTop<=st+8) cur=blocks[i]; else break; }
+    if(!cur) return;
+    var y=+cur.getAttribute('data-y'), m=+cur.getAttribute('data-m'); calCur={y:y,m:m};
+    if(mo) mo.textContent=MN[m]+" / "+y;
+    var prev=document.querySelector('#m-date [data-cal="-1"]'), next=document.querySelector('#m-date [data-cal="1"]');
+    if(prev) prev.disabled=(y===calStart.y&&m===calStart.m);
+    var lm=calStart.m+CAL_RANGE-1, ly=calStart.y+Math.floor(lm/12); lm=((lm%12)+12)%12;
+    if(next) next.disabled=(y===ly&&m===lm);
+  }
+  function scrollToMonth(y,m){
+    var sc=document.getElementById('cal-scroll'); if(!sc) return;
+    var blocks=sc.querySelectorAll('.cal__mon');
+    for(var i=0;i<blocks.length;i++){ if(+blocks[i].getAttribute('data-y')===y && +blocks[i].getAttribute('data-m')===m){ sc.scrollTo({top:blocks[i].offsetTop,behavior:'smooth'}); return; } }
+  }
+  function pickIndex(win){ var s=win.querySelector('.picker-item.sel'); return s?[].indexOf.call(win.querySelector('.picker-list').children,s):0; }
+  function closeModal(m){ m.classList.remove('open'); m.setAttribute('aria-hidden','true'); }
+  function openModal(id){
+    var m=document.getElementById(id); if(!m) return;
+    m.classList.add('open'); m.setAttribute('aria-hidden','false');
+    [].forEach.call(m.querySelectorAll('.picker-window'),function(win){
+      var list=win.querySelector('.picker-list'), sel=win.querySelector('.picker-item.sel');
+      var idx=sel?[].indexOf.call(list.children,sel):0; win.scrollTop=idx*44;
+    });
+    if(id==='m-date') syncCal();
+  }
+  function modalValue(m){
+    if(m.id==='m-date' && m.getAttribute('data-tab')==='far'){ return calSel||''; }
+    var win=m.querySelector('.date-near .picker-window')||m.querySelector('.picker-window');
+    var s=win&&win.querySelector('.picker-item.sel'); return s?s.textContent:'';
+  }
+  function setDropdown(id,val){
+    var map={'m-guests':'guests','m-date':'date','m-time':'time'}, k=map[id]; if(!k) return;
+    var dd=document.querySelector('.bk-dropdown[data-open="'+k+'"]'), lbl=dd&&dd.querySelector('.bk-lbl');
+    if(lbl){ lbl.textContent=val; lbl.style.color='var(--c-primary)'; }
+    if(dd){ dd.classList.add('filled'); dd.classList.remove('req'); }
+    var mm=document.getElementById('msg-'+k); if(mm) mm.classList.remove('show');
+    if(k==='guests') applyVipFilter();
+    updateSubmit();
+  }
+  function phoneValid(v){ return /^[+]?[\d][\d\s()\-]{6,}$/.test((v||'').trim()); }
+  function isDropFilled(k){ var d=document.querySelector('.bk-dropdown[data-open="'+k+'"]'); return !!(d&&d.classList.contains('filled')); }
+  function bookingValid(){
+    var bk=document.getElementById('booking'); if(!bk) return false;
+    var tab=bk.getAttribute('data-tab');
+    var zoneOk = tab==='vip' ? !!bk.querySelector('.bk-card.sel') : !!bk.querySelector('[data-radio="zone"] .bk-radio.on');
+    var nm=document.getElementById('bk-name'), ph=document.getElementById('bk-phone');
+    var nameOk = nm && nm.value.trim().length>0;
+    var phoneOk = ph && phoneValid(ph.value);
+    return isDropFilled('guests') && isDropFilled('date') && isDropFilled('time') && zoneOk && nameOk && phoneOk;
+  }
+  function updateSubmit(){ var b=document.querySelector('.bk-submit'); if(b) b.classList.toggle('active', bookingValid()); }
+  function guestCount(){ var e=document.querySelector('.bk-dropdown[data-open="guests"] .bk-lbl'); if(!e) return 0; var m=e.textContent.match(/\d+/); return m?+m[0]:0; }
+  function applyVipFilter(){
+    var bk=document.getElementById('booking'); if(!bk) return;
+    var g=guestCount();
+    var cards=[].slice.call(bk.querySelectorAll('.bk-card')), available=[];
+    cards.forEach(function(c){
+      var cap=+c.getAttribute('data-cap'), dis = g>0 && g>cap;
+      c.classList.toggle('disabled', dis);
+      if(dis && c.classList.contains('sel')){ c.classList.remove('sel'); var b=c.querySelector('.bk-card__btn'); if(b) b.textContent='Выбрать'; }
+      if(!dis) available.push(c);
+    });
+    function selVip(card){
+      cards.forEach(function(c){ var cur=c===card; c.classList.toggle('sel',cur);
+        var b=c.querySelector('.bk-card__btn'); if(b) b.textContent=cur?'Выбрано':'Выбрать'; });
+    }
+    function scrollVip(card){
+      var vip=card.closest('.bk-vip'); if(!vip) return;
+      var idx=+card.getAttribute('data-idx');
+      requestAnimationFrame(function(){
+        var first=vip.querySelector('.bk-card'), w=first?first.offsetWidth:0;
+        if(!w) return;                                  /* вкладка скрыта — доскроллим при её открытии */
+        vip.scrollTo({left: idx*(w+16), behavior:'smooth'});
+      });
+    }
+    if(g>0 && available.length){
+      if(available.length===1){                         /* подходит только один зал → сразу «Выбрано» + доскролл */
+        selVip(available[0]); scrollVip(available[0]);
+      } else {                                          /* подходит несколько → снимаем выделение, только подсветка + доскролл */
+        cards.forEach(function(c){ c.classList.remove('sel'); var b=c.querySelector('.bk-card__btn'); if(b) b.textContent='Выбрать'; });
+        scrollVip(available[0]);
+      }
+    }
+    updateSubmit();
+  }
+  function highlightMissing(){
+    var bk=document.getElementById('booking'); if(!bk) return;
+    ['guests','date','time'].forEach(function(k){
+      var un=!isDropFilled(k), d=document.querySelector('.bk-dropdown[data-open="'+k+'"]'), m=document.getElementById('msg-'+k);
+      if(d) d.classList.toggle('req', un); if(m) m.classList.toggle('show', un);
+    });
+    var zoneMissing = bk.getAttribute('data-tab')!=='vip' && !bk.querySelector('[data-radio="zone"] .bk-radio.on');
+    [].forEach.call(bk.querySelectorAll('[data-radio="zone"]'),function(z){ z.classList.toggle('req', zoneMissing); });
+    var zm=document.getElementById('msg-zone'); if(zm) zm.classList.toggle('show', zoneMissing);
+    var nm=document.getElementById('bk-name'), nmMissing=!(nm && nm.value.trim());
+    if(nm) nm.classList.toggle('err', nmMissing);
+    var nmm=document.getElementById('msg-name'); if(nmm) nmm.classList.toggle('show', nmMissing);
+    var ph=document.getElementById('bk-phone'), phMissing=!(ph && phoneValid(ph.value));
+    if(ph) ph.classList.toggle('err', phMissing);
+    var phm=document.getElementById('msg-phone');
+    if(phm){ phm.textContent=(ph && ph.value.trim().length>0)?'Введите корректный номер':'Обязательное поле'; phm.classList.toggle('show', phMissing); }
+  }
+  /* дропдауны -> модалки */
+  [].forEach.call(document.querySelectorAll('.bk-dropdown[data-open]'),function(d){
+    d.addEventListener('click',function(){ openModal('m-'+d.getAttribute('data-open')); });
+  });
+  /* пикеры: скролл-выбор + клик по элементу (недоступные слоты пропускаются) */
+  [].forEach.call(document.querySelectorAll('.picker-window'),function(win){
+    var list=win.querySelector('.picker-list'), items=list.children, tk=false;
+    win.addEventListener('scroll',function(){
+      if(tk) return; tk=true;
+      requestAnimationFrame(function(){
+        var idx=Math.round(win.scrollTop/44); if(idx<0)idx=0; if(idx>items.length-1)idx=items.length-1;
+        if(!(items[idx] && items[idx].getAttribute('data-off'))){
+          for(var i=0;i<items.length;i++) items[i].classList.toggle('sel', i===idx);
+        }
+        tk=false;
+      });
+    },{passive:true});
+    [].forEach.call(items,function(it,i){ it.addEventListener('click',function(){
+      if(it.getAttribute('data-off')) return;
+      var pm=win.closest('.modal');
+      if(pm && pm.id==='m-monthyear'){ win.scrollTo({top:i*44,behavior:'smooth'}); return; }
+      for(var j=0;j<items.length;j++) items[j].classList.toggle('sel', j===i);
+      if(pm) confirmModal(pm);
+    }); });
+  });
+  /* табы даты */
+  [].forEach.call(document.querySelectorAll('#m-date [data-dtab]'),function(t){
+    t.addEventListener('click',function(){
+      var m=document.getElementById('m-date');
+      m.setAttribute('data-tab', t.getAttribute('data-dtab'));
+      [].forEach.call(m.querySelectorAll('[data-dtab]'),function(x){ x.classList.toggle('active',x===t); });
+      if(t.getAttribute('data-dtab')==='far') syncCal();
+      else { var win=m.querySelector('.date-near .picker-window'); if(win){ var s=win.querySelector('.picker-item.sel'); var idx=s?[].indexOf.call(win.querySelector('.picker-list').children,s):0; win.scrollTop=idx*44; } }
+    });
+  });
+  /* календарь: стрелки — быстрый скролл к соседнему месяцу */
+  [].forEach.call(document.querySelectorAll('#m-date [data-cal]'),function(b){
+    b.addEventListener('click',function(){
+      if(b.disabled) return;
+      var dir=parseInt(b.getAttribute('data-cal'),10);
+      var m=calCur.m+dir, y=calCur.y+Math.floor(m/12); m=((m%12)+12)%12;
+      scrollToMonth(y,m);
+    });
+  });
+  /* тап по названию месяца — модалка выбора месяца/года */
+  var calScrollEl=document.getElementById('cal-scroll');
+  if(calScrollEl){ var cst=false; calScrollEl.addEventListener('scroll',function(){ if(cst)return; cst=true; requestAnimationFrame(function(){ syncCal(); cst=false; }); },{passive:true}); }
+  var monBtn=document.getElementById('cal-month');
+  if(monBtn) monBtn.addEventListener('click',function(){ openModal('m-monthyear'); });
+  buildCalendar();
+  function confirmModal(m){
+    if(m.id==='m-monthyear'){
+      var cols=m.querySelectorAll('.picker-window');
+      scrollToMonth(2026+pickIndex(cols[1]), pickIndex(cols[0])); closeModal(m); return;
+    }
+    var v=modalValue(m); if(v) setDropdown(m.id,v); closeModal(m);
+  }
+  /* закрытие / подтверждение */
+  [].forEach.call(document.querySelectorAll('.modal'),function(m){
+    [].forEach.call(m.querySelectorAll('[data-close]'),function(c){ c.addEventListener('click',function(){ closeModal(m); }); });
+    var cf=m.querySelector('[data-confirm]');
+    if(cf) cf.addEventListener('click',function(){ confirmModal(m); });
+  });
+  /* --- галерея интерьера (полноэкранная, с табами и редиректом в бронь) --- */
+  var IG_ZONES=[
+    {tab:'Main hall', filter:'main', slides:[
+      {img:'--smk1', zone:'smoking'},
+      {img:'--smk2', zone:'smoking'},
+      {img:'--smk3', zone:'smoking'},
+      {img:'--nsm1', zone:'nonsmoking'},
+      {img:'--nsm2', zone:'nonsmoking'},
+      {img:'--nsm3', zone:'nonsmoking'}
+    ]},
+    {tab:'Панорама', filter:'vip', cardIdx:0, slides:[
+      {img:'--onyx1'},{img:'--onyx2'},{img:'--onyx3'},{img:'--onyx4'},{img:'--onyx5'},{img:'--onyx6'}
+    ]},
+    {tab:'Камин', filter:'vip', cardIdx:1, slides:[{img:'--plamya1'},{img:'--plamya2'},{img:'--plamya3'},{img:'--plamya4'},{img:'--plamya5'},{img:'--plamya6'},{img:'--plamya7'}]},
+    {tab:'Нуар', filter:'vip', cardIdx:2, slides:[{img:'--sumrak1'},{img:'--sumrak2'},{img:'--sumrak3'},{img:'--sumrak4'},{img:'--sumrak5'}]},
+    {tab:'Бельведер', filter:'vip', cardIdx:3, slides:[{img:'--lozha1'},{img:'--lozha2'},{img:'--lozha3'}]},
+    {tab:'Винотека', filter:'vip', cardIdx:4, slides:[{img:'--grot1'},{img:'--grot2'},{img:'--grot3'},{img:'--grot4'}]}
+  ];
+  var igEl=document.getElementById('interior-gallery');
+  var igTrack=document.getElementById('ig-track'), igTabs=document.getElementById('ig-tabs');
+  var igDots=document.getElementById('ig-dots'), igDesc=document.getElementById('ig-desc');
+  var igZone=0, igIdx=0;
+  function igSlideDesc(z, s){
+    if(z.filter==='main'){
+      var zt = s.zone==='nonsmoking' ? 'Некурящая зона' : 'Курящая зона';
+      return zt+' / Основной холл / Первый этаж. Создано для тех, кто ценит комфорт, приватность и атмосферу.';
+    }
+    return 'VIP «'+z.tab+'». Камерное пространство только для вашей компании — с личным сервисом и атмосферой.';
+  }
+  function igBuildTabs(){
+    if(!igTabs) return; igTabs.innerHTML='';
+    IG_ZONES.forEach(function(z,zi){
+      var b=document.createElement('button'); b.className='ig-tab'+(zi===igZone?' active':''); b.textContent=z.tab;
+      b.addEventListener('click',function(){ igSelectZone(zi); });
+      igTabs.appendChild(b);
+    });
+  }
+  function igSelectZone(zi){
+    igZone=zi; igIdx=0; var z=IG_ZONES[zi];
+    igTrack.innerHTML='';
+    z.slides.forEach(function(s){ var d=document.createElement('div'); d.className='ig-slide'; d.style.backgroundImage='var('+s.img+')'; igTrack.appendChild(d); });
+    igDots.innerHTML='';
+    z.slides.forEach(function(s,i){ var dt=document.createElement('div'); dt.className='ig-dot'+(i===0?' on':''); igDots.appendChild(dt); });
+    igTrack.scrollTo({left:0,behavior:'auto'});
+    igDesc.textContent=igSlideDesc(z, z.slides[0]);
+    [].forEach.call(igTabs.children,function(x,i){ x.classList.toggle('active', i===zi); });
+    // подскролл активного таба в зону видимости
+    var at=igTabs.children[zi]; if(at){ var tr=at.getBoundingClientRect(), pr=igTabs.getBoundingClientRect(); if(tr.left<pr.left) igTabs.scrollBy({left:tr.left-pr.left-16,behavior:'smooth'}); else if(tr.right>pr.right) igTabs.scrollBy({left:tr.right-pr.right+16,behavior:'smooth'}); }
+  }
+  function _showGallery(zi,instant){ if(igEl){ igSelectZone(zi||0); igEl.classList.toggle('instant',!!instant); igEl.classList.add('open'); igEl.setAttribute('aria-hidden','false'); } }
+  function _hideGallery(){ if(igEl){ igEl.classList.remove('open'); igEl.setAttribute('aria-hidden','true'); } }
+  function openInteriorGallery(zi){ if(!igEl) return; navGo(function(){ _hideBooking(); _showGallery(zi,false); }, function(){ _hideGallery(); }); }
+  function closeInteriorGallery(){ _hideGallery(); }
+  if(igEl){
+    if(igTrack){ var it=false; igTrack.addEventListener('scroll',function(){ if(it)return; it=true; requestAnimationFrame(function(){
+      var z=IG_ZONES[igZone], i=Math.round(igTrack.scrollLeft/402); if(i<0)i=0; if(i>z.slides.length-1)i=z.slides.length-1; igIdx=i;
+      [].forEach.call(igDots.children,function(d,di){ d.classList.toggle('on', di===i); });
+      igDesc.textContent=igSlideDesc(z, z.slides[i]);
+      it=false;
+    }); },{passive:true}); }
+    var igBack=document.getElementById('ig-back'); if(igBack) igBack.addEventListener('click',function(){ if(navStack.length) history.back(); else _hideGallery(); });
+    var igBook=document.getElementById('ig-book');
+    if(igBook) igBook.addEventListener('click',function(){
+      var z=IG_ZONES[igZone], prevZone=igZone, prevIdx=igIdx;
+      var o = (z.filter==='vip') ? {tab:'vip', cardIdx:z.cardIdx} : {tab:'main', zone:z.slides[igIdx].zone};
+      navGo(function(){ _showBookingWith(o,true); _hideGallery(); },
+            function(){ _hideBooking(); _showGallery(prevZone,true); if(igTrack) igTrack.scrollTo({left:(prevIdx||0)*402,behavior:'auto'}); });
+    });
+    igBuildTabs();
+  }
+  function _showBookingWith(o,instant){
+    _showBooking(instant); var bk=document.getElementById('booking'); if(!bk) return;
+    if(o.tab){ bk.setAttribute('data-tab',o.tab); [].forEach.call(bk.querySelectorAll('.bk-tab'),function(x){ x.classList.toggle('active', x.getAttribute('data-tab')===o.tab); }); }
+    if(o.tab==='main' && o.zone){
+      [].forEach.call(bk.querySelectorAll('[data-radio="zone"]'),function(row){
+        var isNon=row.querySelector('.bk-lbl').textContent.indexOf('Некур')===0;
+        var on=(o.zone==='nonsmoking')?isNon:!isNon;
+        row.querySelector('.bk-radio').classList.toggle('on',on);
+        row.querySelector('.bk-lbl').classList.toggle('on',on);
+        row.classList.remove('req');
+      });
+      var zm=document.getElementById('msg-zone'); if(zm) zm.classList.remove('show');
+    }
+    if(o.tab==='vip' && o.cardIdx!=null){
+      [].forEach.call(bk.querySelectorAll('.bk-card'),function(c){
+        var cur=+c.getAttribute('data-idx')===o.cardIdx; c.classList.toggle('sel',cur);
+        var b=c.querySelector('.bk-card__btn'); if(b) b.textContent=cur?'Выбрано':'Выбрать';
+      });
+      applyVipFilter();
+      var vip=bk.querySelector('.bk-vip'), selCard=bk.querySelector('.bk-card[data-idx="'+o.cardIdx+'"]');
+      if(vip && selCard){
+        requestAnimationFrame(function(){
+          var step=selCard.offsetWidth+16;      /* ширина карточки + gap */
+          vip.scrollTo({left:o.cardIdx*step, behavior:'auto'});
+        });
+      }
+    }
+    updateSubmit();
+  }
+  var openInt=document.getElementById('open-interior');
+  if(openInt) openInt.addEventListener('click',function(e){ e.preventDefault(); openInteriorGallery(0); });
+
+  /* --- карусели меню/интерьера: авто-цикл + ручной скролл (свайп/drag/колесо), 3с простоя → авто --- */
+  function revealLines(el,text){                          /* строки-маски снизу вверх (как описание hero) */
+    if(!el) return;
+    el.classList.remove('reveal'); el.textContent=text;
+    var str=el.textContent.trim(); el.innerHTML='';
+    var words=str.split(' '), spans=[];
+    words.forEach(function(w,i){ var s=document.createElement('span'); s.textContent=w; el.appendChild(s); spans.push(s);
+      if(i<words.length-1) el.appendChild(document.createTextNode(' ')); });
+    var lines=[], top=null, cw=[];
+    spans.forEach(function(s){ var t=s.offsetTop;
+      if(top===null||t===top){ cw.push(s.textContent); top=t; } else { lines.push(cw.join(' ')); cw=[s.textContent]; top=t; } });
+    if(cw.length) lines.push(cw.join(' '));
+    el.innerHTML='';
+    lines.forEach(function(t,idx){ var o=document.createElement('span'); o.className='hline';
+      var inr=document.createElement('span'); inr.className='hli'; inr.textContent=t; inr.style.transitionDelay=(idx*0.1)+'s';
+      o.appendChild(inr); el.appendChild(o); });
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('reveal'); }); });
+  }
+  var MENU_CARDS=[
+    {t:'Hookah',  d:'Премиальные кальяны с авторскими ароматами и сбалансированными вкусами для расслабления.'},
+    {t:'Kitchen', d:'Авторская кухня из сезонных продуктов — выразительные вкусы и подача до мелочей.'},
+    {t:'Bar',     d:'Коктейльная карта с фирменными миксами и редким крепким алкоголем на любой вкус.'}
+  ];
+  var INT_CARDS=[
+    {t:'Main hall', d:'Элегантный основной зал с премиальной атмосферой, мягким рассеянным светом и простором для больших компаний.'},
+    {t:'Панорама',  d:'Панорамный зал с видом на вечерний город и приватной посадкой для близких.'},
+    {t:'Камин',     d:'Уютная зона у живого камина с тёплым светом, глубокими кожаными диванами и располагающей к беседе атмосферой.'},
+    {t:'Нуар',      d:'Тёмный лаунж с приглушённым светом и глубоким, обволакивающим характером.'},
+    {t:'Бельведер', d:'Изысканная ложа с кожаными диванами, деликатным верхним светом и ощущением закрытого приватного клуба для своих.'},
+    {t:'Винотека',  d:'Камерная винная комната с авторской коллекцией и уединённой атмосферой для дегустаций.'}
+  ];
+  function makeCarousel(cfg){
+    var scroll=document.querySelector(cfg.scroll), track=document.querySelector(cfg.track),
+        dots=[].slice.call(document.querySelectorAll(cfg.dots+' i')),
+        title=document.querySelector(cfg.title), desc=document.querySelector(cfg.desc),
+        wrap=document.querySelector(cfg.wrap), cards=cfg.cards,
+        idx=0, timer=null, idleT=null, realN=0, armed=false, cur=-1, drag=false, mX=0, mL=0, W=402;
+    function realOf(pos){ return ((pos-1)%realN+realN)%realN; }
+    function dotsText(real){ dots.forEach(function(d,j){ d.classList.toggle('on', j===real); });
+      if(real!==cur){ cur=real; var c=cards[real]||cards[0]; revealLines(title,c.t); revealLines(desc,c.d); } }
+    function go(pos,smooth){ if(scroll) scroll.scrollTo({left:pos*W, behavior:smooth?'smooth':'auto'}); }
+    var startPos=1;
+    if(track){ realN=track.children.length;
+      var cf=track.children[0].cloneNode(true), cl=track.children[realN-1].cloneNode(true);
+      track.insertBefore(cl,track.children[0]); track.appendChild(cf);
+      track.style.width=(track.children.length*W)+'px';
+      startPos=(cfg.start==='last')?realN:1; idx=startPos; if(scroll) scroll.scrollLeft=startPos*W;
+    }
+    function wrapEdges(){ if(drag) return; var pos=Math.round(scroll.scrollLeft/W);
+      if(pos<=0){ scroll.scrollLeft=realN*W; idx=realN; } else if(pos>=realN+1){ scroll.scrollLeft=W; idx=1; } else idx=pos; }
+    function step(){ idx++; go(idx,true); }
+    function startAuto(){ if(!timer&&armed) timer=setInterval(step,2600); }
+    function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
+    function uStart(){ stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } }
+    function uEnd(){ if(idleT) clearTimeout(idleT); idleT=setTimeout(function(){ idleT=null; startAuto(); },2000); }
+    if(scroll){
+      scroll.addEventListener('pointerdown',uStart);
+      scroll.addEventListener('touchstart',uStart,{passive:true});
+      scroll.addEventListener('wheel',function(e){ uStart(); var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY; scroll.scrollLeft+=d; uEnd(); },{passive:true});
+      window.addEventListener('pointerup',uEnd);
+      scroll.addEventListener('touchend',uEnd);
+      scroll.style.cursor='grab';
+      scroll.addEventListener('mousedown',function(e){ drag=true; mX=e.clientX; mL=scroll.scrollLeft;
+        scroll.style.scrollSnapType='none'; scroll.style.cursor='grabbing'; uStart(); e.preventDefault(); });
+      window.addEventListener('mousemove',function(e){ if(!drag) return; scroll.scrollLeft=mL-(e.clientX-mX); });
+      window.addEventListener('mouseup',function(){ if(!drag) return; drag=false;
+        scroll.style.scrollSnapType='x mandatory'; scroll.style.cursor='grab';
+        var pos=Math.round(scroll.scrollLeft/W);
+        if(pos<=0){ scroll.scrollLeft=realN*W; idx=realN; } else if(pos>=realN+1){ scroll.scrollLeft=W; idx=1; } else { go(pos,true); idx=pos; }
+        uEnd(); });
+      var st=false, se=null;
+      scroll.addEventListener('scroll',function(){
+        if(!st){ st=true; requestAnimationFrame(function(){ st=false; dotsText(realOf(Math.round(scroll.scrollLeft/W))); }); }
+        if(!drag){ if(se) clearTimeout(se); se=setTimeout(wrapEdges,120); } },{passive:true});
+    }
+    function update(){
+      if(!wrap||!scroll) return;
+      var vpr=viewport.getBoundingClientRect(), wr=wrap.getBoundingClientRect();
+      var half=(vpr.bottom - wr.top) >= 250 && wr.bottom > vpr.top;
+      if(half){ if(!armed){ armed=true; idx=startPos; go(idx,false); dotsText(realOf(startPos)); step(); startAuto(); } }
+      else { armed=false; stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } idx=startPos; go(idx,false); dotsText(realOf(startPos)); }
+    }
+    return { update:update, real:function(){ return realOf(Math.round((scroll?scroll.scrollLeft:0)/W)); } };
+  }
+  var menuWrap=document.querySelector('.menu-hwrap');
+  var menuCar=makeCarousel({scroll:'#menu-scroll',track:'#menu-track',dots:'#menu-dots',title:'.menu-htitle',desc:'.menu-hdesc',wrap:'.menu-hwrap',cards:MENU_CARDS,start:'last'});
+  var intCar =makeCarousel({scroll:'#int-scroll', track:'#int-track', dots:'#int-dots', title:'.int-htitle', desc:'.int-hdesc', wrap:'.int-hwrap', cards:INT_CARDS, start:0});
+  function menuH(){ if(menuCar) menuCar.update(); if(intCar) intCar.update(); }
+  /* единая смена локали закреплённой кнопки по активному блоку */
+  var hallEl=document.getElementById('hall');
+  function ctaLabelUpdate(){
+    var vpr=viewport.getBoundingClientRect(), center=vpr.top+vpr.height*0.5, mode='book';
+    if(menuWrap){ var wr=menuWrap.getBoundingClientRect(); if(wr.top<center && wr.bottom>center) mode='menu'; }
+    if(mode==='book' && hallEl){ var hr=hallEl.getBoundingClientRect(); if(hr.top<center && hr.bottom>center) mode='interior'; }
+    ctaMode=mode;
+    if(typeof setCtaLabel==='function') setCtaLabel(mode==='menu'?'Меню':mode==='interior'?'Галерея':'Забронировать столик');
+  }
+  /* --- hero: логотип и описание статичны — при скролле только opacity (к ¾ блока);
+         фону (картинка/будущее видео) — параллакс-смещение, привязанное к скроллу --- */
+  var heroLogo=document.querySelector('.hero__logo'),
+      heroBottom=document.querySelector('.hero__bottom'),
+      heroImg=document.querySelector('.hero__img'),
+      heroSec=document.querySelector('.hero');
+  /* --- декор-панели: маска-окно раскрывает картинку по скроллу (картинка параллаксит внутри) --- */
+  var decorClips=[].slice.call(document.querySelectorAll('.sc__graphic-clip'));
+  function menuDecor(){
+    if(!decorClips) return;
+    var vpr=viewport.getBoundingClientRect();
+    for(var i=0;i<decorClips.length;i++){
+      var clip=decorClips[i], wrap=clip.parentElement, r=wrap.getBoundingClientRect();
+      if(r.bottom<vpr.top-60||r.top>vpr.bottom+60) continue;
+      var progRaw=1-(r.top-vpr.top)/vpr.height;
+      var prog=progRaw<0?0:progRaw>1?1:progRaw;
+      var open=(prog-0.2)/0.5; if(open<0)open=0; if(open>1)open=1;
+      if(open<(clip._open||0)) open=clip._open; else clip._open=open;   /* маска только раскрывается; на скролл вверх остаётся раскрытой */
+      var t=(30*(1-open)).toFixed(1);
+      var l=(60*(1-open)).toFixed(1);
+      clip.style.clipPath='inset('+t+'px '+l+'px round 2px)';
+      var title=wrap.querySelector('.sc__title');
+      if(title){ var op=(prog-0.45)/0.35; if(op<0)op=0; if(op>1)op=1;     /* надпись из opacity, в видимой зоне кадра */
+        if(op<(title._op||0)) op=title._op; else title._op=op;           /* тоже не гаснет на скролл вверх */
+        title.style.opacity=op.toFixed(3); }
+      if(wrap.closest('.sc--menu')){                                     /* параллакс меню: -42 → -439 (финал макета), дальше медленнее, без остановки */
+        var mimg=clip.querySelector('.sc__graphic-img');
+        if(mimg){
+          var pu=progRaw<0?0:progRaw;
+          var Y = pu<=1 ? pu*397 : 397 + (pu-1)*397*0.3;                 /* после финала — 30% скорости */
+          if(Y>560) Y=560;                                              /* предел, чтобы картинка всегда покрывала окно */
+          mimg.style.transform='translate3d(0,'+(-Y).toFixed(1)+'px,0)';
+        }
+      } else if(wrap.closest('.sc--interior')){                          /* параллакс интерьера: равномерный, пока блок в кадре (без скачка в начале) */
+        var iimg=clip.querySelector('.sc__graphic-img');
+        if(iimg){
+          var pu2=progRaw<0?0:progRaw;
+          var Yi = pu2<=1 ? pu2*300 : 300 + (pu2-1)*300*0.35;           /* линейно до финала, дальше чуть медленнее */
+          if(Yi>460) Yi=460;                                            /* предел покрытия окна */
+          iimg.style.transform='translate3d(0,'+(-Yi).toFixed(1)+'px,0)';
+        }
+      }
+    }
+  }
+  function heroScroll(){
+    if(!heroSec) return;
+    var vpr=viewport.getBoundingClientRect(), hr=heroSec.getBoundingClientRect();
+    var prog=(vpr.top - hr.top)/hr.height; if(prog<0)prog=0; if(prog>1)prog=1;
+    if(heroImg) heroImg.style.transform='translateY('+(prog*120)+'px)';   /* параллакс фона (маска — overflow hidden) */
+  }
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){
+    if((igEl&&igEl.classList.contains('open'))||(booking&&booking.classList.contains('open'))){ if(navStack.length) history.back(); return; }
+    var o=document.querySelector('.modal.open'); if(o) closeModal(o); } });
+
+  /* --- hero: разбиваем описание на строки-маски (проявятся снизу-вверх на этапе rv-chrome) --- */
+  (function(){
+    var p=document.querySelector('.hero__desc'); if(!p) return;
+    var str=p.textContent.trim();
+    p.innerHTML='';
+    var words=str.split(' '), spans=[];
+    words.forEach(function(w,i){ var s=document.createElement('span'); s.textContent=w; p.appendChild(s); spans.push(s);
+      if(i<words.length-1) p.appendChild(document.createTextNode(' ')); });
+    var lines=[], top=null, cw=[];
+    spans.forEach(function(s){ var t=s.offsetTop;
+      if(top===null||t===top){ cw.push(s.textContent); top=t; }
+      else { lines.push(cw.join(' ')); cw=[s.textContent]; top=t; } });
+    if(cw.length) lines.push(cw.join(' '));
+    p.innerHTML='';
+    lines.forEach(function(t,idx){
+      var o=document.createElement('span'); o.className='hline';
+      var inr=document.createElement('span'); inr.className='hli'; inr.textContent=t;
+      inr.style.transitionDelay=(idx*0.1)+'s';      /* по очереди, плотным потоком (без пауз) */
+      o.appendChild(inr); p.appendChild(o);
+    });
+    /* если прелоудер есть — описание раскроет он в финале; иначе показываем сами после отрисовки */
+    if(!document.getElementById('preloader')){
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ p.classList.add('reveal'); }); });
+    }
+  })();
+
+  /* ===== оркестрация прелоудера ===== */
+  (function(){
+    var dev=document.getElementById('device'), pl=document.getElementById('preloader');
+    if(!dev||!pl) return;
+    dev.classList.add('scroll-lock');                                 /* блок скролла на время интро */
+    var logo=document.getElementById('pl-logo');
+    function flyLogo(){                                   /* уменьшение + полёт точно на svg бренда в хедере (без подпрыжки) */
+      var brandSvg=document.querySelector('#site-header .brand svg'), logoSvg=logo&&logo.querySelector('svg');
+      if(!brandSvg||!logoSvg) return;
+      var scale=dev.getBoundingClientRect().width/402 || 1;
+      var br=brandSvg.getBoundingClientRect(), lr=logoSvg.getBoundingClientRect();
+      var dx=((br.left+br.width/2)-(lr.left+lr.width/2))/scale;
+      var dy=((br.top+br.height/2)-(lr.top+lr.height/2))/scale;
+      var s=br.width/lr.width || .55;
+      logo.style.transform='translate('+dx+'px,'+dy+'px) scale('+s+')';
+    }
+    function landing(){
+      /* прописной логотип FAME и дальнейшая анимация (pl держим — reveal-классы его перекрывают) */
+      dev.classList.add('rv-mark');                                     /* прописной FAME */
+      setTimeout(function(){                                            /* описание (+0.3с) */
+        var d=document.querySelector('.hero__desc'); if(d) d.classList.add('reveal');
+      }, 300);
+      setTimeout(function(){ dev.classList.add('cta-enter'); }, 500);   /* кнопка (+0.5с, один раз) */
+      setTimeout(function(){ dev.classList.remove('pl','cta-enter'); }, 2100);  /* очистка после показа кнопки */
+    }
+    var heroLoader=document.getElementById('hero-loader'), heroMain=document.getElementById('hero-main'),
+        heroSecEl=document.querySelector('.hero');
+    if(heroLoader){ heroLoader.playbackRate=0.51;                     /* 2.04с → ~4с (двери ~наполовину к ~2.35с) */
+      heroLoader.addEventListener('loadedmetadata',function(){ if(heroLoader.duration) heroLoader.playbackRate=heroLoader.duration/4; });
+      var p1=heroLoader.play(); if(p1&&p1.catch) p1.catch(function(){}); }
+    if(heroMain){ var p2=heroMain.play(); if(p2&&p2.catch) p2.catch(function(){}); }
+    if(heroSecEl){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ heroSecEl.classList.add('media-in'); }); }); }  /* 0с: видео из opacity (≤0.6с) */
+    setTimeout(function(){ pl.classList.add('logo-on'); }, 2150);     /* 2.15с: овал проявляется из opacity (1.3с) */
+    setTimeout(function(){ flyLogo(); }, 3550);                        /* отлёт сразу после появления (плавно, 1.1с) */
+    setTimeout(function(){ dev.classList.add('rv-chrome'); }, 4350);   /* бургер */
+    setTimeout(function(){                                             /* овал встраивается как бренд (в момент прилёта) */
+      var b=document.querySelector('#site-header .brand');
+      if(b){ b.style.transition='none'; b.style.opacity='1'; }
+      if(logo) logo.style.display='none';
+    }, 4650);
+    setTimeout(landing, 4700);                                         /* прописной FAME и далее */
+    setTimeout(function(){ if(heroSecEl) heroSecEl.classList.add('vid-main'); }, 4000);  /* 4с: бесшовно лоадер → главное видео (цикл) */
+    setTimeout(function(){ pl.style.display='none'; }, 5100);
+    setTimeout(function(){ dev.classList.remove('scroll-lock'); }, 5800);   /* разблок после появления элементов hero */
+  })();
+})();
+</script>
+</body>
+</html>
