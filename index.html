@@ -94,16 +94,18 @@ a{color:inherit;text-decoration:none}
 .dots i:not(.on){opacity:.3}
 
 /* ---------------- HERO 402×706 (между нативными барами) ---------------- */
-.hero{position:relative;width:402px;height:calc(var(--vh-region,732px) - 56px);overflow:hidden;background:#0e0e0f}   /* +20px вниз: блок уходит под кнопку с запасом (без зазора) */
-.hero__media{position:absolute;inset:0;overflow:hidden;background:#0e0e0f;opacity:0;transition:opacity .6s ease}
+.hero{position:relative;width:402px;height:var(--vh-region,732px);overflow:hidden;background:#0e0e0f}   /* +20px вниз: блок уходит под кнопку с запасом (без зазора) */
+.hero__media{position:absolute;inset:0;overflow:hidden;background:#0E0E0F;opacity:0;transition:opacity .6s ease}
 .hero.media-in .hero__media{opacity:1}                       /* появление видео из opacity ≤0.6с */
 .hero__vid{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
 .hero__vid::-webkit-media-controls-start-playback-button,.hero__vid::-webkit-media-controls{display:none!important;-webkit-appearance:none}   /* убираем нативную iOS-кнопку плея */
 #hero-loader{opacity:1;transition:opacity .9s ease}          /* лоадер сверху; на 5с гаснет → главное видео (бесшовно) */
 .hero.vid-main #hero-loader{opacity:0}
-.hero__scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(14,14,15,.55),rgba(14,14,15,.35) 45%,rgba(14,14,15,.6))}   /* блэкаут поверх видео */
-.hero__veil{position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgNDAyIDczMicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSdub25lJz48cmVjdCB4PScwJyB5PScwJyBoZWlnaHQ9JzEwMCUnIHdpZHRoPScxMDAlJyBmaWxsPSd1cmwoI2dyYWQpJyBvcGFjaXR5PScxJy8+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSdncmFkJyBncmFkaWVudFVuaXRzPSd1c2VyU3BhY2VPblVzZScgY3g9JzAnIGN5PScwJyByPScxMCcgZ3JhZGllbnRUcmFuc2Zvcm09J21hdHJpeCgxLjY0OWUtMTMgLTc5LjkgMjI3LjA5IC0xLjY3MDllLTcgMjAxIDY3MS43KSc+PHN0b3Agc3RvcC1jb2xvcj0ncmdiYSgxNCwxNCwxNSwxKScgb2Zmc2V0PScwLjA4OTEyMycvPjxzdG9wIHN0b3AtY29sb3I9J3JnYmEoMTQsMTQsMTUsMCknIG9mZnNldD0nMScvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==") center/100% 100% no-repeat}
-.hero__blackout{position:absolute;inset:0;background:#0e0e0f;opacity:0;pointer-events:none}
+.hero__scrim{display:none}   /* блэкаут поверх видео */
+.hero__veil{display:none;position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgNDAyIDczMicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSdub25lJz48cmVjdCB4PScwJyB5PScwJyBoZWlnaHQ9JzEwMCUnIHdpZHRoPScxMDAlJyBmaWxsPSd1cmwoI2dyYWQpJyBvcGFjaXR5PScxJy8+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSdncmFkJyBncmFkaWVudFVuaXRzPSd1c2VyU3BhY2VPblVzZScgY3g9JzAnIGN5PScwJyByPScxMCcgZ3JhZGllbnRUcmFuc2Zvcm09J21hdHJpeCgxLjY0OWUtMTMgLTc5LjkgMjI3LjA5IC0xLjY3MDllLTcgMjAxIDY3MS43KSc+PHN0b3Agc3RvcC1jb2xvcj0ncmdiYSgxNCwxNCwxNSwxKScgb2Zmc2V0PScwLjA4OTEyMycvPjxzdG9wIHN0b3AtY29sb3I9J3JnYmEoMTQsMTQsMTUsMCknIG9mZnNldD0nMScvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==") center/100% 100% no-repeat}
+.hero__blackout{position:absolute;inset:0;pointer-events:none;opacity:1;
+  background:radial-gradient(3260px 61.13% at 50% 100%, rgba(14,14,15,1) 4.1711%, rgba(14,14,15,0) 100%)}   /* блекаут Figma 1026:18248 — привязан к низу, пропорц. высоте видимой области */
+
 .hero__header{position:absolute;top:44px;left:0;width:402px;height:52px;z-index:25;display:flex;align-items:center;
   justify-content:space-between;mix-blend-mode:difference;color:#fff;transition:transform .3s ease}
 .hero__header.hdr-masked{}
@@ -115,9 +117,9 @@ a{color:inherit;text-decoration:none}
 .hero__header .brand{display:flex;align-items:center;height:100%;padding-top:20px}
 .hero__header .brand svg{width:40px;height:40px}
 .hero__header .spacer{width:44px;height:44px;opacity:0}
-.hero__logo{position:absolute;left:calc(50% + .5px);top:calc(50% - 28px);transform:translate(-50%,-50%);width:255px;height:52px}
+.hero__logo{position:absolute;left:calc(50% + .5px);top:calc(50% - 56px);transform:translate(-50%,-50%);width:255px;height:52px}
 .hero__logo svg{width:255px;height:52px}
-.hero__bottom{position:absolute;left:16px;bottom:52px;width:353px;display:flex;flex-direction:column;align-items:flex-start}
+.hero__bottom{position:absolute;left:16px;bottom:108px;width:353px;display:flex;flex-direction:column;align-items:flex-start}
 .hero__desc{width:353px;color:rgba(225,225,225,.6)}
 
 /* ===== ПРЕЛОУДЕР ===== */
@@ -150,7 +152,7 @@ a{color:inherit;text-decoration:none}
 #device.rv-mark .hero__logo svg path:nth-child(4){transition-delay:.3s}
 #device.rv-brand .hero__header .brand{opacity:1!important}
 #device.rv-chrome #burger{opacity:1!important}
-#hero-blackout{transition:opacity .8s ease}
+#hero-blackout{}
 /* hero: строки описания появляются по очереди снизу-вверх через маску (медленно, лаконично) */
 .hero__desc .hline{display:block;overflow:hidden}
 .hero__desc .hli{display:block;transform:translateY(110%);transition:transform 1.5s cubic-bezier(.33,1,.68,1)}
@@ -189,8 +191,13 @@ a{color:inherit;text-decoration:none}
 .sc--menu .sc__media,.sc--interior .sc__media{height:var(--cimg,500px)}
 .sc--interior .sc__media-img{height:var(--cimg,500px)}
 /* блок меню: pinned horizontal scroll (вертикальный скролл двигает карточки по X) */
-.menu-hwrap{position:relative;height:calc(var(--vh-region,732px) - 56px)}   /* обычная высота карточки (без пина) */
-.menu-hpin{position:relative;height:100%;overflow:hidden;background:var(--bg);z-index:2;--cimg:min(500px, calc(var(--vh-region,732px) - 230px))}
+.menu-hwrap{position:relative;height:calc(var(--vh-region,732px) - 56px)}
+.menu-hwrap:not(.int-hwrap){height:calc((var(--vh-region,732px) - 56px) * 3.4)}   /* высокий скролл-пин ТОЛЬКО у меню */   /* обычная высота карточки (без пина) */
+.menu-hpin{position:relative;height:100%;overflow:hidden;background:var(--bg);z-index:2;--cimg:calc(var(--vh-region,732px) - 230px)}
+.menu-hwrap:not(.int-hwrap) .menu-hpin{position:sticky;top:0;height:calc(var(--vh-region,732px) - 56px)}   /* пин ТОЛЬКО у меню */
+.menu-hwrap.pin-done{height:calc(var(--vh-region,732px) - 56px)}
+.menu-hwrap.pin-done .menu-hpin{position:relative;height:100%}   /* после первого прохода — обычная карусель, без пина */
+.menu-hwrap.int-hwrap{height:calc(var(--vh-region,732px) - 56px)}   /* та же высота, что и блок карточек меню */   /* интерьер: высота по контенту (без большого отступа снизу) */
 .menu-hscroll{position:absolute;left:0;top:0;width:402px;height:100%;overflow:hidden;touch-action:pan-y}   /* вертикаль — странице, горизонталь двигает JS */
 .menu-hscroll::-webkit-scrollbar{display:none}
 .menu-htrack{display:flex;height:100%;will-change:transform}
@@ -245,9 +252,11 @@ a{color:inherit;text-decoration:none}
 
 /* ---------------- BURGER MENU OVERLAY (в области viewport) ---------------- */
 .menu-overlay{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:26;background:var(--bg);overflow-y:auto;
-  opacity:0;visibility:hidden;transform:translateX(-100%);
-  transition:opacity .4s ease, visibility .4s ease, transform 0s linear .4s}   /* закрытие — плавное затухание на месте */
-.menu-overlay.open{opacity:1;visibility:visible;transform:translateX(0);transition:transform 1.05s cubic-bezier(.16,1,.3,1), opacity .4s ease, visibility 0s}   /* открытие — выезд слева */
+  visibility:hidden;transform:translateX(-100%);
+  transition:transform .85s cubic-bezier(.22,1,.36,1), visibility .85s ease}   /* открытие слайд слева / закрытие — влево */
+.menu-overlay.open{visibility:visible;transform:translateX(0);transition:transform .85s cubic-bezier(.22,1,.36,1), visibility 0s}
+.stage{position:absolute;inset:0;transform-origin:50% calc(100% - 98px);will-change:transform;transition:transform .85s cubic-bezier(.22,1,.36,1), border-radius .85s ease}
+#device.menu-open .stage,#device.modal-open .stage{transform:scale(0.9204);border-radius:18px;overflow:hidden}   /* 16px по бокам, низ вплотную */
 .menu-overlay__inner{position:relative;width:402px;min-height:100%;display:flex;flex-direction:column;padding-bottom:16px}
 .menu-overlay__header{flex:none;height:52px;display:flex;align-items:center;justify-content:space-between;padding-right:16px}
 .menu-close{width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:none;border:0;color:var(--c-primary);cursor:pointer}
@@ -281,8 +290,8 @@ a{color:inherit;text-decoration:none}
 
 /* ===================== BOOKING SCREEN (макеты 740:18363 / 740:18387) ===================== */
 #booking{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:28;background:#0e0e0f;
-  opacity:0;visibility:hidden;transition:opacity .35s ease, visibility .35s ease}   /* закрытие — простое затухание */
-#booking.open{opacity:1;visibility:visible;transition:opacity .45s ease, visibility 0s}
+  transform:translateY(100%);visibility:hidden;transition:transform .85s cubic-bezier(.22,1,.36,1), visibility .85s ease}   /* закрытие — простое затухание */
+#booking.open{transform:translateY(0);visibility:visible;transition:transform .85s cubic-bezier(.22,1,.36,1), visibility 0s}
 @keyframes ovSweep{from{transform:translateY(100%)}to{transform:translateY(-101%)}}
 @keyframes ovFade{from{opacity:0}to{opacity:1}}
 @keyframes plateUp{0%{transform:translateY(101%)}40%{transform:translateY(0)}60%{transform:translateY(0)}100%{transform:translateY(-101%)}}
@@ -360,10 +369,10 @@ a{color:inherit;text-decoration:none}
 .bk-card.sel{border-color:var(--border-inverted)}
 .bk-card__img{height:160px;background-size:cover;background-position:center;cursor:pointer}
 /* галерея интерьера (полноэкранная, по макету) */
-#interior-gallery{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:47;background:#0e0e0f;overflow:hidden;
-  opacity:0;visibility:hidden;transition:opacity .35s ease, visibility .35s ease}   /* закрытие — простое затухание */
-#interior-gallery.open{opacity:1;visibility:visible;transition:opacity .45s ease, visibility 0s}
-#booking.instant.open,#interior-gallery.instant.open{transition:opacity 0s, visibility 0s}   /* модалка↔модалка — мгновенно */
+#interior-gallery{position:absolute;top:44px;bottom:98px;left:0;right:0;z-index:29;background:#0e0e0f;overflow:hidden;
+  transform:translateY(100%);visibility:hidden;transition:transform .85s cubic-bezier(.22,1,.36,1), visibility .85s ease}   /* закрытие — простое затухание */
+#interior-gallery.open{transform:translateY(0);visibility:visible;transition:transform .85s cubic-bezier(.22,1,.36,1), visibility 0s}
+#booking.instant.open,#interior-gallery.instant.open{transition:transform 0s, visibility 0s}   /* модалка↔модалка — мгновенно */
 #interior-gallery::before{content:"";position:absolute;inset:0;background:#0e0e0f;z-index:3;transform:translateY(100%)}
 #interior-gallery.open::before{animation:none}
 #interior-gallery .ig-track,#interior-gallery .ig-top,#interior-gallery .ig-bottom{opacity:1}
@@ -551,7 +560,7 @@ a{color:inherit;text-decoration:none}
   #interior-gallery{top:0;bottom:0}
   .modal{top:0;bottom:0}
   #preloader{top:0;height:var(--screenh,732px)}
-  .hero{height:calc(var(--vh-region,732px) - 56px)}
+  .hero{height:var(--vh-region,732px)}
   .sc__graphic{height:var(--screenh,732px)}
   .footer{min-height:var(--screenh,732px)}
 }
@@ -565,7 +574,7 @@ a{color:inherit;text-decoration:none}
   <div class="native-bar native-bar--top"><img src="native-top.b42dbcba.webp" alt=""></div>
 
   <!-- SITE HEADER — прикреплён к верхнему краю; у футера уезжает наверх -->
-  <header class="hero__header" id="site-header">
+  <div class="stage"><header class="hero__header" id="site-header">
     <button class="icon-btn" id="burger" aria-label="Открыть меню" aria-controls="menu-overlay" aria-expanded="false"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M15.6 5C15.8209 5 16 5.17909 16 5.4V6.6C16 6.82091 15.8209 7 15.6 7H0.4C0.179086 7 0 6.82091 0 6.6V5.4C0 5.17909 0.179086 5 0.4 5H15.6Z" fill="currentColor"/>
 <path d="M9.6 10C9.82091 10 10 10.1791 10 10.4V11.6C10 11.8209 9.82091 12 9.6 12H0.4C0.179086 12 0 11.8209 0 11.6V10.4C0 10.1791 0.179086 10 0.4 10H9.6Z" fill="currentColor"/>
@@ -760,7 +769,7 @@ a{color:inherit;text-decoration:none}
   </div><!-- /#viewport -->
 
   <!-- НАТИВНАЯ ПАНЕЛЬ SAFARI -->
-  <div class="native-bar native-bar--bottom"><img src="native-bot.8899d3f0.webp" alt=""></div>
+  </div><div class="native-bar native-bar--bottom"><img src="native-bot.8899d3f0.webp" alt=""></div>
 
   <!-- BURGER MENU OVERLAY -->
   <div class="menu-overlay" id="menu-overlay" role="dialog" aria-modal="true" aria-label="Навигация" aria-hidden="true">
@@ -974,8 +983,11 @@ a{color:inherit;text-decoration:none}
         if(br.top < vp.bottom && br.bottom > vp.bottom - guard) hideCta = true;  /* секционная кнопка вплотную к CTA */
       });
     }
-    var _lc=document.querySelector('.loyalty__card');
-    if(_lc){ var _lr=_lc.getBoundingClientRect(); if(_lr.top < vp.bottom && _lr.bottom > vp.bottom - guard) hideCta=true; }   /* над карточкой лояльности CTA прячем */
+    var _lc=document.querySelector('.loyalty__card'), _loyZone=false;
+    if(_lc){ var _lr=_lc.getBoundingClientRect(); _loyZone=(_lr.top < vp.bottom && _lr.bottom > vp.bottom - guard); }
+    if(_loyZone) _loyArrived=true;                     /* доехали до лояльности */
+    if(_loyArrived && !_loyZone) ctaAnchorHide=false;  /* побывали и ушли → сброс */
+    if(ctaAnchorHide) hideCta=true;                    /* пришли по якорю из бургера → без кнопки (обычный скролл — не трогаем) */
     if(cta) cta.classList.toggle('hide', hideCta);
   }
 
@@ -1009,7 +1021,7 @@ a{color:inherit;text-decoration:none}
       if(r.bottom<vp.top-40||r.top>vp.bottom+40) continue;
       var travel=parseFloat(el.getAttribute('data-parallax'))||0;
       var p=(vp.bottom-r.top)/(vp.height+r.height); p=p<0?0:p>1?1:p;
-      el.style.transform='translate3d(0,'+(-p*travel).toFixed(1)+'px,0)';
+      el.style.transform='translate3d(0,'+((el.classList.contains('loyalty__img')?-p:(0.5-p))*travel).toFixed(1)+'px,0)';   /* лоялти-картинка прибита к верху (только вверх), декор — центрированный */
     }
   }
   function onScroll(){
@@ -1051,8 +1063,8 @@ a{color:inherit;text-decoration:none}
   var burger=document.getElementById('burger'),
       overlay=document.getElementById('menu-overlay'),
       closeBtn=document.getElementById('menu-close');
-  function openMenu(){overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');if(burger)burger.setAttribute('aria-expanded','true');}
-  function closeMenu(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');if(burger)burger.setAttribute('aria-expanded','false');}
+  function openMenu(){overlay.classList.add('open');if(device)device.classList.add('menu-open');overlay.setAttribute('aria-hidden','false');if(burger)burger.setAttribute('aria-expanded','true');}
+  function closeMenu(){overlay.classList.remove('open');if(device)device.classList.remove('menu-open');overlay.setAttribute('aria-hidden','true');if(burger)burger.setAttribute('aria-expanded','false');}
   if(burger) burger.addEventListener('click',openMenu);
   if(closeBtn) closeBtn.addEventListener('click',closeMenu);
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('open'))closeMenu();});
@@ -1100,6 +1112,7 @@ a{color:inherit;text-decoration:none}
       if(!sec) return;
       var top=offsetWithin(sec);
       var ab=a.getAttribute('data-align-bottom');
+      ctaAnchorHide = (ab!==null); if(ab!==null) _loyArrived=false;   /* лояльность из бургера → открыть без кнопки */
       if(ab!==null){ var lcard=sec.querySelector('.loyalty__card');
         if(lcard){ top = offsetWithin(lcard) + lcard.offsetHeight - viewport.clientHeight + 56; }   /* карта целиком видна, ниже центра */
         else { top = top + sec.offsetHeight - viewport.clientHeight + parseFloat(ab||0); }
@@ -1118,8 +1131,8 @@ a{color:inherit;text-decoration:none}
   var navStack=[];
   function navGo(open,undo){ open(); navStack.push(undo); try{ history.pushState({n:navStack.length},''); }catch(e){} }
   window.addEventListener('popstate',function(){ if(navStack.length){ var u=navStack.pop(); u(); } });
-  function _hdrMask(){ var sh=document.getElementById('site-header'); if(sh) sh.classList.add('hdr-masked'); var tm=document.querySelector('.top-mask'); if(tm) tm.classList.add('show'); }
-  function _hdrUnmask(){ var sh=document.getElementById('site-header'); var bo=booking&&booking.classList.contains('open'), go=igEl&&igEl.classList.contains('open'); if(!bo && !go){ if(sh) sh.classList.remove('hdr-masked'); var tm=document.querySelector('.top-mask'); if(tm) tm.classList.remove('show'); } }
+  function _hdrMask(){ var sh=document.getElementById('site-header'); if(sh) sh.classList.add('hdr-masked'); var tm=document.querySelector('.top-mask'); if(tm) tm.classList.add('show'); if(device) device.classList.add('modal-open'); }
+  function _hdrUnmask(){ var sh=document.getElementById('site-header'); var bo=booking&&booking.classList.contains('open'), go=igEl&&igEl.classList.contains('open'); if(!bo && !go){ if(sh) sh.classList.remove('hdr-masked'); var tm=document.querySelector('.top-mask'); if(tm) tm.classList.remove('show'); if(device) device.classList.remove('modal-open'); } }
   function _showBooking(instant){ if(booking){ booking.classList.toggle('instant',!!instant); booking.classList.add('open'); booking.setAttribute('aria-hidden','false'); _hdrMask(); } }
   function _hideBooking(){ if(booking){ booking.classList.remove('open'); booking.setAttribute('aria-hidden','true'); _hdrUnmask(); } }
   function openBooking(){ if(!booking)return; closeMenu(); navGo(function(){ _hideGallery(); _showBooking(false); }, function(){ _hideBooking(); }); }
@@ -1127,6 +1140,9 @@ a{color:inherit;text-decoration:none}
   if(bkBack) bkBack.addEventListener('click',function(){ if(navStack.length) history.back(); else _hideBooking(); });
   /* закреплённый CTA: действие зависит от режима (бронь / меню) */
   var ctaMode='book';
+  var MENU_PDF_URL='';   /* сюда позже ссылка на PDF-страницу меню */
+  var ctaAnchorHide=false, _loyArrived=false;   /* скрыть CTA при переходе к лояльности из бургера */
+  function openMenuPage(){ if(MENU_PDF_URL){ window.location.href=MENU_PDF_URL; } }
   var ctaBtnEl=document.querySelector('#cta-bar .btn');
   var ctaLbl=ctaBtnEl?ctaBtnEl.querySelector('span'):null;
   if(ctaLbl){ ctaLbl.classList.add('cta-lbl'); ctaLbl.innerHTML='<span class="cta-lbl__in">'+rollHTML(ctaLbl.textContent)+'</span>'; ctaLbl.setAttribute('data-t','Забронировать стол'); }
@@ -1148,7 +1164,8 @@ a{color:inherit;text-decoration:none}
     e.preventDefault();
     ctaBtnEl.classList.add('roll-on');                     /* показать анимацию кнопки */
     setTimeout(function(){
-      if(ctaMode==='interior') openInteriorGallery(0);     /* блок интерьера → залы */
+      if(ctaMode==='menu') openMenuPage();                 /* блок меню → PDF-страница (отдельная) */
+      else if(ctaMode==='interior') openInteriorGallery(0);/* блок интерьера → залы */
       else openBooking();                                  /* остальное → бронь */
       setTimeout(function(){ ctaBtnEl.classList.remove('roll-on'); }, 300);
     }, 420);                                                /* придержать, чтобы был виден ролл */
@@ -1227,9 +1244,7 @@ a{color:inherit;text-decoration:none}
     if(vipScroll) vipScroll.addEventListener('scroll',hideCapTip,{passive:true});
     [].forEach.call(booking.querySelectorAll('.bk-card'),function(card){
       card.addEventListener('click',function(e){
-        if(card.classList.contains('disabled')){ showCapTooltip(card); return; }   /* неактивная: только подсказка, без галереи */
-        if(e.target.closest('[data-card-img]')){ var zi=+card.getAttribute('data-idx')+1;
-          navGo(function(){ _showGallery(zi,true); _hideBooking(); }, function(){ _hideGallery(); _showBooking(true); }); return; }
+        if(card.classList.contains('disabled')){ showCapTooltip(card); return; }   /* неактивная: только подсказка */
         hideCapTip(); selectCard(card); ensureCardVisible(card);
       });
     });
@@ -1714,7 +1729,7 @@ a{color:inherit;text-decoration:none}
         dots=[].slice.call(document.querySelectorAll(cfg.dots+' i')),
         title=document.querySelector(cfg.title), desc=document.querySelector(cfg.desc),
         wrap=document.querySelector(cfg.wrap), cards=cfg.cards,
-        idx=0, timer=null, idleT=null, realN=0, armed=false, cur=-1, W=402;
+        idx=0, timer=null, idleT=null, realN=0, armed=false, cur=-1, W=402, pinned=false;
     function realOf(pos){ return ((pos%realN)+realN)%realN; }
     function dotsText(real){ dots.forEach(function(d,j){ d.classList.toggle('on', j===real); });
       if(real!==cur){ cur=real; var c=cards[real]||cards[0]; revealLines(title, (c.t&&c.t[LANG])||c.t); revealLines(desc, (c.d&&c.d[LANG])||c.d); } }
@@ -1725,12 +1740,12 @@ a{color:inherit;text-decoration:none}
       orig.forEach(function(s){ f1.appendChild(s.cloneNode(true)); f2.appendChild(s.cloneNode(true)); });
       track.insertBefore(f1, track.firstChild); track.appendChild(f2);
       track.style.width=(track.children.length*W)+'px';
-      startPos=(cfg.start==='last')?(2*realN-1):realN; idx=startPos; setPos(idx,false);
+      startPos=(cfg.start==='last')?(2*realN-1):realN; idx=startPos; setPos(idx,false); dotsText(realOf(idx));   /* показать текст первой карточки сразу */
     }
     function wrapIdx(){ if(idx<realN){ idx+=realN; setPos(idx,false); } else if(idx>=2*realN){ idx-=realN; setPos(idx,false); } }
     function goIdx(n,smooth){ idx=n; setPos(idx,smooth); dotsText(realOf(idx)); }
     function step(){ goIdx(idx+1,true); setTimeout(wrapIdx,580); }
-    function startAuto(){ if(!timer&&armed) timer=setInterval(step,2600); }
+    function startAuto(){ if(!timer&&armed) timer=setInterval(step,4000); }
     function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
     function uStart(){ stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } }
     function uEnd(){ if(idleT) clearTimeout(idleT); idleT=setTimeout(function(){ idleT=null; startAuto(); },2000); }
@@ -1755,32 +1770,65 @@ a{color:inherit;text-decoration:none}
         wheelT=setTimeout(function(){ var n=Math.round(wheelAcc/W)||(wheelAcc>0?1:-1); wheelAcc=0; goIdx(idx+n,true); setTimeout(wrapIdx,580); uEnd(); },60);
       },{passive:false});
       /* --- МЫШЬ drag (десктоп) --- */
-      var md=false, mSx=0, mIdx=0, mDX=0;
-      scroll.addEventListener('mousedown',function(e){ md=true; mSx=e.clientX; mIdx=idx; mDX=0; if(track) track.style.transition='none'; scroll.style.cursor='grabbing'; uStart(); e.preventDefault(); });
-      window.addEventListener('mousemove',function(e){ if(!md) return; mDX=e.clientX-mSx; if(track) track.style.transform='translate3d('+(-(mIdx*W)+mDX)+'px,0,0)'; });
-      window.addEventListener('mouseup',function(){ if(!md) return; md=false; scroll.style.cursor='grab'; var n=Math.round(-mDX/W); if(n===0 && Math.abs(mDX)>W*0.14) n=(mDX<0)?1:-1; goIdx(mIdx+n,true); setTimeout(wrapIdx,580); uEnd(); });
+      var md=false, mSx=0, mSy=0, mIdx=0, mDX=0, mAxis=0;
+      scroll.addEventListener('mousedown',function(e){ if(Date.now()-lastTouch<800) return; md=true; mSx=e.clientX; mSy=e.clientY; mIdx=idx; mDX=0; mAxis=0; });
+      window.addEventListener('mousemove',function(e){ if(!md) return; var dx=e.clientX-mSx, dy=e.clientY-mSy;
+        if(mAxis===0){ if(Math.abs(dx)>6 && Math.abs(dx)>Math.abs(dy)){ mAxis=1; uStart(); if(track) track.style.transition='none'; scroll.style.cursor='grabbing'; } else if(Math.abs(dy)>6){ mAxis=-1; } }   /* горизонталь → карусель, вертикаль → страница */
+        if(mAxis===1){ mDX=dx; if(track) track.style.transform='translate3d('+(-(mIdx*W)+mDX)+'px,0,0)'; e.preventDefault(); } });
+      window.addEventListener('mouseup',function(){ if(!md) return; md=false; scroll.style.cursor='grab';
+        if(mAxis===1){ var n=Math.round(-mDX/W); if(n===0 && Math.abs(mDX)>W*0.14) n=(mDX<0)?1:-1; goIdx(mIdx+n,true); setTimeout(wrapIdx,580); uEnd(); } });
       scroll.style.cursor='grab';
     }
     function update(){
       if(!wrap||!track) return;
+      if(pinned) return;                                   /* скролл-пин управляет карточками вместо авто-цикла */
       var vpr=viewport.getBoundingClientRect(), wr=wrap.getBoundingClientRect();
       var half=(vpr.bottom - wr.top) >= 250 && wr.bottom > vpr.top;
-      if(half){ if(!armed){ armed=true; goIdx(startPos,false); step(); startAuto(); } }
-      else { armed=false; stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } goIdx(startPos,false); }
+      if(half){ if(!armed){ armed=true; startAuto(); } }   /* в поле зрения — продолжаем авто-цикл с текущей карточки (без сброса/возврата) */
+      else { armed=false; stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } }   /* ушли — только пауза, позицию сохраняем */
     }
-    return { update:update };
+    return { update:update,
+             goReal:function(k,smooth){ if(!realN) return; goIdx(realN+((k%realN)+realN)%realN, smooth!==false); },
+             setScrub:function(f){ if(!realN) return; setPos(realN+f, false); dotsText(((Math.round(f)%realN)+realN)%realN); idx=realN+Math.round(f); },
+             count:function(){ return realN; },
+             pin:function(on){ pinned=!!on; if(on){ stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } } } };
   }
   var menuWrap=document.querySelector('.menu-hwrap');
-  var menuCar=makeCarousel({scroll:'#menu-scroll',track:'#menu-track',dots:'#menu-dots',title:'.menu-htitle',desc:'.menu-hdesc',wrap:'.menu-hwrap',cards:MENU_CARDS,start:'last'});
+  var menuCar=makeCarousel({scroll:'#menu-scroll',track:'#menu-track',dots:'#menu-dots',title:'.menu-htitle',desc:'.menu-hdesc',wrap:'.menu-hwrap',cards:MENU_CARDS});
+  if(menuCar&&menuCar.pin){ menuCar.pin(true); if(menuCar.setScrub) menuCar.setScrub(0); }
   var intCar =makeCarousel({scroll:'#int-scroll', track:'#int-track', dots:'#int-dots', title:'.int-htitle', desc:'.int-hdesc', wrap:'.int-hwrap', cards:INT_CARDS, start:0});
-  function menuH(){ if(menuCar) menuCar.update(); if(intCar) intCar.update(); }
+  var menuHwrap=document.querySelector('.menu-hwrap:not(.int-hwrap)'), menuPinLast=-1, menuScrubMax=0, menuFirstDone=false;
+  function menuPin(){                                         /* ПЕРВЫЙ проход: верт. скролл вниз → смена карточек, потом коллапс в обычную карусель */
+    if(menuFirstDone) return;                                 /* после первого прохода — обычная карусель (авто + свайп) */
+    if(!menuCar||!menuHwrap||!menuCar.count) return;
+    var N=menuCar.count(); if(!N) return;
+    var r=menuHwrap.getBoundingClientRect(), vh=viewport.clientHeight, range=menuHwrap.offsetHeight - vh;
+    if(r.bottom<=4){                                          /* блок ушёл из вида → делаем обычной каруселью, при возврате не пиним */
+      if(!menuFirstDone){ menuFirstDone=true;
+        var oldH=menuHwrap.offsetHeight;
+        menuHwrap.classList.add('pin-done');                  /* убираем высоту+sticky */
+        viewport.scrollTop -= (oldH - menuHwrap.offsetHeight);/* блок выше вьюпорта — компенсируем сжатие, вид не прыгает */
+        if(menuCar.pin) menuCar.pin(false);                   /* свайп + авто */
+      }
+      return;
+    }
+    if(range<=0) return;
+    if(r.top>4){ menuPinLast=-1; menuScrubMax=0; return; }    /* ещё не дошли до зоны пина */
+    if(r.bottom<vh-4) return;
+    var frac=(-r.top)/range; frac=frac<0?0:frac>1?1:frac;
+    var driveFrac=Math.min(1, frac/0.72);                  /* к 72% доходим до 3-й, дальше — выдержка на ней */
+    var sc=driveFrac*(N-1); if(sc>menuScrubMax) menuScrubMax=sc;   /* только вперёд: скролл вверх не отматывает назад */
+    menuCar.setScrub(menuScrubMax);
+  }
+  function menuH(){ menuPin(); if(menuCar) menuCar.update(); if(intCar) intCar.update(); }
   /* единая смена локали закреплённой кнопки по активному блоку */
   var hallEl=document.getElementById('hall');
   function ctaLabelUpdate(){
     var vpr=viewport.getBoundingClientRect(), center=vpr.top+vpr.height*0.5, mode='book';
+    if(menuWrap){ var wr=menuWrap.getBoundingClientRect(); if(wr.top<center && wr.bottom>center) mode='menu'; }
     if(mode==='book' && hallEl){ var hr=hallEl.getBoundingClientRect(); if(hr.top<center && hr.bottom>center) mode='interior'; }
     ctaMode=mode;
-    if(typeof setCtaLabel==='function') setCtaLabel(mode==='interior'?tr('Галерея'):tr('Забронировать стол'));
+    if(typeof setCtaLabel==='function') setCtaLabel(mode==='menu'?tr('Меню'):mode==='interior'?tr('Галерея'):tr('Забронировать стол'));
   }
   /* --- hero: логотип и описание статичны — при скролле только opacity (к ¾ блока);
          фону (картинка/будущее видео) — параллакс-смещение, привязанное к скроллу --- */
@@ -1807,22 +1855,13 @@ a{color:inherit;text-decoration:none}
       if(title){ var op=(prog-0.45)/0.35; if(op<0)op=0; if(op>1)op=1;     /* надпись из opacity, в видимой зоне кадра */
         if(op<(title._op||0)) op=title._op; else title._op=op;           /* тоже не гаснет на скролл вверх */
         title.style.opacity=op.toFixed(3); }
-      if(wrap.closest('.sc--menu')){                                     /* параллакс меню: -42 → -439 (финал макета), дальше медленнее, без остановки */
-        var mimg=clip.querySelector('.sc__graphic-img');
-        if(mimg){
-          var pu=progRaw<0?0:progRaw;
-          var Y = pu<=1 ? pu*397 : 397 + (pu-1)*397*0.3;                 /* после финала — 30% скорости */
-          if(Y>560) Y=560;                                              /* предел, чтобы картинка всегда покрывала окно */
-          mimg.style.transform='translate3d(0,'+(-Y).toFixed(1)+'px,0)';
-        }
-      } else if(wrap.closest('.sc--interior')){                          /* параллакс интерьера: равномерный, пока блок в кадре (без скачка в начале) */
-        var iimg=clip.querySelector('.sc__graphic-img');
-        if(iimg){
-          var pu2=progRaw<0?0:progRaw;
-          var Yi = pu2<=1 ? pu2*300 : 300 + (pu2-1)*300*0.35;           /* линейно до финала, дальше чуть медленнее */
-          if(Yi>460) Yi=460;                                            /* предел покрытия окна */
-          iimg.style.transform='translate3d(0,'+(-Yi).toFixed(1)+'px,0)';
-        }
+      var img=clip.querySelector('.sc__graphic-img');                    /* единый параллакс: плавный сдвиг по позиции блока в кадре */
+      if(img){
+        var pImg=(vpr.bottom - r.top)/(vpr.height + r.height);           /* 0 — блок входит снизу, 1 — уходит вверх */
+        pImg=pImg<0?0:pImg>1?1:pImg;
+        var range=(img.offsetHeight - r.height);                        /* доступный ход картинки внутри клипа */
+        var Y=pImg*range*0.5;                                           /* используем середину хода — окно всегда покрыто */
+        img.style.transform='translate3d(0,'+(-Y).toFixed(1)+'px,0)';
       }
     }
   }
