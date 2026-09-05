@@ -64,7 +64,7 @@ body{background:#000;font-family:"TT Commons",sans-serif;color:var(--c-primary)}
 .native-bar--top{top:0;height:44px}
 .native-bar--bottom{bottom:0;height:98px}
 /* область веб-контента между барами (706px) — здесь скроллится лендинг */
-#viewport{position:absolute;top:44px;bottom:98px;left:0;right:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#viewport{position:absolute;top:44px;bottom:98px;left:0;right:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;scrollbar-width:none}
 #device.scroll-lock #viewport{overflow:hidden;touch-action:none}   /* блок скролла на время прелоудера + появления hero */
 #viewport::-webkit-scrollbar{width:0;height:0}
 #content{position:relative;width:402px}
@@ -99,7 +99,7 @@ a{color:inherit;text-decoration:none}
 .hero.media-in .hero__media{opacity:1}                       /* появление видео из opacity ≤0.6с */
 .hero__vid{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
 .hero__vid::-webkit-media-controls-start-playback-button,.hero__vid::-webkit-media-controls{display:none!important;-webkit-appearance:none}   /* убираем нативную iOS-кнопку плея */
-#hero-loader{opacity:1;transition:opacity .9s ease}          /* лоадер сверху; на 5с гаснет → главное видео (бесшовно) */
+#hero-loader{opacity:1;transition:opacity .9s cubic-bezier(.4,0,.2,1)}          /* лоадер сверху; на 5с гаснет → главное видео (бесшовно) */
 .hero.vid-main #hero-loader{opacity:0}
 .hero__scrim{display:none}   /* блэкаут поверх видео */
 .hero__veil{display:none;position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PScwIDAgNDAyIDczMicgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyBwcmVzZXJ2ZUFzcGVjdFJhdGlvPSdub25lJz48cmVjdCB4PScwJyB5PScwJyBoZWlnaHQ9JzEwMCUnIHdpZHRoPScxMDAlJyBmaWxsPSd1cmwoI2dyYWQpJyBvcGFjaXR5PScxJy8+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSdncmFkJyBncmFkaWVudFVuaXRzPSd1c2VyU3BhY2VPblVzZScgY3g9JzAnIGN5PScwJyByPScxMCcgZ3JhZGllbnRUcmFuc2Zvcm09J21hdHJpeCgxLjY0OWUtMTMgLTc5LjkgMjI3LjA5IC0xLjY3MDllLTcgMjAxIDY3MS43KSc+PHN0b3Agc3RvcC1jb2xvcj0ncmdiYSgxNCwxNCwxNSwxKScgb2Zmc2V0PScwLjA4OTEyMycvPjxzdG9wIHN0b3AtY29sb3I9J3JnYmEoMTQsMTQsMTUsMCknIG9mZnNldD0nMScvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjwvc3ZnPg==") center/100% 100% no-repeat}
@@ -1001,6 +1001,7 @@ a{color:inherit;text-decoration:none}
   var px=[].slice.call(document.querySelectorAll('[data-parallax]'));
   var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
   var ticking=false;
+  var _ctaNativeTop=null;
   var header=document.getElementById('site-header'),
       cta=document.getElementById('cta-bar'),
       cardEl=document.getElementById('loyalty-card'),
@@ -1031,10 +1032,23 @@ a{color:inherit;text-decoration:none}
     var _fb=footerEl&&footerEl.querySelector('.footer__lead .btn'), _docked=false;
     var _footerNear=(fr.top - vp.top) <= vp.height + 60;
     if(cta && _fb && _footerNear){
-      cta.style.transition='none'; cta.style.transform='';       /* меряем нативную позицию */
-      var _cr=cta.getBoundingClientRect(), _br=_fb.getBoundingClientRect();
-      if(_br.top <= _cr.top){ cta.style.transform='translateY('+(_br.top - _cr.top)+'px)'; _docked=true; }  /* тянется к месту в футере */
-    } else if(cta){ cta.style.transform=''; cta.style.transition=''; }
+      var _ctaBtn=cta.querySelector('.btn');
+      if(_ctaNativeTop==null && _ctaBtn && cta.style.display!=='none'){ _ctaNativeTop=_ctaBtn.getBoundingClientRect().top; }  /* нативный верх кнопки CTA — один раз */
+      var _br=_fb.getBoundingClientRect();
+      if(_ctaNativeTop!=null && _br.top <= _ctaNativeTop){
+        if(cta.style.display!=='none') cta.style.display='none';          /* закреплённую убираем мгновенно (никакого JS-трекинга → нет плавания) */
+        _fb.style.opacity='1'; _fb.style.pointerEvents='auto';           /* показываем НАТИВНУЮ футер-кнопку — она скроллится вместе с футером */
+        _docked=true;
+      } else {
+        if(cta.style.display==='none') cta.style.display='';
+        _fb.style.opacity='0'; _fb.style.pointerEvents='none';
+      }
+    } else if(cta){
+      if(cta.style.display==='none') cta.style.display='';
+      cta.style.transform=''; cta.style.transition='';
+      if(_fb){ _fb.style.opacity='0'; _fb.style.pointerEvents='none'; }
+      _ctaNativeTop=null;
+    }
     if(cta) cta.classList.toggle('hide', hideCta && !_docked);
   }
 
@@ -1080,7 +1094,7 @@ a{color:inherit;text-decoration:none}
     if(!ticking){ticking=true;requestAnimationFrame(function(){parallax();updateHeader();menuH();heroScroll();menuDecor();ctaLabelUpdate();ticking=false;});}
   }
   fit(); parallax(); updateHeader(); menuH(); heroScroll(); menuDecor(); ctaLabelUpdate();
-  window.addEventListener('resize',function(){fit();parallax();updateHeader();menuH();heroScroll();menuDecor();ctaLabelUpdate();});
+  window.addEventListener('resize',function(){_ctaNativeTop=null;fit();parallax();updateHeader();menuH();heroScroll();menuDecor();ctaLabelUpdate();});
   /* клавиатура: макет не трогаем, только докручиваем фокусный инпут в видимую зону над клавиатурой */
   function scrollParent(el){
     for(var p=el.parentElement; p; p=p.parentElement){
@@ -1700,14 +1714,15 @@ a{color:inherit;text-decoration:none}
       var _nt=t.getAttribute('data-dtab'); if(m.getAttribute('data-tab')===_nt) return;
       [].forEach.call(m.querySelectorAll('[data-dtab]'),function(x){ x.classList.toggle('active',x===t); });
       var _old=m.getAttribute('data-tab')==='far'?m.querySelector('.date-far'):m.querySelector('.date-near');
-      if(_old){ _old.style.transition='opacity .42s cubic-bezier(.4,0,.2,1)'; _old.style.opacity='0'; }
+      var _new=_nt==='far'?m.querySelector('.date-far'):m.querySelector('.date-near');
+      if(_old){ _old.style.transition='opacity .3s ease'; _old.style.opacity='0'; }   /* всё на вкладке аккуратно уходит в opacity */
       setTimeout(function(){
+        if(_new){ _new.style.transition='none'; _new.style.opacity='0'; }             /* новую прячем ДО показа — без вспышки белой плашки при syncCal/скролле */
         m.setAttribute('data-tab', _nt);
         if(_nt==='far') syncCal();
         else { var win=m.querySelector('.date-near .picker-window'); if(win){ var s=win.querySelector('.picker-item.sel'); var idx=s?[].indexOf.call(win.querySelector('.picker-list').children,s):0; win.scrollTop=idx*44; } }
-        var _new=_nt==='far'?m.querySelector('.date-far'):m.querySelector('.date-near');
-        if(_new){ _new.style.transition='none'; _new.style.opacity='0'; requestAnimationFrame(function(){ _new.style.transition='opacity .52s cubic-bezier(.4,0,.2,1)'; _new.style.opacity='1'; }); }
-      }, 430);
+        if(_new){ void _new.offsetWidth; _new.style.transition='opacity .3s ease'; _new.style.opacity='1'; }   /* новая аккуратно появляется */
+      }, 300);
     });
   });
   /* календарь: стрелки — быстрый скролл к соседнему месяцу */
@@ -1804,7 +1819,7 @@ a{color:inherit;text-decoration:none}
         setTimeout(function(){
           if(igDesc){ igDesc.style.transition='none'; igDesc.style.opacity='1'; }                                       /* сброс перед reveal */
           igSelectZone(zi);                                                                                              /* смена графики + reveal текста */
-          if(igTrack){ igTrack.style.transition='none'; igTrack.style.opacity='0'; requestAnimationFrame(function(){ igTrack.style.transition='opacity .6s cubic-bezier(.4,0,.2,1)'; igTrack.style.opacity='1'; }); }   /* картинка появляется */
+          if(igTrack){ igTrack.style.transition='none'; igTrack.style.opacity='0'; igTrack.style.transformOrigin=(igTrack.clientWidth/2)+'px 50%'; igTrack.style.transform='scale(1.06)'; requestAnimationFrame(function(){ igTrack.style.transition='opacity .9s cubic-bezier(.4,0,.2,1), transform .9s cubic-bezier(.4,0,.2,1)'; igTrack.style.opacity='1'; igTrack.style.transform='scale(1)'; }); }   /* картинка появляется плавнее + лёгкий скейл 1.06→1 */
         }, 340);
       });
       igTabs.appendChild(b);
@@ -1998,7 +2013,7 @@ a{color:inherit;text-decoration:none}
       return;
     }
     if(range<=0) return;
-    if(r.top>4){ menuPinLast=-1; menuScrubMax=0; return; }    /* ещё не дошли до зоны пина */
+    if(r.top>4){ return; }    /* ещё не дошли до зоны пина — menuScrubMax НЕ сбрасываем, иначе при возврате карточка прыгает назад */
     if(r.bottom<vh-4) return;
     var frac=(-r.top)/range; frac=frac<0?0:frac>1?1:frac;
     var driveFrac=Math.min(1, Math.max(0,(frac-0.06))/0.66);   /* небольшая выдержка перед первой сменой */                  /* к 72% доходим до 3-й, дальше — выдержка на ней */
@@ -2007,10 +2022,9 @@ a{color:inherit;text-decoration:none}
   }
   function menuH(){
     menuPin();
-    if(menuFirstDone && !menuReenabled && menuHwrap){       /* после 1-го прохода: авто+свайп при повторном появлении */
+    if(menuFirstDone && !menuReenabled && menuHwrap){       /* после 1-го прохода: свайп+авто как только блок снова нормально в кадре */
       var r=menuHwrap.getBoundingClientRect(), vh=viewport.clientHeight;
-      if(r.bottom<0 || r.top>vh) menuLeftView=true;         /* блок ушёл из вида */
-      else if(menuLeftView){ menuReenabled=true; if(menuCar.pin) menuCar.pin(false); }  /* снова в кадре → включаем */
+      if(r.top < vh-40 && r.bottom > 40){ menuReenabled=true; if(menuCar.pin) menuCar.pin(false); }  /* не требуем полного ухода — иначе свайп не включался при возврате назад */
     }
     if(menuCar) menuCar.update(); if(intCar) intCar.update();
   }
@@ -2132,7 +2146,9 @@ a{color:inherit;text-decoration:none}
         v.addEventListener('canplay',function on(){ v.removeEventListener('canplay',on); v.play().catch(function(){}); },{once:true});
       }); }
     if(heroLoader){ heroLoader.playbackRate=0.68;                     /* 2.04с → ~3с (двери ~наполовину к ~1.76с) */
-      heroLoader.addEventListener('loadedmetadata',function(){ if(heroLoader.duration) heroLoader.playbackRate=heroLoader.duration/3; }); }
+      heroLoader.addEventListener('loadedmetadata',function(){ if(heroLoader.duration) heroLoader.playbackRate=heroLoader.duration/3; });
+      heroLoader.addEventListener('timeupdate',function(){ if(heroLoader.duration && heroLoader.currentTime >= heroLoader.duration*0.75) toMain(); });  /* двери открылись → сразу главное видео (без холда последнего кадра) */
+    }
     if(heroMain){ robustPlay(heroMain); }
     /* iOS: автоплей часто заблокирован → стартуем видео по любому касанию/клику (повторно, пока не заиграет) */
     function tryStartVids(){
@@ -2140,6 +2156,8 @@ a{color:inherit;text-decoration:none}
       if(heroMain && heroMain.paused){ try{ heroMain.muted=true; }catch(e){} heroMain.play().catch(function(){}); }
     }
     ['touchstart','touchend','pointerdown','click'].forEach(function(ev){ document.addEventListener(ev, tryStartVids, {passive:true}); });
+    var _vidMainDone=false;
+    function toMain(){ if(_vidMainDone) return; _vidMainDone=true; if(heroSecEl) heroSecEl.classList.add('vid-main'); }
     /* 0с: знак-овал проявляется на чистом тёмном фоне */
     requestAnimationFrame(function(){ requestAnimationFrame(function(){ pl.classList.add('logo-on'); }); });
     /* 1с: появляется видео с открытием дверей (через opacity) + стартует воспроизведение */
@@ -2147,15 +2165,15 @@ a{color:inherit;text-decoration:none}
       if(heroSecEl) heroSecEl.classList.add('media-in');   /* видео из opacity (1.2с) */
       robustPlay(heroLoader);                              /* двери начинают открываться */
     }, 1000);
-    setTimeout(function(){ flyLogo(); }, 2760);            /* двери ~наполовину (1с + ~1.76с) → знак летит вверх (1.1с) */
-    setTimeout(function(){ dev.classList.add('rv-chrome'); }, 3450);   /* бургер */
-    setTimeout(landing, 3650);                                         /* анимация блока hero подключается ДО прилёта знака */
+    setTimeout(function(){ flyLogo(); }, 1700);            /* знак летит вверх чуть раньше полу-открытия дверей (1.1с) */
+    setTimeout(function(){ dev.classList.add('rv-chrome'); }, 2390);   /* бургер */
+    setTimeout(landing, 2590);                                         /* анимация блока hero подключается ДО прилёта знака */
     setTimeout(function(){                                             /* знак долетел до хедера → встраивается как бренд */
       var b=document.querySelector('#site-header .brand');
       if(b){ b.style.transition='none'; b.style.opacity='1'; }
       if(logo) logo.style.display='none';
-    }, 3860);
-    setTimeout(function(){ if(heroSecEl) heroSecEl.classList.add('vid-main'); }, 3950);  /* бесшовно лоадер → главное видео */
+    }, 2800);
+    setTimeout(toMain, 4200);  /* fallback: если timeupdate не сработал */
     setTimeout(function(){ pl.style.display='none'; }, 4000);
     setTimeout(function(){ dev.classList.remove('scroll-lock'); }, 4600);   /* разблок */
   })();
