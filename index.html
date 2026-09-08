@@ -64,7 +64,7 @@ body{background:#000;font-family:"TT Commons",sans-serif;color:var(--c-primary)}
 .native-bar--top{top:0;height:44px}
 .native-bar--bottom{bottom:0;height:98px}
 /* область веб-контента между барами (706px) — здесь скроллится лендинг */
-#viewport{position:absolute;top:44px;bottom:98px;left:0;right:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;scrollbar-width:none}
+#viewport{position:absolute;top:44px;bottom:98px;left:0;right:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior-y:none;overflow-anchor:none;scrollbar-width:none}
 #device.scroll-lock #viewport{overflow:hidden;touch-action:none}   /* блок скролла на время прелоудера + появления hero */
 #viewport::-webkit-scrollbar{width:0;height:0}
 #content{position:relative;width:402px}
@@ -169,7 +169,7 @@ a{color:inherit;text-decoration:none}
 #cta-bar .btn .cta-lbl__in .roll span{display:flex;align-items:center;height:42px}
 #cta-bar .btn .cta-lbl__in .roll span b{display:block;line-height:1;font-weight:400;font-style:normal;white-space:nowrap;transform:translateY(-5px)}
 #cta-bar .btn .cta-lbl__in .roll span:nth-child(2) b{transform:translateY(-1px)}
-#cta-bar .btn:hover .cta-lbl__in .roll,#cta-bar .btn.roll-on .cta-lbl__in .roll{transform:translateY(-50%)}
+#cta-bar .btn.roll-on .cta-lbl__in .roll{transform:translateY(-50%)}
 .cta-bar.hide{transform:translateY(calc(100% + 24px));opacity:0}
 
 /* ---------------- SHOWCASE (Menu / Interior) ---------------- */
@@ -192,9 +192,9 @@ a{color:inherit;text-decoration:none}
 .sc--interior .sc__media-img{height:var(--cimg,500px)}
 /* блок меню: pinned horizontal scroll (вертикальный скролл двигает карточки по X) */
 .menu-hwrap{position:relative;height:calc(var(--vh-region,732px) - 56px)}
-.menu-hwrap:not(.int-hwrap){height:calc((var(--vh-region,732px) - 56px) * 4.4)}   /* высокий скролл-пин ТОЛЬКО у меню */   /* обычная высота карточки (без пина) */
+.menu-hwrap:not(.int-hwrap){height:calc(var(--vh-region,732px) - 56px)}   /* высокий скролл-пин ТОЛЬКО у меню */   /* обычная высота карточки (без пина) */
 .menu-hpin{position:relative;height:100%;overflow:hidden;background:var(--bg);z-index:2;--cimg:calc(var(--vh-region,732px) - 230px)}
-.menu-hwrap:not(.int-hwrap) .menu-hpin{position:sticky;top:0;height:calc(var(--vh-region,732px) - 56px)}   /* пин ТОЛЬКО у меню */
+.menu-hwrap:not(.int-hwrap) .menu-hpin{position:relative;height:100%}   /* пин ТОЛЬКО у меню */
 .menu-hwrap.pin-done{height:calc(var(--vh-region,732px) - 56px)}
 .menu-hwrap.pin-done .menu-hpin{position:relative;height:100%}   /* после первого прохода — обычная карусель, без пина */
 .menu-hwrap.int-hwrap{height:calc(var(--vh-region,732px) - 56px)}   /* та же высота, что и блок карточек меню */   /* интерьер: высота по контенту (без большого отступа снизу) */
@@ -230,10 +230,10 @@ a{color:inherit;text-decoration:none}
 .footer{background:var(--bg);display:flex;flex-direction:column;justify-content:space-between;min-height:732px;padding:88px 0 24px;width:402px;overflow:hidden}
 .footer__lead{display:flex;flex-direction:column;gap:20px;padding:0 16px}
 .footer__lead p{color:var(--c-secondary-l)} .footer__lead .btn{opacity:0;pointer-events:none}   /* место для встраивания закреплённой CTA */
-.footer__grid{display:flex;flex-direction:column;gap:32px}
+.footer__grid{display:flex;flex-direction:column;gap:32px;margin-top:30px}
 .contacts{display:flex;align-items:flex-start}
 .contacts.pad{padding:0 16px;gap:58px}
-.contact .label{color:var(--c-secondary);margin-bottom:16px}
+.contact .label{color:var(--c-secondary);margin-bottom:8px}
 .contact .val,.contact a{color:var(--c-primary);position:relative;display:inline-block;text-decoration:none}
 .contact .val::after,.contact a::after{content:"";position:absolute;left:0;bottom:-3px;width:100%;height:1px;background:currentColor;
   transform:scaleX(0);transform-origin:left center;transition:transform .45s cubic-bezier(.5,0,.2,1)}   /* свип-подчёркивание как у соцсетей */
@@ -255,9 +255,10 @@ a{color:inherit;text-decoration:none}
   visibility:hidden;transform:translateX(-100%);
   transition:transform .85s cubic-bezier(.22,1,.36,1), visibility .85s ease}   /* открытие слайд слева / закрытие — влево */
 .menu-overlay.open{visibility:visible;transform:translateX(0);transition:transform .85s cubic-bezier(.22,1,.36,1), visibility 0s}
+.menu-overlay.open.closing-fade{opacity:0;transform:translateX(0);transition:opacity .5s cubic-bezier(.22,1,.36,1)}
 .stage{position:absolute;inset:0;transform-origin:50% 44px;will-change:transform;transition:transform .85s cubic-bezier(.22,1,.36,1), border-radius .85s ease}
-#device.menu-open .stage,#device.modal-open .stage{transform:translateY(16px) scale(0.9204);border-radius:18px;overflow:hidden}   /* лендинг: к верху, 16px сверху+по бокам */
-#device.menu-open #cta-bar,#device.modal-open #cta-bar{transform:scale(0.9204);transform-origin:50% 100%}   /* CTA: уменьшается прижатой к низу */
+#device.modal-open .stage{transform:translateY(16px) scale(0.9204);border-radius:18px;overflow:hidden}   /* лендинг: к верху, 16px сверху+по бокам */
+#device.modal-open #cta-bar{transform:scale(0.9204);transform-origin:50% 100%}   /* CTA: уменьшается прижатой к низу */
 #device.menu-open,#device.modal-open{background:var(--bg)}   /* белая подложка за лендингом при уменьшении */   /* 16px по бокам, низ вплотную */
 .menu-overlay__inner{position:relative;width:402px;min-height:100%;display:flex;flex-direction:column;padding-bottom:16px}
 .menu-overlay__header{flex:none;height:52px;display:flex;align-items:center;justify-content:space-between;padding-right:16px}
@@ -286,7 +287,7 @@ a{color:inherit;text-decoration:none}
 .btn .btn-lbl .roll span{display:flex;align-items:center;height:42px}
 .btn .btn-lbl .roll span b{display:block;line-height:1;font-weight:400;font-style:normal;white-space:nowrap;transform:translateY(-5px)}
 .btn .btn-lbl .roll span:nth-child(2) b{transform:translateY(-1px)}
-.btn:hover .btn-lbl .roll,.btn.roll-on .btn-lbl .roll{transform:translateY(-50%)}
+.btn.roll-on .btn-lbl .roll{transform:translateY(-50%)}
 .menu-social .sep{color:var(--c-secondary);text-decoration:none}
 .menu-cta{flex:none;margin-left:16px;width:370px}
 
@@ -679,7 +680,7 @@ a{color:inherit;text-decoration:none}
     <div class="sc__graphic">
       <div class="sc__graphic-clip"><div class="sc__graphic-img"></div></div>
       <div class="sc__title" data-parallax="60">
-        <h2 class="t-disp-xs">Menu</h2>
+        <h2 class="t-disp-xs">Меню</h2>
         <span class="sc__mark"><svg viewBox="0 0 81 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M58.1261 4.78261C58.1838 4.89855 58.1261 5 57.9529 5.08696C57.8085 5.17391 57.6498 5.23188 57.4766 5.26087C56.8126 5.43478 55.932 5.44928 54.835 5.30435C53.3627 5.13043 51.8326 4.91304 50.2448 4.65218C48.657 4.36232 47.0115 4.05797 45.3082 3.73913C44.1245 4.78261 43.0419 5.78261 42.0604 6.73913C41.1077 7.66667 40.1983 8.57971 39.3322 9.47826C38.4662 10.3768 37.6434 11.2464 36.8639 12.087C36.0845 12.9275 35.3194 13.7536 34.5688 14.5652C34.4822 14.6812 34.3234 14.8551 34.0925 15.087C33.8904 15.2899 33.6739 15.5217 33.4429 15.7826C33.212 16.0145 32.981 16.2464 32.7501 16.4783C32.548 16.7101 32.3892 16.8696 32.2737 16.9565C33.313 16.9565 34.2946 16.9855 35.2184 17.0435C36.1711 17.0725 36.9361 17.1159 37.5135 17.1739C37.8599 17.2319 38.0476 17.3333 38.0764 17.4783C38.1342 17.5942 38.1053 17.7101 37.9898 17.8261C37.9032 17.8841 37.73 17.8986 37.4702 17.8696C37.2392 17.8406 36.9938 17.8261 36.734 17.8261C36.2432 17.7681 35.5215 17.7101 34.5688 17.6522C33.645 17.5942 32.7068 17.5797 31.7541 17.6087C29.4734 20.0145 27.2793 22.1159 25.1719 23.913C23.0933 25.7101 21.0292 27.2029 18.9794 28.3913C16.9586 29.5797 14.9089 30.4783 12.8303 31.087C10.7806 31.6957 8.6587 32 6.46464 32C5.59857 32 4.76136 31.8985 3.95302 31.6957C3.17355 31.4928 2.48069 31.1594 1.87444 30.6957C1.26818 30.2319 0.791841 29.6232 0.445411 28.8696C0.0989801 28.1159 -0.0453659 27.1884 0.0123725 26.087C0.070111 24.9855 0.344369 23.8116 0.835145 22.5652C1.35479 21.3188 2.04765 20.087 2.91373 18.8696C2.53843 18.6377 2.11983 18.1304 1.65792 17.3478C1.22488 16.5652 1.03723 15.3913 1.09497 13.8261C1.09497 13.1304 1.21044 12.3623 1.4414 11.5217C1.70122 10.6522 2.07652 9.78261 2.5673 8.91304C3.08694 8.04348 3.72207 7.2029 4.47267 6.3913C5.22327 5.57971 6.11821 4.85507 7.1575 4.21739C8.13906 3.6087 9.17835 3.04348 10.2754 2.52174C11.3724 2 12.6138 1.55073 13.9995 1.17391C15.3852 0.797101 16.9586 0.507247 18.7196 0.304349C20.5095 0.10145 22.5737 0 24.9121 0C26.8463 0 28.8094 0.10145 30.8014 0.304349C32.8222 0.507247 34.742 0.753624 36.5608 1.04348C38.3796 1.30435 40.0395 1.5942 41.5407 1.91304C43.0708 2.2029 44.3122 2.43478 45.2649 2.6087C45.669 2.28986 46.232 1.89855 46.9537 1.43478C47.7043 0.971016 48.4694 0.623189 49.2488 0.391304C49.422 0.333334 49.6386 0.289856 49.8984 0.260871C50.1582 0.231884 50.2737 0.289856 50.2448 0.434785C50.2159 0.550725 50.1005 0.637682 49.8984 0.695653C49.6963 0.753624 49.5664 0.797101 49.5086 0.826087C48.989 0.971016 48.4116 1.26087 47.7765 1.69565C47.1414 2.13044 46.6506 2.50725 46.3042 2.82609C47.5167 3.08696 48.8447 3.3913 50.2881 3.73913C51.7316 4.05797 53.3049 4.37681 55.0082 4.69565C55.5567 4.78261 56.0042 4.85507 56.3507 4.91304C56.726 4.94203 57.0724 4.92754 57.3899 4.86957C57.6209 4.84058 57.7941 4.81159 57.9096 4.78261C58.0251 4.72464 58.0972 4.72464 58.1261 4.78261ZM44.0957 3.47826C43.4317 3.36232 42.3491 3.2029 40.8479 3C39.3755 2.76812 37.73 2.55073 35.9112 2.34783C34.0925 2.11594 32.2016 1.92754 30.2384 1.78261C28.2753 1.6087 26.4854 1.52174 24.8688 1.52174C22.7324 1.52174 20.8126 1.6087 19.1094 1.78261C17.4349 1.95652 15.9049 2.2029 14.5192 2.52174C13.1623 2.84058 11.9354 3.21739 10.8383 3.65218C9.77017 4.08696 8.78861 4.56522 7.89367 5.08696C6.76777 5.75362 5.81509 6.46377 5.03562 7.21739C4.25615 7.97101 3.62102 8.73913 3.13025 9.52174C2.63947 10.2754 2.27861 11.029 2.04765 11.7826C1.84557 12.5362 1.74453 13.2319 1.74453 13.8696C1.71566 15.029 1.83113 15.9855 2.09096 16.7391C2.37965 17.4928 2.75495 18.0725 3.21686 18.4783C4.74692 16.3913 6.68116 14.5362 9.01957 12.913C10.1743 12.1304 11.3435 11.4638 12.5272 10.913C13.7397 10.3333 14.9233 9.85507 16.0781 9.47826C17.2329 9.10145 18.3299 8.82609 19.3692 8.65217C20.4373 8.47826 21.4045 8.3913 22.2705 8.3913C23.6274 8.3913 24.6378 8.6087 25.3018 9.04348C25.8503 9.3913 26.1534 9.89855 26.2112 10.5652C26.2689 11.2319 26.139 11.9855 25.8215 12.8261C25.5039 13.6377 25.0275 14.5072 24.3924 15.4348C23.7862 16.3333 23.0644 17.2174 22.2272 18.087C22.6603 17.913 23.2088 17.7681 23.8728 17.6522C24.5656 17.5362 25.1286 17.4493 25.5616 17.3913C26.37 17.3043 27.0773 17.2464 27.6835 17.2174C28.2898 17.1884 28.9249 17.1449 29.5889 17.087C29.7621 16.942 29.9786 16.7391 30.2384 16.4783C30.5271 16.2174 30.8158 15.942 31.1045 15.6522C31.3932 15.3333 31.6675 15.0435 31.9273 14.7826C32.1871 14.4928 32.3892 14.2754 32.5335 14.1304C34.5544 12.1304 36.5031 10.2754 38.3796 8.56522C40.2561 6.82609 42.1614 5.13044 44.0957 3.47826ZM28.9393 17.6957C28.2176 17.7536 27.4814 17.8116 26.7308 17.8696C25.9802 17.8986 25.2729 17.9565 24.6089 18.0435C24.0027 18.1594 23.3531 18.3333 22.6603 18.5652C21.9963 18.7681 21.4333 19.029 20.9714 19.3478C20.7116 19.5217 20.4085 19.7681 20.062 20.087C19.7156 20.4058 19.3692 20.7246 19.0228 21.0435C18.7052 21.3043 18.4021 21.5217 18.1134 21.6957C17.8247 21.8406 17.6082 21.8406 17.4638 21.6957C17.4061 21.6377 17.3916 21.5362 17.4205 21.3913C17.4782 21.2464 17.5649 21.1014 17.6803 20.9565C17.8247 20.7826 17.969 20.6232 18.1134 20.4783C18.2866 20.3043 18.4454 20.1594 18.5897 20.0435C18.8784 19.8116 19.2537 19.5507 19.7156 19.2609C20.1775 18.971 20.6683 18.7101 21.1879 18.4783C22.0252 17.6087 22.7758 16.7246 23.4397 15.8261C24.1037 14.8986 24.6234 14.029 24.9987 13.2174C25.4028 12.4058 25.6194 11.6812 25.6482 11.0435C25.706 10.4058 25.5472 9.91304 25.1719 9.56522C24.8543 9.27536 24.5079 9.10145 24.1326 9.04348C23.7862 8.98551 23.382 8.95652 22.9201 8.95652C22.054 8.95652 21.0725 9.11594 19.9754 9.43478C18.9073 9.75362 17.7958 10.1739 16.641 10.6957C15.5151 11.1884 14.3748 11.7681 13.22 12.4348C12.0941 13.0725 11.026 13.7391 10.0156 14.4348C8.83192 15.2464 7.67715 16.1449 6.55125 17.1304C5.45422 18.087 4.47267 19.087 3.60659 20.1304C2.76938 21.1449 2.07652 22.1739 1.52801 23.2174C1.00836 24.2319 0.719668 25.1884 0.66193 26.087C0.604191 27.1014 0.719668 27.942 1.00836 28.6087C1.32592 29.2464 1.75896 29.7681 2.30748 30.1739C2.85599 30.5797 3.49111 30.8551 4.21284 31C4.96344 31.1739 5.72848 31.2609 6.50795 31.2609C8.32671 31.2609 10.1743 30.8841 12.0508 30.1304C13.9273 29.3768 15.8038 28.3768 17.6803 27.1304C19.5857 25.8551 21.4766 24.4058 23.3531 22.7826C25.2585 21.1304 27.1206 19.4348 28.9393 17.6957Z" fill="#E1E1E1"/>
 <path d="M49.7519 16.1739C48.8281 17.0145 47.9187 17.8696 47.0238 18.7391C46.1288 19.5797 45.2916 20.3913 44.5121 21.1739C43.7615 21.9565 43.0687 22.6812 42.4335 23.3478C41.8273 24.0145 41.3365 24.5652 40.9612 25C40.2972 25.8406 39.7776 26.5507 39.4023 27.1304C39.0558 27.6812 39.0414 28.029 39.359 28.1739C39.5322 28.2609 39.7776 28.2319 40.0951 28.087C40.4416 27.942 40.8169 27.7536 41.221 27.5217C41.6541 27.2609 42.0727 26.9855 42.4768 26.6957C42.881 26.3768 43.2419 26.1014 43.5594 25.8696C44.2523 25.3188 44.974 24.7101 45.7246 24.0435C46.5041 23.3768 47.1537 22.8116 47.6733 22.3478C47.731 22.2899 47.8177 22.2464 47.9331 22.2174C48.0486 22.1594 48.1352 22.1884 48.193 22.3043C48.2507 22.4493 48.2507 22.5652 48.193 22.6522C48.1352 22.7101 48.063 22.7826 47.9764 22.8696C47.3413 23.4203 46.634 24.029 45.8545 24.6957C45.1039 25.3333 44.4688 25.8696 43.9492 26.3043C43.6316 26.5652 43.2563 26.8551 42.8233 27.1739C42.4191 27.4638 42.0005 27.7391 41.5675 28C41.1344 28.2609 40.7158 28.4783 40.3117 28.6522C39.9364 28.8261 39.6044 28.913 39.3157 28.913C38.9404 28.913 38.6228 28.8261 38.363 28.6522C38.1032 28.5072 37.9155 28.2754 37.8 27.9565C37.7134 27.6377 37.7279 27.2609 37.8433 26.8261C37.9588 26.3623 38.2186 25.8261 38.6228 25.2174C37.3526 26.2899 36.1689 27.1739 35.0719 27.8696C33.9749 28.5652 33.0799 28.913 32.3871 28.913C31.6365 28.913 31.1746 28.6667 31.0013 28.1739C30.8281 27.6812 30.8714 27.058 31.1312 26.3043C31.3622 25.5507 31.7664 24.7391 32.3438 23.8696C32.8923 22.971 33.5418 22.1449 34.2924 21.3913C35.1585 20.5217 36.1256 19.6957 37.1938 18.913C38.2908 18.1304 39.359 17.4783 40.3983 16.9565C41.4664 16.4348 42.448 16.0725 43.3429 15.8696C44.2379 15.6667 44.9163 15.6957 45.3782 15.9565C45.6669 16.1304 45.7824 16.4638 45.7246 16.9565C45.6958 17.4493 45.2627 18.1014 44.4255 18.913C45.2916 18.1884 46.0133 17.6232 46.5907 17.2174C47.197 16.7826 47.6877 16.4928 48.063 16.3478C48.5827 16.1739 49.1456 16.1159 49.7519 16.1739ZM45.0318 16.5217C44.6276 16.2029 43.6461 16.5652 42.0871 17.6087C40.5282 18.6232 38.5939 20.2319 36.2844 22.4348C35.6204 23.0725 34.9997 23.7246 34.4223 24.3913C33.8738 25.029 33.4263 25.6232 33.0799 26.1739C32.7046 26.6957 32.4592 27.1449 32.3438 27.5217C32.2283 27.8985 32.3004 28.1449 32.5603 28.2609C32.7624 28.3478 33.1232 28.2609 33.6429 28C34.1914 27.7101 34.8409 27.3043 35.5915 26.7826C36.371 26.2319 37.2082 25.5652 38.1032 24.7826C38.9981 24 39.9075 23.1304 40.8313 22.1739C41.2643 21.7391 41.7551 21.2319 42.3036 20.6522C42.881 20.0725 43.4007 19.5072 43.8626 18.9565C44.3533 18.4058 44.7286 17.913 44.9885 17.4783C45.2483 17.0145 45.2627 16.6957 45.0318 16.5217Z" fill="#E1E1E1"/>
@@ -711,7 +712,7 @@ a{color:inherit;text-decoration:none}
     <div class="sc__graphic">
       <div class="sc__graphic-clip"><div class="sc__graphic-img"></div></div>
       <div class="sc__title" data-parallax="60">
-        <h2 class="t-disp-xs">Interior</h2>
+        <h2 class="t-disp-xs">Интерьер</h2>
         <span class="sc__mark"><svg viewBox="0 0 81 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M58.1261 4.78261C58.1838 4.89855 58.1261 5 57.9529 5.08696C57.8085 5.17391 57.6498 5.23188 57.4766 5.26087C56.8126 5.43478 55.932 5.44928 54.835 5.30435C53.3627 5.13043 51.8326 4.91304 50.2448 4.65218C48.657 4.36232 47.0115 4.05797 45.3082 3.73913C44.1245 4.78261 43.0419 5.78261 42.0604 6.73913C41.1077 7.66667 40.1983 8.57971 39.3322 9.47826C38.4662 10.3768 37.6434 11.2464 36.8639 12.087C36.0845 12.9275 35.3194 13.7536 34.5688 14.5652C34.4822 14.6812 34.3234 14.8551 34.0925 15.087C33.8904 15.2899 33.6739 15.5217 33.4429 15.7826C33.212 16.0145 32.981 16.2464 32.7501 16.4783C32.548 16.7101 32.3892 16.8696 32.2737 16.9565C33.313 16.9565 34.2946 16.9855 35.2184 17.0435C36.1711 17.0725 36.9361 17.1159 37.5135 17.1739C37.8599 17.2319 38.0476 17.3333 38.0764 17.4783C38.1342 17.5942 38.1053 17.7101 37.9898 17.8261C37.9032 17.8841 37.73 17.8986 37.4702 17.8696C37.2392 17.8406 36.9938 17.8261 36.734 17.8261C36.2432 17.7681 35.5215 17.7101 34.5688 17.6522C33.645 17.5942 32.7068 17.5797 31.7541 17.6087C29.4734 20.0145 27.2793 22.1159 25.1719 23.913C23.0933 25.7101 21.0292 27.2029 18.9794 28.3913C16.9586 29.5797 14.9089 30.4783 12.8303 31.087C10.7806 31.6957 8.6587 32 6.46464 32C5.59857 32 4.76136 31.8985 3.95302 31.6957C3.17355 31.4928 2.48069 31.1594 1.87444 30.6957C1.26818 30.2319 0.791841 29.6232 0.445411 28.8696C0.0989801 28.1159 -0.0453659 27.1884 0.0123725 26.087C0.070111 24.9855 0.344369 23.8116 0.835145 22.5652C1.35479 21.3188 2.04765 20.087 2.91373 18.8696C2.53843 18.6377 2.11983 18.1304 1.65792 17.3478C1.22488 16.5652 1.03723 15.3913 1.09497 13.8261C1.09497 13.1304 1.21044 12.3623 1.4414 11.5217C1.70122 10.6522 2.07652 9.78261 2.5673 8.91304C3.08694 8.04348 3.72207 7.2029 4.47267 6.3913C5.22327 5.57971 6.11821 4.85507 7.1575 4.21739C8.13906 3.6087 9.17835 3.04348 10.2754 2.52174C11.3724 2 12.6138 1.55073 13.9995 1.17391C15.3852 0.797101 16.9586 0.507247 18.7196 0.304349C20.5095 0.10145 22.5737 0 24.9121 0C26.8463 0 28.8094 0.10145 30.8014 0.304349C32.8222 0.507247 34.742 0.753624 36.5608 1.04348C38.3796 1.30435 40.0395 1.5942 41.5407 1.91304C43.0708 2.2029 44.3122 2.43478 45.2649 2.6087C45.669 2.28986 46.232 1.89855 46.9537 1.43478C47.7043 0.971016 48.4694 0.623189 49.2488 0.391304C49.422 0.333334 49.6386 0.289856 49.8984 0.260871C50.1582 0.231884 50.2737 0.289856 50.2448 0.434785C50.2159 0.550725 50.1005 0.637682 49.8984 0.695653C49.6963 0.753624 49.5664 0.797101 49.5086 0.826087C48.989 0.971016 48.4116 1.26087 47.7765 1.69565C47.1414 2.13044 46.6506 2.50725 46.3042 2.82609C47.5167 3.08696 48.8447 3.3913 50.2881 3.73913C51.7316 4.05797 53.3049 4.37681 55.0082 4.69565C55.5567 4.78261 56.0042 4.85507 56.3507 4.91304C56.726 4.94203 57.0724 4.92754 57.3899 4.86957C57.6209 4.84058 57.7941 4.81159 57.9096 4.78261C58.0251 4.72464 58.0972 4.72464 58.1261 4.78261ZM44.0957 3.47826C43.4317 3.36232 42.3491 3.2029 40.8479 3C39.3755 2.76812 37.73 2.55073 35.9112 2.34783C34.0925 2.11594 32.2016 1.92754 30.2384 1.78261C28.2753 1.6087 26.4854 1.52174 24.8688 1.52174C22.7324 1.52174 20.8126 1.6087 19.1094 1.78261C17.4349 1.95652 15.9049 2.2029 14.5192 2.52174C13.1623 2.84058 11.9354 3.21739 10.8383 3.65218C9.77017 4.08696 8.78861 4.56522 7.89367 5.08696C6.76777 5.75362 5.81509 6.46377 5.03562 7.21739C4.25615 7.97101 3.62102 8.73913 3.13025 9.52174C2.63947 10.2754 2.27861 11.029 2.04765 11.7826C1.84557 12.5362 1.74453 13.2319 1.74453 13.8696C1.71566 15.029 1.83113 15.9855 2.09096 16.7391C2.37965 17.4928 2.75495 18.0725 3.21686 18.4783C4.74692 16.3913 6.68116 14.5362 9.01957 12.913C10.1743 12.1304 11.3435 11.4638 12.5272 10.913C13.7397 10.3333 14.9233 9.85507 16.0781 9.47826C17.2329 9.10145 18.3299 8.82609 19.3692 8.65217C20.4373 8.47826 21.4045 8.3913 22.2705 8.3913C23.6274 8.3913 24.6378 8.6087 25.3018 9.04348C25.8503 9.3913 26.1534 9.89855 26.2112 10.5652C26.2689 11.2319 26.139 11.9855 25.8215 12.8261C25.5039 13.6377 25.0275 14.5072 24.3924 15.4348C23.7862 16.3333 23.0644 17.2174 22.2272 18.087C22.6603 17.913 23.2088 17.7681 23.8728 17.6522C24.5656 17.5362 25.1286 17.4493 25.5616 17.3913C26.37 17.3043 27.0773 17.2464 27.6835 17.2174C28.2898 17.1884 28.9249 17.1449 29.5889 17.087C29.7621 16.942 29.9786 16.7391 30.2384 16.4783C30.5271 16.2174 30.8158 15.942 31.1045 15.6522C31.3932 15.3333 31.6675 15.0435 31.9273 14.7826C32.1871 14.4928 32.3892 14.2754 32.5335 14.1304C34.5544 12.1304 36.5031 10.2754 38.3796 8.56522C40.2561 6.82609 42.1614 5.13044 44.0957 3.47826ZM28.9393 17.6957C28.2176 17.7536 27.4814 17.8116 26.7308 17.8696C25.9802 17.8986 25.2729 17.9565 24.6089 18.0435C24.0027 18.1594 23.3531 18.3333 22.6603 18.5652C21.9963 18.7681 21.4333 19.029 20.9714 19.3478C20.7116 19.5217 20.4085 19.7681 20.062 20.087C19.7156 20.4058 19.3692 20.7246 19.0228 21.0435C18.7052 21.3043 18.4021 21.5217 18.1134 21.6957C17.8247 21.8406 17.6082 21.8406 17.4638 21.6957C17.4061 21.6377 17.3916 21.5362 17.4205 21.3913C17.4782 21.2464 17.5649 21.1014 17.6803 20.9565C17.8247 20.7826 17.969 20.6232 18.1134 20.4783C18.2866 20.3043 18.4454 20.1594 18.5897 20.0435C18.8784 19.8116 19.2537 19.5507 19.7156 19.2609C20.1775 18.971 20.6683 18.7101 21.1879 18.4783C22.0252 17.6087 22.7758 16.7246 23.4397 15.8261C24.1037 14.8986 24.6234 14.029 24.9987 13.2174C25.4028 12.4058 25.6194 11.6812 25.6482 11.0435C25.706 10.4058 25.5472 9.91304 25.1719 9.56522C24.8543 9.27536 24.5079 9.10145 24.1326 9.04348C23.7862 8.98551 23.382 8.95652 22.9201 8.95652C22.054 8.95652 21.0725 9.11594 19.9754 9.43478C18.9073 9.75362 17.7958 10.1739 16.641 10.6957C15.5151 11.1884 14.3748 11.7681 13.22 12.4348C12.0941 13.0725 11.026 13.7391 10.0156 14.4348C8.83192 15.2464 7.67715 16.1449 6.55125 17.1304C5.45422 18.087 4.47267 19.087 3.60659 20.1304C2.76938 21.1449 2.07652 22.1739 1.52801 23.2174C1.00836 24.2319 0.719668 25.1884 0.66193 26.087C0.604191 27.1014 0.719668 27.942 1.00836 28.6087C1.32592 29.2464 1.75896 29.7681 2.30748 30.1739C2.85599 30.5797 3.49111 30.8551 4.21284 31C4.96344 31.1739 5.72848 31.2609 6.50795 31.2609C8.32671 31.2609 10.1743 30.8841 12.0508 30.1304C13.9273 29.3768 15.8038 28.3768 17.6803 27.1304C19.5857 25.8551 21.4766 24.4058 23.3531 22.7826C25.2585 21.1304 27.1206 19.4348 28.9393 17.6957Z" fill="#E1E1E1"/>
 <path d="M49.7519 16.1739C48.8281 17.0145 47.9187 17.8696 47.0238 18.7391C46.1288 19.5797 45.2916 20.3913 44.5121 21.1739C43.7615 21.9565 43.0687 22.6812 42.4335 23.3478C41.8273 24.0145 41.3365 24.5652 40.9612 25C40.2972 25.8406 39.7776 26.5507 39.4023 27.1304C39.0558 27.6812 39.0414 28.029 39.359 28.1739C39.5322 28.2609 39.7776 28.2319 40.0951 28.087C40.4416 27.942 40.8169 27.7536 41.221 27.5217C41.6541 27.2609 42.0727 26.9855 42.4768 26.6957C42.881 26.3768 43.2419 26.1014 43.5594 25.8696C44.2523 25.3188 44.974 24.7101 45.7246 24.0435C46.5041 23.3768 47.1537 22.8116 47.6733 22.3478C47.731 22.2899 47.8177 22.2464 47.9331 22.2174C48.0486 22.1594 48.1352 22.1884 48.193 22.3043C48.2507 22.4493 48.2507 22.5652 48.193 22.6522C48.1352 22.7101 48.063 22.7826 47.9764 22.8696C47.3413 23.4203 46.634 24.029 45.8545 24.6957C45.1039 25.3333 44.4688 25.8696 43.9492 26.3043C43.6316 26.5652 43.2563 26.8551 42.8233 27.1739C42.4191 27.4638 42.0005 27.7391 41.5675 28C41.1344 28.2609 40.7158 28.4783 40.3117 28.6522C39.9364 28.8261 39.6044 28.913 39.3157 28.913C38.9404 28.913 38.6228 28.8261 38.363 28.6522C38.1032 28.5072 37.9155 28.2754 37.8 27.9565C37.7134 27.6377 37.7279 27.2609 37.8433 26.8261C37.9588 26.3623 38.2186 25.8261 38.6228 25.2174C37.3526 26.2899 36.1689 27.1739 35.0719 27.8696C33.9749 28.5652 33.0799 28.913 32.3871 28.913C31.6365 28.913 31.1746 28.6667 31.0013 28.1739C30.8281 27.6812 30.8714 27.058 31.1312 26.3043C31.3622 25.5507 31.7664 24.7391 32.3438 23.8696C32.8923 22.971 33.5418 22.1449 34.2924 21.3913C35.1585 20.5217 36.1256 19.6957 37.1938 18.913C38.2908 18.1304 39.359 17.4783 40.3983 16.9565C41.4664 16.4348 42.448 16.0725 43.3429 15.8696C44.2379 15.6667 44.9163 15.6957 45.3782 15.9565C45.6669 16.1304 45.7824 16.4638 45.7246 16.9565C45.6958 17.4493 45.2627 18.1014 44.4255 18.913C45.2916 18.1884 46.0133 17.6232 46.5907 17.2174C47.197 16.7826 47.6877 16.4928 48.063 16.3478C48.5827 16.1739 49.1456 16.1159 49.7519 16.1739ZM45.0318 16.5217C44.6276 16.2029 43.6461 16.5652 42.0871 17.6087C40.5282 18.6232 38.5939 20.2319 36.2844 22.4348C35.6204 23.0725 34.9997 23.7246 34.4223 24.3913C33.8738 25.029 33.4263 25.6232 33.0799 26.1739C32.7046 26.6957 32.4592 27.1449 32.3438 27.5217C32.2283 27.8985 32.3004 28.1449 32.5603 28.2609C32.7624 28.3478 33.1232 28.2609 33.6429 28C34.1914 27.7101 34.8409 27.3043 35.5915 26.7826C36.371 26.2319 37.2082 25.5652 38.1032 24.7826C38.9981 24 39.9075 23.1304 40.8313 22.1739C41.2643 21.7391 41.7551 21.2319 42.3036 20.6522C42.881 20.0725 43.4007 19.5072 43.8626 18.9565C44.3533 18.4058 44.7286 17.913 44.9885 17.4783C45.2483 17.0145 45.2627 16.6957 45.0318 16.5217Z" fill="#E1E1E1"/>
@@ -747,7 +748,7 @@ a{color:inherit;text-decoration:none}
     <div class="loyalty__grad"></div>
     <div class="loyalty__card" id="loyalty-card">
       <div class="loyalty__inner">
-        <p class="eyebrow t-body">Decor title</p>
+        <p class="eyebrow t-body">Membership</p>
         <div class="loyalty__group">
           <h2 class="t-h2">Loyalty program</h2>
           <p class="t-body wrap-lh">Лояльная программа с эксклюзивными привилегиями, персональными бонусами и особым статусом для самых ценимых гостей.</p>
@@ -819,7 +820,7 @@ a{color:inherit;text-decoration:none}
         <button class="menu-close" id="menu-close" aria-label="Закрыть меню"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M2.34338 12.9995H3.63031C3.71342 12.9995 3.79367 12.9721 3.85597 12.9224L7.99969 9.6183L12.144 12.9229C12.2063 12.9726 12.2866 13 12.3697 13H13.6566C13.9498 13 14.1062 12.688 13.9127 12.4892L9.79911 8.47101C9.74444 8.41485 9.71429 8.34265 9.71429 8.26789L9.71429 7.73066C9.71429 7.65587 9.74447 7.58363 9.79919 7.52746L13.9144 3.51141C14.1081 3.31261 13.9517 3.00049 13.6585 3.00049L12.3718 3.00049C12.2888 3.00049 12.2085 3.02789 12.1462 3.07752L8.00031 6.38163L3.85375 3.07703C3.79147 3.02739 3.71124 3 3.62816 3H2.34153C2.04827 3 1.8919 3.31212 2.08556 3.51091L6.20081 7.52746C6.25553 7.58363 6.28571 7.65587 6.28571 7.73066V8.26789C6.28571 8.34265 6.25556 8.41485 6.20089 8.47101L2.08733 12.4887C1.89378 12.6875 2.05017 12.9995 2.34338 12.9995Z" fill="currentColor"/>
 </svg></button>
-        <div class="menu-lang t-body"><span class="lang on">Rus</span><span>/</span><span class="lang">Eng</span></div>
+        <div class="menu-lang t-body"><span class="lang">Rus</span><span>/</span><span class="lang on">Eng</span></div>
       </div>
       <div class="menu-gap menu-gap--lg"></div>
       <nav class="menu-nav">
@@ -1194,7 +1195,15 @@ a{color:inherit;text-decoration:none}
   function _hdrUnmask(){ var sh=document.getElementById('site-header'); var bo=booking&&booking.classList.contains('open'), go=igEl&&igEl.classList.contains('open'); if(!bo && !go){ if(sh) sh.classList.remove('hdr-masked'); var tm=document.querySelector('.top-mask'); if(tm) tm.classList.remove('show'); if(device) device.classList.remove('modal-open'); } }
   function _showBooking(instant){ if(booking){ booking.classList.toggle('instant',!!instant); booking.classList.add('open'); booking.setAttribute('aria-hidden','false'); _hdrMask(); } }
   function _hideBooking(){ if(booking){ booking.classList.remove('open'); booking.setAttribute('aria-hidden','true'); _hdrUnmask(); } }
-  function openBooking(){ if(!booking)return; closeMenu(); navGo(function(){ _hideGallery(); _showBooking(false); }, function(){ _hideBooking(); }); }
+  function openBooking(){ if(!booking)return;
+    if(overlay && overlay.classList.contains('open')){
+      overlay.classList.add('closing-fade');                              /* бургер уходит в opacity (на месте, без сдвига) */
+      setTimeout(function(){
+        overlay.style.transition='none'; overlay.classList.remove('open'); overlay.classList.remove('closing-fade'); void overlay.offsetWidth; overlay.style.transition='';   /* закрываем мгновенно, без слайда */
+        overlay.setAttribute('aria-hidden','true'); if(device) device.classList.remove('menu-open'); if(burger) burger.setAttribute('aria-expanded','false');
+      }, 520);
+    } else { closeMenu(); }
+    navGo(function(){ _hideGallery(); _showBooking(false); }, function(){ _hideBooking(); }); }
   function closeBooking(){ _hideBooking(); }
   if(bkBack) bkBack.addEventListener('click',function(){ if(navStack.length) history.back(); else _hideBooking(); });
   /* закреплённый CTA: действие зависит от режима (бронь / меню) */
@@ -1220,7 +1229,7 @@ a{color:inherit;text-decoration:none}
   if(ctaBtnEl) ctaBtnEl.addEventListener('click',function(e){
     e.preventDefault();
     if(ctaMode==='menu') openMenuPage();                   /* блок меню → PDF-страница */
-    else if(ctaMode==='interior') openInteriorGallery(0);  /* блок интерьера → залы */
+    else if(ctaMode==='interior') openInteriorGallery(intCar?intCar.current():0);  /* блок интерьера → залы */
     else openBooking();                                    /* остальное → бронь (сразу, без анимации) */
   });
   [].forEach.call(document.querySelectorAll('.footer__lead .btn, .menu-cta'),function(b){
@@ -1230,39 +1239,28 @@ a{color:inherit;text-decoration:none}
     var _bv=booking.querySelector('.bk-vip');
     [].forEach.call(booking.querySelectorAll('.bk-tab'),function(t){
       t.addEventListener('click',function(){
-        var _nt=t.getAttribute('data-tab'); if(booking.getAttribute('data-tab')===_nt) return;
+        var _nt=t.getAttribute('data-tab'); var _cw=booking.getAttribute('data-tab'); if(_cw===_nt) return;
         [].forEach.call(booking.querySelectorAll('.bk-tab'),function(x){ x.classList.toggle('active', x===t); });
-        var _main=booking.querySelector('.bk-only-main'), _vip=booking.querySelector('.bk-only-vip'), _cards=booking.querySelector('.bk-vip'), _mask=booking.querySelector('.bk-mask'), _zb=booking.querySelector('.bk-zbody');
-        var EASE='cubic-bezier(.45,0,.55,1)';
-        function _grow(fromH,toH,dur){ if(!_zb) return; _zb.classList.add('zanim'); _zb.style.height=fromH+'px'; void _zb.offsetWidth; _zb.style.transition='height '+dur+' '+EASE; _zb.style.height=toH+'px'; }
-        function _growReset(){ if(!_zb){return;} _zb.classList.remove('zanim'); _zb.style.height=''; _zb.style.transition=''; }
-        if(_nt==='vip'){
-          if(_mask){ _mask.style.opacity='1'; }
-          if(_main){ _main.style.transition='opacity .22s '+EASE; _main.style.opacity='0'; }
-          setTimeout(function(){
-            var oldH=_zb?_zb.offsetHeight:0;
-            booking.setAttribute('data-tab','vip'); applyVipFilter(); updateSubmit();
-            if(_main){ _main.style.transition=''; _main.style.opacity=''; }
-            if(_vip){ _vip.style.opacity=''; }
-            var newH=_zb?_zb.offsetHeight:0;
-            _grow(oldH,newH,'.55s');                         /* высота растёт вниз → верх карточек раскрывается, контент едет вниз */
-            if(_cards){ _cards.classList.remove('cards-out','cards-in'); void _cards.offsetWidth; _cards.classList.add('cards-in'); }
-            if(_mask){ _mask.style.opacity='0'; }
-            setTimeout(function(){ _growReset(); if(_cards) _cards.classList.remove('cards-in'); }, 570);
-          }, 220);
-        } else {
-          /* меряем высоту основного синхронно (без перерисовки) */
-          var vipH=_zb?_zb.offsetHeight:0;
-          booking.setAttribute('data-tab','main'); var mainH=_zb?_zb.offsetHeight:0; booking.setAttribute('data-tab','vip');
-          if(_zb){ _zb.classList.add('zanim'); _zb.style.height=vipH+'px'; void _zb.offsetWidth; _zb.style.transition='height .42s '+EASE; _zb.style.height=mainH+'px'; }  /* высота сжимается → карточки едут вверх, контент тянется */
-          if(_cards){ _cards.classList.remove('cards-in'); void _cards.offsetWidth; _cards.classList.add('cards-out'); }   /* карточки уходят с движением в opacity */
-          setTimeout(function(){                                             /* на их месте появляются инпуты (без нахлёста) */
-            if(_cards) _cards.classList.remove('cards-out');
-            booking.setAttribute('data-tab','main'); applyVipFilter(); updateSubmit();
-            _growReset();
-            if(_main){ _main.style.transition='none'; _main.style.opacity='0'; void _main.offsetWidth; _main.style.transition='opacity .34s '+EASE; _main.style.opacity='1'; }
-          }, 420);
-        }
+        var _main=booking.querySelector('.bk-only-main'), _vip=booking.querySelector('.bk-only-vip'), _mask=booking.querySelector('.bk-mask'), _zb=booking.querySelector('.bk-zbody');
+        var EASE='cubic-bezier(.4,0,.2,1)', DUR='.55s';
+        if(_mask){ _mask.style.opacity='0'; }
+        var _cur=(_cw==='vip')?_vip:_main, _new=(_nt==='vip')?_vip:_main;
+        if(!_zb||!_cur||!_new){ booking.setAttribute('data-tab',_nt); applyVipFilter(); updateSubmit(); return; }
+        var oldH=_zb.offsetHeight;
+        booking.setAttribute('data-tab',_nt); applyVipFilter(); updateSubmit();            /* сразу подмена: новый контент в НОРМАЛЬНОМ потоке (инпуты не слипаются) */
+        var newH=_zb.offsetHeight;
+        _zb.classList.add('zanim');                                                        /* overflow:hidden на время */
+        _cur.style.display='block'; _cur.style.position='absolute'; _cur.style.left='0'; _cur.style.right='0'; _cur.style.top='0'; _cur.style.opacity='1'; _cur.style.transition='none'; void _cur.offsetWidth;  /* СТАРЫЙ — стеком сверху, гаснет */
+        _new.style.opacity='0'; _new.style.transition='none'; void _new.offsetWidth;
+        _zb.style.height=oldH+'px'; void _zb.offsetWidth;
+        _zb.style.transition='height '+DUR+' '+EASE; _zb.style.height=newH+'px';            /* высота плавно к новой */
+        _cur.style.transition='opacity '+DUR+' '+EASE; _cur.style.opacity='0';              /* старый гаснет... */
+        _new.style.transition='opacity '+DUR+' '+EASE; _new.style.opacity='1';              /* ...новый проявляется ОДНОВРЕМЕННО — без паузы */
+        setTimeout(function(){
+          _cur.style.display=''; _cur.style.position=''; _cur.style.left=''; _cur.style.right=''; _cur.style.top=''; _cur.style.opacity=''; _cur.style.transition='';
+          _new.style.opacity=''; _new.style.transition='';
+          _zb.classList.remove('zanim'); _zb.style.height=''; _zb.style.transition='';
+        }, 570);
       });
     });
     [].forEach.call(booking.querySelectorAll('[data-radio="zone"]'),function(r){
@@ -1366,7 +1364,7 @@ a{color:inherit;text-decoration:none}
     var succMenu=document.getElementById('succ-menu'); if(succMenu) succMenu.addEventListener('click',function(){ hideSuccess(); closeBooking(); });
     updateSubmit();
   }
-  var LANG='ru';
+  var LANG='en';
   var MN_ALL={ru:["Январь","Февраль","Март","Апрель","Май","Июнь","Июль","Август","Сентябрь","Октябрь","Ноябрь","Декабрь"],
               en:["January","February","March","April","May","June","July","August","September","October","November","December"]};
   var MNG_ALL={ru:["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"],
@@ -1405,6 +1403,30 @@ a{color:inherit;text-decoration:none}
       else { var w=(num%10===1&&num%100!==11)?'гость':((num%10>=2&&num%10<=4&&(num%100<10||num%100>=20))?'гостя':'гостей'); it.textContent=num+' '+w; }
     });
   }
+  function localizeMonths(){
+    [].forEach.call(document.querySelectorAll('.my-col .picker-item'),function(it){
+      var raw=(it.textContent||'').trim(); if(!raw) return;
+      var ri=MN_ALL.ru.indexOf(raw), ei=MN_ALL.en.indexOf(raw), idx=(ri>=0)?ri:ei;
+      if(idx<0) return; it.textContent=(LANG==='en')?MN_ALL.en[idx]:MN_ALL.ru[idx];
+    });
+  }
+  function localizeDates(){
+    var wdRu=['Сегодня','Завтра','Пн','Вт','Ср','Чт','Пт','Сб','Вс'], wdEn=['Today','Tomorrow','Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+    var moRu=['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'], moEn=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    [].forEach.call(document.querySelectorAll('#m-date .date-near .picker-item'),function(it){
+      var raw=(it.textContent||'').trim(); if(!raw) return;
+      var suf=''; var sm=raw.match(/^(.+?),\s*(Не доступно|Unavailable)$/);
+      if(sm){ raw=sm[1].trim(); suf=(LANG==='en')?', Unavailable':', Не доступно'; }
+      var parts=raw.split(','); if(parts.length<2) return;
+      var wRaw=parts[0].trim(), rest=parts.slice(1).join(',').trim();
+      var wi=wdRu.indexOf(wRaw); if(wi<0) wi=wdEn.indexOf(wRaw); if(wi<0) return;
+      var rp=rest.split(/\s+/), day, mo;
+      if(/^\d+$/.test(rp[0])){ day=rp[0]; mo=rp[1]; } else { mo=rp[0]; day=rp[1]; }
+      var mi=moRu.indexOf(mo); if(mi<0) mi=moEn.indexOf(mo); if(mi<0) return;
+      var W=(LANG==='en')?wdEn[wi]:wdRu[wi], M=(LANG==='en')?moEn[mi]:moRu[mi];
+      it.textContent=((LANG==='en')?(W+', '+M+' '+day):(W+', '+day+' '+M))+suf;
+    });
+  }
   /* авто-разметка простых текстовых элементов, чей текст есть в словаре */
   var i18nTagged=false;
   function i18nAutotag(){
@@ -1427,7 +1449,7 @@ a{color:inherit;text-decoration:none}
     try{ if(typeof ctaLabelUpdate==="function"){ ctaLbl&&ctaLbl.setAttribute("data-t",""); ctaLabelUpdate(); } }catch(e){}
     try{ if(typeof renderGuests==="function") renderGuests(); }catch(e){}
     try{ if(typeof buildCalendar==="function") buildCalendar(); }catch(e){}
-    try{ localizeGuests(); }catch(e){}
+    try{ localizeGuests(); }catch(e){} try{ localizeMonths(); }catch(e){} try{ localizeDates(); }catch(e){}
     try{ rvRelocalize(); }catch(e){}
     try{ if(typeof igRelabel==="function") igRelabel(); }catch(e){}
   }
@@ -1463,7 +1485,7 @@ a{color:inherit;text-decoration:none}
       targets.forEach(function(el){ io.observe(el); });
     } else { targets.forEach(function(el){ el.classList.add('reveal'); }); }
   })();
-  window.__setLang=applyLang;
+  window.__setLang=applyLang; try{ applyLang(LANG); }catch(e){}
   var TODAY0=new Date(2026,7,15); TODAY0.setHours(0,0,0,0);
   var calStart={y:2026,m:7};       /* текущий месяц — раньше нельзя */
   var CAL_RANGE=15;                /* горизонт отображения, мес. */
@@ -1780,7 +1802,7 @@ a{color:inherit;text-decoration:none}
   });
   /* --- галерея интерьера (полноэкранная, с табами и редиректом в бронь) --- */
   var IG_ZONES=[
-    {tab:'Main hall', filter:'main', slides:[
+    {tab:'Основной зал', filter:'main', slides:[
       {img:'--smk1', zone:'smoking'},
       {img:'--smk2', zone:'smoking'},
       {img:'--smk3', zone:'smoking'},
@@ -1801,25 +1823,34 @@ a{color:inherit;text-decoration:none}
   var igDots=document.getElementById('ig-dots'), igDesc=document.getElementById('ig-desc');
   var igZone=0, igIdx=0;
   function igSlideDesc(z, s){
+    var en=(LANG==='en');
     if(z.filter==='main'){
-      var zt = s.zone==='nonsmoking' ? 'Некурящая зона' : 'Курящая зона';
-      return zt+' / Основной холл / Первый этаж. Создано для тех, кто ценит комфорт, приватность и атмосферу.';
+      var zt = s.zone==='nonsmoking' ? (en?'Non-smoking area':'Некурящая зона') : (en?'Smoking area':'Курящая зона');
+      return en ? (zt+' / Main hall / Ground floor. Created for those who value comfort, privacy and atmosphere.')
+                : (zt+' / Основной холл / Первый этаж. Создано для тех, кто ценит комфорт, приватность и атмосферу.');
     }
-    return 'VIP «'+z.tab+'». Камерное пространство только для вашей компании — с личным сервисом и атмосферой.';
+    return en ? ('VIP «'+tr(z.tab)+'». An intimate space just for your party — with personal service and atmosphere.')
+              : ('VIP «'+z.tab+'». Камерное пространство только для вашей компании — с личным сервисом и атмосферой.');
+  }
+  function igRelabel(){
+    if(igTabs){ [].forEach.call(igTabs.children,function(b,i){ if(IG_ZONES[i]) b.textContent=tr(IG_ZONES[i].tab); }); }
+    var z=IG_ZONES[igZone]; if(z && igDesc){ var s=z.slides[igIdx||0]||z.slides[0]; igDesc.textContent=igSlideDesc(z,s); }
   }
   function igBuildTabs(){
     if(!igTabs) return; igTabs.innerHTML='';
     IG_ZONES.forEach(function(z,zi){
-      var b=document.createElement('button'); b.className='ig-tab'+(zi===igZone?' active':''); b.textContent=z.tab;
+      var b=document.createElement('button'); b.className='ig-tab'+(zi===igZone?' active':''); b.textContent=tr(z.tab);
       b.addEventListener('click',function(){
         if(zi===igZone) return;
         [].forEach.call(igTabs.children,function(x,i){ x.classList.toggle('active', i===zi); });   /* табы сразу */
         if(igTrack){ igTrack.style.transition='opacity .34s cubic-bezier(.4,0,.2,1)'; igTrack.style.opacity='0'; }     /* графика плавно гаснет */
         if(igDesc){ igDesc.style.transition='opacity .34s cubic-bezier(.4,0,.2,1)'; igDesc.style.opacity='0'; }           /* текст тоже гаснет вместе с картинкой */
+        if(igDots){ igDots.style.transition='opacity .34s cubic-bezier(.4,0,.2,1)'; igDots.style.opacity='0'; }           /* точки пагинации тоже гаснут */
         setTimeout(function(){
           if(igDesc){ igDesc.style.transition='none'; igDesc.style.opacity='1'; }                                       /* сброс перед reveal */
           igSelectZone(zi);                                                                                              /* смена графики + reveal текста */
           if(igTrack){ igTrack.style.transition='none'; igTrack.style.opacity='0'; igTrack.style.transformOrigin=(igTrack.clientWidth/2)+'px 50%'; igTrack.style.transform='scale(1.06)'; requestAnimationFrame(function(){ igTrack.style.transition='opacity .9s cubic-bezier(.4,0,.2,1), transform .9s cubic-bezier(.4,0,.2,1)'; igTrack.style.opacity='1'; igTrack.style.transform='scale(1)'; }); }   /* картинка появляется плавнее + лёгкий скейл 1.06→1 */
+          if(igDots){ igDots.style.transition='none'; igDots.style.opacity='0'; requestAnimationFrame(function(){ igDots.style.transition='opacity .6s ease'; igDots.style.opacity='1'; }); }   /* точки проявляются фейдом */
         }, 340);
       });
       igTabs.appendChild(b);
@@ -1837,7 +1868,12 @@ a{color:inherit;text-decoration:none}
     // подскролл активного таба в зону видимости
     var at=igTabs.children[zi]; if(at){ var tr=at.getBoundingClientRect(), pr=igTabs.getBoundingClientRect(); if(tr.left<pr.left) igTabs.scrollBy({left:tr.left-pr.left-16,behavior:'smooth'}); else if(tr.right>pr.right) igTabs.scrollBy({left:tr.right-pr.right+16,behavior:'smooth'}); }
   }
-  function _showGallery(zi,instant){ if(igEl){ igSelectZone(zi||0); igEl.classList.toggle('instant',!!instant); igEl.classList.add('open'); igEl.setAttribute('aria-hidden','false'); _hdrMask(); if(device) device.classList.add('scroll-lock'); } }
+  function _showGallery(zi,instant){ if(igEl){ igSelectZone(zi||0); igEl.classList.toggle('instant',!!instant); igEl.classList.add('open'); igEl.setAttribute('aria-hidden','false'); _hdrMask(); if(device) device.classList.add('scroll-lock');
+    if(!instant){ requestAnimationFrame(function(){                                   /* при появлении галереи: картинка первой вкладки с фейдом+скейлом */
+      if(igTrack){ igTrack.style.transition='none'; igTrack.style.opacity='0'; igTrack.style.transformOrigin=(igTrack.clientWidth/2)+'px 50%'; igTrack.style.transform='scale(1.06)'; requestAnimationFrame(function(){ igTrack.style.transition='opacity .9s cubic-bezier(.4,0,.2,1), transform .9s cubic-bezier(.4,0,.2,1)'; igTrack.style.opacity='1'; igTrack.style.transform='scale(1)'; }); }
+      if(igDots){ igDots.style.transition='none'; igDots.style.opacity='0'; requestAnimationFrame(function(){ igDots.style.transition='opacity .6s ease'; igDots.style.opacity='1'; }); }
+    }); }
+  } }
   function _hideGallery(){ if(igEl){ igEl.classList.remove('open'); igEl.setAttribute('aria-hidden','true'); _hdrUnmask(); if(device) device.classList.remove('scroll-lock'); } }
   function openInteriorGallery(zi){ if(!igEl) return; navGo(function(){ _hideBooking(); _showGallery(zi,false); }, function(){ _hideGallery(); }); }
   function closeInteriorGallery(){ _hideGallery(); }
@@ -1888,7 +1924,7 @@ a{color:inherit;text-decoration:none}
     updateSubmit();
   }
   var openInt=document.getElementById('open-interior');
-  if(openInt) openInt.addEventListener('click',function(e){ e.preventDefault(); openInteriorGallery(0); });
+  if(openInt) openInt.addEventListener('click',function(e){ e.preventDefault(); openInteriorGallery(intCar?intCar.current():0); });
 
   /* --- карусели меню/интерьера: авто-цикл + ручной скролл (свайп/drag/колесо), 3с простоя → авто --- */
   function revealLines(el,text){                          /* строки-маски снизу вверх (как описание hero) */
@@ -1926,7 +1962,7 @@ a{color:inherit;text-decoration:none}
         dots=[].slice.call(document.querySelectorAll(cfg.dots+' i')),
         title=document.querySelector(cfg.title), desc=document.querySelector(cfg.desc),
         wrap=document.querySelector(cfg.wrap), cards=cfg.cards,
-        idx=0, timer=null, idleT=null, realN=0, armed=false, cur=-1, W=402, pinned=false;
+        idx=0, timer=null, idleT=null, realN=0, armed=false, cur=-1, W=402, pinned=false, lastTouch=0, autoUsed=false;
     function realOf(pos){ return ((pos%realN)+realN)%realN; }
     function curX(){ if(!track) return -idx*W; var tr=getComputedStyle(track).transform; if(!tr||tr==='none') return -idx*W; try{ return new DOMMatrix(tr).m41; }catch(e){ return -idx*W; } }
     function dotsText(real){ dots.forEach(function(d,j){ d.classList.toggle('on', j===real); });
@@ -1942,28 +1978,50 @@ a{color:inherit;text-decoration:none}
     }
     function wrapIdx(){ if(idx<realN){ idx+=realN; setPos(idx,false); } else if(idx>=2*realN){ idx-=realN; setPos(idx,false); } }
     function goIdx(n,smooth){ idx=n; setPos(idx,smooth); dotsText(realOf(idx)); }
-    function step(){ if(pinned) return; goIdx(idx+1,true); setTimeout(wrapIdx,580); }
-    function startAuto(){ if(!timer&&armed) timer=setInterval(step,4000); }
+    function step(){ if(pinned) return;
+        var _tw=title&&title.parentElement;
+        if(_tw){                                                             /* авто-скролл: текст уезжает влево вместе с картинкой */
+          var _cl=_tw.cloneNode(true); _cl.style.transition='none'; _cl.style.transform='translate3d(0,0,0)'; _cl.style.pointerEvents='none'; _cl.setAttribute('aria-hidden','true');
+          _tw.parentNode.appendChild(_cl);
+          var _off=-(W+40);
+          requestAnimationFrame(function(){ _cl.style.transition='transform .55s cubic-bezier(.5,0,.2,1)'; _cl.style.transform='translate3d('+_off+'px,0,0)'; });
+          setTimeout(function(){ if(_cl.parentNode) _cl.parentNode.removeChild(_cl); }, 600);
+        }
+        goIdx(idx+1,true); setTimeout(wrapIdx,580); }
+    function startAuto(){ if(!timer&&armed){ setTimeout(function(){ if(armed) step(); }, fastScroll?140:500); timer=setInterval(step,4000); } }   /* первый свайп последняя→первая: быстрее при быстром скролле */
     function stopAuto(){ if(timer){ clearInterval(timer); timer=null; } }
     function uStart(){ stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } }
     function uEnd(){ if(idleT) clearTimeout(idleT); idleT=setTimeout(function(){ idleT=null; startAuto(); },2000); }
     if(scroll){
       /* --- ТАЧ: горизонталь двигает карточки, вертикаль отдаётся странице (не блокируется) --- */
       var sx=0, sy=0, sIdx=0, axis=0, lastDX=0;
-      scroll.addEventListener('touchstart',function(e){ if(pinned) return; var t=e.touches[0]; sx=t.clientX; sy=t.clientY; axis=0; lastDX=0; uStart();
+      scroll.addEventListener('touchstart',function(e){ if(pinned) return; lastTouch=Date.now(); var t=e.touches[0]; sx=t.clientX; sy=t.clientY; axis=0; lastDX=0; uStart();
         if(track){ var cx=curX(); track.style.transition='none'; track.style.transform='translate3d('+cx+'px,0,0)'; sIdx=-cx/W; idx=Math.round(sIdx); } else { sIdx=idx; } },{passive:true});
       scroll.addEventListener('touchmove',function(e){ if(pinned) return; var t=e.touches[0], dx=t.clientX-sx, dy=t.clientY-sy;
         if(axis===0){ if(Math.abs(dx)>6 && Math.abs(dx)>Math.abs(dy)) axis=1; else if(Math.abs(dy)>6) axis=-1; }
         if(axis===1){ lastDX=dx; if(e.cancelable) e.preventDefault();   /* фиксируем блок: страница не скроллится при свайпе */
-          if(track) track.style.transform='translate3d('+(-(sIdx*W)+dx)+'px,0,0)'; }
+          if(track) track.style.transform='translate3d('+(-(sIdx*W)+dx)+'px,0,0)';
+          var _tw=title&&title.parentElement; if(_tw){ _tw.style.transition='none'; _tw.style.transform='translate3d('+dx+'px,0,0)'; } }   /* текст (заголовок+описание) едет в сторону вместе с картинкой */
         /* axis===-1 (вертикаль): страница скроллится сама */
       },{passive:false});
-      scroll.addEventListener('touchend',function(){ if(pinned) return; if(axis===1){ var n=Math.round(-lastDX/W);
+      scroll.addEventListener('touchend',function(){ if(pinned) return; lastTouch=Date.now(); if(axis===1){ var n=Math.round(-lastDX/W);
         if(n===0 && Math.abs(lastDX)>W*0.14) n=(lastDX<0)?1:-1;
-        goIdx(Math.round(sIdx)+n,true); setTimeout(wrapIdx,580); } uEnd(); },{passive:true});
+        var _tw=title&&title.parentElement;
+        if(_tw){
+          if(n!==0){
+            var _cl=_tw.cloneNode(true); _cl.style.transition='none'; _cl.style.transform='translate3d('+lastDX+'px,0,0)'; _cl.style.pointerEvents='none'; _cl.setAttribute('aria-hidden','true');
+            _tw.parentNode.appendChild(_cl);                                   /* клон старого текста */
+            var _off=(n>0?-1:1)*(W+40);                                        /* уезжает в сторону свайпа за край (клип устройства) */
+            requestAnimationFrame(function(){ _cl.style.transition='transform .45s cubic-bezier(.5,0,.2,1)'; _cl.style.transform='translate3d('+_off+'px,0,0)'; });
+            setTimeout(function(){ if(_cl.parentNode) _cl.parentNode.removeChild(_cl); }, 520);
+            _tw.style.transition='none'; _tw.style.transform='';               /* оригинал в 0 → revealLines проявит новый текст «как было» */
+          } else { _tw.style.transition='transform .45s cubic-bezier(.5,0,.2,1)'; _tw.style.transform=''; }   /* та же карточка → текст плавно назад */
+        }
+        goIdx(Math.round(sIdx)+n,true); setTimeout(wrapIdx,580); } else if(axis===0 && Math.abs(lastDX)<8){ if(cfg.onTap) cfg.onTap(cur<0?realOf(idx):cur); }   /* открываем зону текущей (остановленной) карточки */ uEnd(); },{passive:true});
       /* --- КОЛЕСО (десктоп): горизонтальный сдвиг --- */
       var wheelT=null, wheelAcc=0;
-      scroll.addEventListener('wheel',function(e){ var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
+      scroll.addEventListener('wheel',function(e){ if(pinned) return;   /* во время первого прохода колесо крутит только страницу (пин), без смены карточек */
+        var d=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;
         if(Math.abs(e.deltaX)<Math.abs(e.deltaY)) return;      /* вертикальное колесо → странице */
         e.preventDefault(); uStart(); wheelAcc+=d;
         if(wheelT) clearTimeout(wheelT);
@@ -1974,31 +2032,53 @@ a{color:inherit;text-decoration:none}
       scroll.addEventListener('mousedown',function(e){ if(pinned) return; if(Date.now()-lastTouch<800) return; md=true; mSx=e.clientX; mSy=e.clientY; mIdx=idx; mDX=0; mAxis=0; });
       window.addEventListener('mousemove',function(e){ if(!md) return; var dx=e.clientX-mSx, dy=e.clientY-mSy;
         if(mAxis===0){ if(Math.abs(dx)>6 && Math.abs(dx)>Math.abs(dy)){ mAxis=1; uStart(); if(track) track.style.transition='none'; scroll.style.cursor='grabbing'; } else if(Math.abs(dy)>6){ mAxis=-1; } }   /* горизонталь → карусель, вертикаль → страница */
-        if(mAxis===1){ mDX=dx; if(track) track.style.transform='translate3d('+(-(mIdx*W)+mDX)+'px,0,0)'; e.preventDefault(); } });
+        if(mAxis===1){ mDX=dx; if(track) track.style.transform='translate3d('+(-(mIdx*W)+mDX)+'px,0,0)';
+          var _tw=title&&title.parentElement; if(_tw){ _tw.style.transition='none'; _tw.style.transform='translate3d('+mDX+'px,0,0)'; }   /* текст едет в сторону вместе с картинкой (мышь) */
+          e.preventDefault(); } });
       window.addEventListener('mouseup',function(){ if(!md) return; md=false; scroll.style.cursor='grab';
-        if(mAxis===1){ var n=Math.round(-mDX/W); if(n===0 && Math.abs(mDX)>W*0.14) n=(mDX<0)?1:-1; goIdx(mIdx+n,true); setTimeout(wrapIdx,580); uEnd(); } });
+        if(mAxis===1){ var n=Math.round(-mDX/W); if(n===0 && Math.abs(mDX)>W*0.14) n=(mDX<0)?1:-1;
+          var _tw=title&&title.parentElement;
+          if(_tw){
+            if(n!==0){
+              var _cl=_tw.cloneNode(true); _cl.style.transition='none'; _cl.style.transform='translate3d('+mDX+'px,0,0)'; _cl.style.pointerEvents='none'; _cl.setAttribute('aria-hidden','true');
+              _tw.parentNode.appendChild(_cl);
+              var _off=(n>0?-1:1)*(W+40);
+              requestAnimationFrame(function(){ _cl.style.transition='transform .45s cubic-bezier(.5,0,.2,1)'; _cl.style.transform='translate3d('+_off+'px,0,0)'; });
+              setTimeout(function(){ if(_cl.parentNode) _cl.parentNode.removeChild(_cl); }, 520);
+              _tw.style.transition='none'; _tw.style.transform='';   /* новый текст reveal'ом в 0 — появление неизменно */
+            } else { _tw.style.transition='transform .45s cubic-bezier(.5,0,.2,1)'; _tw.style.transform=''; }
+          }
+          goIdx(mIdx+n,true); setTimeout(wrapIdx,580); uEnd(); } else if(mAxis===0 && Math.abs(mDX)<8){ if(cfg.onTap) cfg.onTap(cur<0?realOf(idx):cur); } });
       scroll.style.cursor='grab';
     }
     function update(){
       if(!wrap||!track) return;
       if(pinned){ if(timer){ clearInterval(timer); timer=null; } armed=false; return; }   /* пин: авто выключен (первое знакомство) */
       var vpr=viewport.getBoundingClientRect(), wr=wrap.getBoundingClientRect();
-      var half=(vpr.bottom - wr.top) >= 250 && wr.bottom > vpr.top;
-      if(half){ if(!armed){ armed=true; startAuto(); } }   /* в поле зрения — продолжаем авто-цикл с текущей карточки (без сброса/возврата) */
+      var half=(vpr.bottom - wr.top) >= wr.height*0.5 && wr.bottom > vpr.top;   /* ~2 четверти карточки в кадре */
+      if(half){ if(!armed && !autoUsed){ armed=true; autoUsed=true; startAuto(); } }   /* авто-скролл (последняя→первая + листание) только при ПЕРВОМ появлении */   /* в поле зрения — продолжаем авто-цикл с текущей карточки (без сброса/возврата) */
       else { armed=false; stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } }   /* ушли — только пауза, позицию сохраняем */
     }
     return { update:update,
              goReal:function(k,smooth){ if(!realN) return; goIdx(realN+((k%realN)+realN)%realN, smooth!==false); },
              setScrub:function(f){ if(!realN) return; setPos(realN+f, false); dotsText(((Math.round(f)%realN)+realN)%realN); idx=realN+Math.round(f); },
              count:function(){ return realN; },
-             pin:function(on){ pinned=!!on; if(on){ stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } } } };
+             current:function(){ return cur<0?0:cur; },
+             pin:function(on){ pinned=!!on; if(on){ stopAuto(); if(idleT){ clearTimeout(idleT); idleT=null; } } },
+             slideText:function(dir){ var _tw=title&&title.parentElement; if(!_tw) return;   /* увести старый текст в сторону, новый проявится revealLines */
+               var _cl=_tw.cloneNode(true); _cl.style.transition='none'; _cl.style.transform='translate3d(0,0,0)'; _cl.style.pointerEvents='none'; _cl.setAttribute('aria-hidden','true');
+               _tw.parentNode.appendChild(_cl);
+               var _off=(dir<0?-1:1)*(W+40);
+               requestAnimationFrame(function(){ _cl.style.transition='transform .55s cubic-bezier(.5,0,.2,1)'; _cl.style.transform='translate3d('+_off+'px,0,0)'; });
+               setTimeout(function(){ if(_cl.parentNode) _cl.parentNode.removeChild(_cl); }, 620);
+               _tw.style.transition='none'; _tw.style.transform=''; } };
   }
   var menuWrap=document.querySelector('.menu-hwrap');
-  var menuCar=makeCarousel({scroll:'#menu-scroll',track:'#menu-track',dots:'#menu-dots',title:'.menu-htitle',desc:'.menu-hdesc',wrap:'.menu-hwrap',cards:MENU_CARDS});
-  if(menuCar&&menuCar.pin){ menuCar.pin(true); if(menuCar.setScrub) menuCar.setScrub(0); }
-  var intCar =makeCarousel({scroll:'#int-scroll', track:'#int-track', dots:'#int-dots', title:'.int-htitle', desc:'.int-hdesc', wrap:'.int-hwrap', cards:INT_CARDS, start:0});
+  var menuCar=makeCarousel({scroll:'#menu-scroll',track:'#menu-track',dots:'#menu-dots',title:'.menu-htitle',desc:'.menu-hdesc',wrap:'.menu-hwrap',cards:MENU_CARDS, start:'last'});
+     /* обычная карусель: автоскролл при появлении в кадре, без вертикального пина */
+  var intCar =makeCarousel({scroll:'#int-scroll', track:'#int-track', dots:'#int-dots', title:'.int-htitle', desc:'.int-hdesc', wrap:'.int-hwrap', cards:INT_CARDS, start:'last', onTap:function(ri){ if(typeof openInteriorGallery==='function') openInteriorGallery(ri); }});
   var menuHwrap=document.querySelector('.menu-hwrap:not(.int-hwrap)'), menuPinLast=-1, menuScrubMax=0, menuFirstDone=false, menuLeftView=false, menuReenabled=false;
-  function menuPin(){                                         /* ПЕРВЫЙ проход: верт. скролл вниз → смена карточек, потом коллапс в обычную карусель */
+  function menuPin(){ return;   /* пин отключён — карточки меню теперь обычная карусель с автоскроллом */
     if(menuFirstDone) return;                                 /* после первого прохода — обычная карусель (авто + свайп) */
     if(!menuCar||!menuHwrap||!menuCar.count) return;
     var N=menuCar.count(); if(!N) return;
@@ -2018,14 +2098,9 @@ a{color:inherit;text-decoration:none}
     var frac=(-r.top)/range; frac=frac<0?0:frac>1?1:frac;
     var driveFrac=Math.min(1, Math.max(0,(frac-0.06))/0.66);   /* небольшая выдержка перед первой сменой */                  /* к 72% доходим до 3-й, дальше — выдержка на ней */
     var target=Math.min(N-1, Math.floor(driveFrac*N));            /* дискретно: каждый шаг скролла = следующая карточка */
-    if(target>menuScrubMax){ menuScrubMax=target; if(menuCar.goReal) menuCar.goReal(target,true); }   /* только вперёд, смена карточки целиком */
+    if(target>menuScrubMax){ menuScrubMax=target; if(menuCar.slideText) menuCar.slideText(-1); if(menuCar.goReal) menuCar.goReal(target,true); }   /* старый текст уезжает влево, новый — reveal'ом */   /* только вперёд, смена карточки целиком */
   }
   function menuH(){
-    menuPin();
-    if(menuFirstDone && !menuReenabled && menuHwrap){       /* после 1-го прохода: свайп+авто как только блок снова нормально в кадре */
-      var r=menuHwrap.getBoundingClientRect(), vh=viewport.clientHeight;
-      if(r.top < vh-40 && r.bottom > 40){ menuReenabled=true; if(menuCar.pin) menuCar.pin(false); }  /* не требуем полного ухода — иначе свайп не включался при возврате назад */
-    }
     if(menuCar) menuCar.update(); if(intCar) intCar.update();
   }
   /* единая смена локали закреплённой кнопки по активному блоку */
